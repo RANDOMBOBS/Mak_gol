@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.org.makgol.boards.vo.BoardVo;
 
 @Component
-public class BoardDaoSuggestion {
+public class BoardSuggestionDao {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
