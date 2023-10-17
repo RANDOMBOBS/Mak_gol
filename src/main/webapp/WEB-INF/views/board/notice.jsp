@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
 	<section>
 		<div id="section_wrap">
 			<div class="word">
-				<h3>공지!사항</h3>
+				<h3>공지사항</h3>
 			</div>
 			<div class="book_list">
 				<table>
@@ -30,26 +31,20 @@
 					
 					<tbody>
 						
-						<c:forEach var="item" items="${boardVo}">
+						<c:forEach var="item" items="${boardVo}" varStatus="status">
 							<tr>
-								<td><c:url value='#' var='#'>
-									<c:param name='id' value='${item.id}'/>
-								</c:url></td>
+								<td>${fn:length(boardVo)-(status.index)}</td>
 								<td>${item.title}</td>
-								<td>${item.user_id}</td>
+								<td>${item.name}</td>
 								<td>${item.date}</td>
 								<td>${item.hit}</td>
 								<td>${item.sympathy}</td>
 							</tr>
 						</c:forEach>
-						
 					</tbody>
-					
-					
 				</table>
-				
 			</div>
-			
+				<a href="<c:url value='/board/noticeCreateForm'/>">글쓰기</a>			
 		</div>
 		
 	</section>

@@ -18,6 +18,9 @@ public class BoardNoticeService {
 		return noticeDao.selectNotice();
 	}
 	
+	public int noticeAddList(BoardVo boardVo) {
+		return noticeDao.insertNotice(boardVo);
+	}
 	
 	
 }
