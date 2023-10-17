@@ -19,12 +19,14 @@ import com.org.makgol.boards.vo.BoardVo;
 public class BoardSuggestionController {
 	@Autowired
 	BoardSuggestionService boardService;
-//
+
 
 	@GetMapping({"/",""})
 	public String showList(Model model) {
 		String nextPage = "board/suggestion";
 		List<BoardVo> boardVos = boardService.getSuggestionBoard();
+		System.out.println(boardVos);
+		
 		if(boardVos != null) {
 			model.addAttribute("boardVos", boardVos);
 		}
@@ -32,12 +34,13 @@ public class BoardSuggestionController {
 	}
 	
 	
-//	@GetMapping("/detail")
-//	public String detail(@RequestParam("b_id") int b_id, Model model) {
-//		String nextPage = "board/suggestion_board_detail";
-//		BoardVo boardVo = boardService.readSuggestionBoard();
-//		return nextPage;
-//	}
+	@GetMapping("/detail")
+	public String detail(@RequestParam("b_id") int b_id, Model model) {
+		String nextPage = "board/suggestion_board_detail";
+		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
+		model.addAttribute("boardVo" , boardVo);
+		return nextPage;
+	}
 	
 	@GetMapping("/create")
 	public String create(@RequestParam("name") String name, Model model) {
@@ -49,7 +52,6 @@ public class BoardSuggestionController {
 		return nextPage;
 	}
 			
-	
 	@PostMapping("/createConfirm")
 	public String createConfirm(BoardVo boardVo) {
 		String nextPage = "board/suggestion_ok";
