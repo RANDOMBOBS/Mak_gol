@@ -16,7 +16,7 @@ import org.springframework.ui.Model;
 @RequestMapping("/board")
 
 public class BoardNoticeController {
-//
+// ¹ß¼Û
 	@Autowired
 	BoardNoticeService boardService;
 	
