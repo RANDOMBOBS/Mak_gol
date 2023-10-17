@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.org.makgol.boards.boardDao.BoardDaoSuggestion;
+import com.org.makgol.boards.boardDao.BoardSuggestionDao;
 
 import com.org.makgol.boards.vo.BoardVo;
 
@@ -13,7 +13,7 @@ import com.org.makgol.boards.vo.BoardVo;
 public class BoardSuggestionService {
 
 	@Autowired
-	BoardDaoSuggestion boardDao;
+	BoardSuggestionDao boardDao;
 	
 	public List<BoardVo> getSuggestionBoard() {
 		System.out.println("suggestion service");
