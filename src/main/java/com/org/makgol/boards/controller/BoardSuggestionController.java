@@ -7,14 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;		
-import com.org.makgol.boards.service.BoardService;
+import com.org.makgol.boards.service.BoardSuggestionService;
 import com.org.makgol.boards.vo.BoardVo;
 
 @Controller
 @RequestMapping("/board")
-public class SuggestionBoardController {
+public class BoardSuggestionController {
 	@Autowired
-	BoardService boardService;
+	BoardSuggestionService boardService;
 
 
 	@GetMapping("/suggestion")
