@@ -13,7 +13,7 @@
 	<section>
 		<div id="section_wrap">
 			<div class="word">
-				<h3>공지!!사항</h3>
+				<h3>공지사항</h3>
 			</div>
 			<div class="book_list">
 				<table>
