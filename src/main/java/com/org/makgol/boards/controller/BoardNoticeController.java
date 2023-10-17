@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.org.makgol.boards.service.BoardNoticeService;
 import com.org.makgol.boards.vo.BoardVo;
 
 import org.springframework.ui.Model;
@@ -14,10 +15,10 @@ import org.springframework.ui.Model;
 @Controller
 @RequestMapping("/board")
 
-public class BoardControllerKhw {
+public class BoardNoticeController {
 
 	@Autowired
-	BoardService boardService;
+	BoardNoticeService boardService;
 	
 	
 	@GetMapping("/getAllNotice")
