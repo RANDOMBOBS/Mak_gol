@@ -59,6 +59,7 @@ public class BoardSuggestionDao {
 //	}
 
 	public int insertSuggestionBoard(BoardVo boardVo) {
+		
 		String sql = "INSERT INTO boards(user_id, title, date, contents, category) values (?,?,now(),?,?)";
 		int result = -1;
 		try {
@@ -68,6 +69,7 @@ public class BoardSuggestionDao {
 			System.out.println("캐치로들어옴");
 			e.printStackTrace();
 		}
+	
 		return result;
 	}
 
