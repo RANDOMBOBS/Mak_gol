@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h3>건의 게시판</h3>
-
+//
 	<div class="board_list">
 
 		<table>

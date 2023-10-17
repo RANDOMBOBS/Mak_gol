@@ -10,7 +10,7 @@ import com.org.makgol.boards.vo.BoardVo;
 
 @Service
 public class BoardNoticeService {
-
+//
 	@Autowired
 	BoardNoticeDao noticeDao;
 	
