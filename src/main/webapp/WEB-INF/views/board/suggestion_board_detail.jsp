@@ -7,6 +7,6 @@
 <title>글 보기</title>
 </head>
 <body>
-
+//
 </body>
 </html>

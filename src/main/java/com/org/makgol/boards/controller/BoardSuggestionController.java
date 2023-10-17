@@ -15,7 +15,7 @@ import com.org.makgol.boards.vo.BoardVo;
 public class BoardSuggestionController {
 	@Autowired
 	BoardSuggestionService boardService;
-
+//
 
 	@GetMapping("/suggestion")
 	public String showList(Model model) {

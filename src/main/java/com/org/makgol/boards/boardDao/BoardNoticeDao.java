@@ -14,7 +14,7 @@ import com.org.makgol.boards.vo.BoardVo;
 @Component
 public class BoardNoticeDao {
 
-	
+	//
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 

@@ -13,7 +13,7 @@ import com.org.makgol.boards.vo.BoardVo;
 
 @Component
 public class BoardSuggestionDao {
-
+//
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
