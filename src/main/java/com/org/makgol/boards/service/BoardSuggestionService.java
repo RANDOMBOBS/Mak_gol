@@ -16,8 +16,18 @@ public class BoardSuggestionService {
 	BoardSuggestionDao boardDao;
 	//
 	public List<BoardVo> getSuggestionBoard() {
-		System.out.println("suggestion service");
-		return boardDao.selectSuggestionBoard();
+		return boardDao.selectAllSuggestionBoard();
 	}
+	
+	
+//	public BoardVo readSuggestionBoard(){
+//		return boardDao.
+//	}
+	
+	
+	public int createBoardConfirm(BoardVo boardVo) {
+		return boardDao.insertSuggestionBoard(boardVo);
+	}
+	
 	
 }

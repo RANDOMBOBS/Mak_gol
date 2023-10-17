@@ -1,13 +1,20 @@
 package com.org.makgol.users.vo;
 
 public class UsersVo {
-
+	int id;
 	String name;
 	String email;
 	String password;
 	String phone;
 	String photo;
 	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -38,5 +45,7 @@ public class UsersVo {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+
+
 	
 }

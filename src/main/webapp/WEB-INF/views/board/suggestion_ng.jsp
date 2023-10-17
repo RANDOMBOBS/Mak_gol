@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글 보기</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-
-
+<h3>글쓰기 오류!!!!!</h3>
 </body>
 </html>
