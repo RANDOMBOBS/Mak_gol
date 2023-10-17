@@ -19,6 +19,7 @@ public class SuggestionBoardController {
 
 	@GetMapping("/suggestion")
 	public String showList(Model model) {
+		System.out.println("건의게시판 Controller");
 		String nextPage = "board/suggestion";
 		List<BoardVo> boardVos = boardService.getSuggestionBoard();
 		System.out.println(boardVos);

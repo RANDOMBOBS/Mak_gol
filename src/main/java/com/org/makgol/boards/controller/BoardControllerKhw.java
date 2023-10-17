@@ -22,7 +22,7 @@ public class BoardControllerKhw {
 	
 	@GetMapping("/getAllNotice")
 	public String getAllNotice(Model model) {
-		String nextPage = "board/notice/admin";
+		String nextPage = "board/notice";
 		List<BoardVo> boardVo = boardService.getAllNotice();
 		model.addAttribute("boardVo",boardVo);
 		return nextPage;
