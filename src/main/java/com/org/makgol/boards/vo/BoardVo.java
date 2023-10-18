@@ -4,7 +4,11 @@ import java.time.LocalDate;
 
 public class BoardVo {
 
+<<<<<<< HEAD
 	int b_id;	
+=======
+	int b_id;
+>>>>>>> 598d47344806f7201c4ce15f34bd9a98bcc9c79d
 	int user_id;
 	int hit;
 	String title;
@@ -76,7 +80,18 @@ public class BoardVo {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+<<<<<<< HEAD
 
+=======
+	
+	@Override
+	public String toString() {
+		return "BoardVo [b_id=" + b_id + ", user_id=" + user_id + ", hit=" + hit + ", title=" + title + ", date=" + date
+				+ ", contents=" + contents + ", category=" + category + ", sympathy=" + sympathy + ", name=" + name
+				+ ", photo=" + photo + "]";
+	}
+	
+>>>>>>> 598d47344806f7201c4ce15f34bd9a98bcc9c79d
 	
 	
 }
