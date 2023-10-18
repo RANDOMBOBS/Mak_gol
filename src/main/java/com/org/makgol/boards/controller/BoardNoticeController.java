@@ -1,6 +1,7 @@
 package com.org.makgol.boards.controller;
 
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,25 +24,48 @@ public class BoardNoticeController {
 	@Autowired
 	BoardNoticeService boardService;
 	
-	// 전체 게시물중 공지사항만 보여주는 페이지
-	@GetMapping("/getAllNotice")
-	public String getAllNotice(Model model) {
+	@GetMapping("/Notice")
+	/**
+	 * 전체 게시물을 공지사항만 보여주는 페이지
+	 * @param model  = BoardVo 다음화면으로 값을 전달
+	 * BoardVo -- 
+	 * b_id : 게시글 번호
+	 * title : 게시글 제목
+	 * date : 게시글 작성일
+	 * category : 게시글 유형
+	 * contents : 게시글 내용
+	 * name : 게시글 작성자
+	 * @return = nextPage
+	 * nextPage : "board/notice" 이동
+	 */
+	public String Notice(Model model) {
 		String nextPage = "board/notice";
-		List<BoardVo> boardVo = boardService.getAllNotice();
+		List<BoardVo> boardVo = boardService.Notice();
 		model.addAttribute("boardVo",boardVo);
 		return nextPage;
 	}
 	
-	// 공지사항 게시판에서 글쓰기를 클릭하면 이동하는 페이지
 	@GetMapping("/noticeCreateForm")
+	/***
+	 * 공지사항 게시판 글쓰기
+	 * @return = nextPage
+	 * nextPage : "board/notice_create_form" 이동
+	 */
 	public String noticeCreateForm() {
 		String nextPage = "board/notice_create_form";
 		return nextPage;
 	}
 	
-	// 게시글 등록 버튼을 누르면 데이터값이 잘 전달되면 ok 페이지로 없을 시 ng 페이지
 	@PostMapping("/noticeAddList")
-	public String noticeAddList(BoardVo boardVo) {
+	/***
+	 * 공지사항 게시글 등록 버튼
+	 * @param boardVo
+	 * @return = nextPage
+	 * 등록버튼 누를 시 nextPage --
+	 * 성공 : "board/register_notice_ok" 이동
+	 * 실패 : "board/register_notice_ng" 이동
+	 */
+	public String noticeAddList(BoardVo boardVo ) {
 		String nextPage = "board/register_notice_ok";
 		int result = boardService.noticeAddList(boardVo);
 		if (result <=0) {
@@ -50,23 +74,61 @@ public class BoardNoticeController {
 		return nextPage;
 	}
  
-	//게시글 추가 성공후 이동
-		@GetMapping("/AllNotice")
-		public String AllNotice(Model model) {
-			String nextPage = "board/notice";
-			List<BoardVo> boardVo = boardService.allNotice();
+		@GetMapping("/detailNotice")
+		/***
+		 * 공지사항 중 게시글
+		 * @param b_id = 게시글 번호
+		 * @param model 
+		 * @return = nextPage
+		 * nextPage : "board/notice_detail" 이동
+		 */
+		public String detailNotice(@RequestParam("b_id") int b_id, Model model) {
+			String nextPage = "board/notice_detail";
+			BoardVo boardVo = boardService.detailNotice(b_id);
+			model.addAttribute("boardVo", boardVo);
+			return nextPage;
+		}
+		
+		@GetMapping("/modifyNotice")
+		/***
+		 * 공지사항 게시글 수정 버튼
+		 * @param b_id = 게시글 번호
+		 * @param model
+		 * @return = nextPage
+		 * nextPage : "/board/notice_modify_form" 이동
+		 */
+		public String modifyNotice(@RequestParam("b_id") int b_id, Model model) {
+			String nextPage = "/board/notice_modify_form";
+			BoardVo boardVo = boardService.modifyNotice(b_id);
 			model.addAttribute("boardVo",boardVo);
 			return nextPage;
 		}
 		
-		
-		// 게시글 누르면 
-		@GetMapping("/detailNoticeForm")
-		public String detailNoticeForm(@RequestParam("b_id") int b_id, Model model) {
-			String nextPage = "board/notice_detail";
-			BoardVo boardVo = boardService.detailNoticeForm(b_id);
-			model.addAttribute("boardVo", boardVo);
+		@PostMapping	("/modifyNoticeConfirm")
+		/***
+		 * 게시글 수정 등록 버튼
+ 		 * @param boardVo
+		 * @return = nextPage
+		 * 등록버튼 누를 시 nextPage --
+		 * 성공 : "board/notice_modify_ok" 이동
+		 * 실패 : "board/notice_modify_ng" 이동
+		 */
+		public String modifyNoticeConfirm(BoardVo boardVo) {
+			String nextPage = "/board/notice_modify_ok";
+			int result = boardService.modifyNoticeConfirm(boardVo);
+			if(result <= 0) {
+				nextPage = "/board/notice_modify_ng";
+			}
 			return nextPage;
-		}	
+		}
 		
+		@GetMapping("/deleteNotice")
+		public String deleteNotice(@RequestParam("b_id") int b_id ) {
+			String nextPage = "board/notice_delete_ok";
+			int result = boardService.deleteNotice(b_id);
+			if (result <=0) {
+				nextPage = "board/notice_delete_ng";
+			}
+			return nextPage;
+		}
 }

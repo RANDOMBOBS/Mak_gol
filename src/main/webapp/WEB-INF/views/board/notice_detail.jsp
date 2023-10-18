@@ -10,11 +10,11 @@
 
 <script type="text/javascript">
 
-	function deleteNotice(b_id, name) {
+	function deleteBoard(b_id) {
 		console.log('deleteNotice() CALLED!!');
 		let result = confirm('공지사항 [' + title + '] 를(을) 정말 삭제 하시겠습니까?');
 		if (result)
-			location.href = "<c:url value='/board/deleteNoticeConfirm?b_id="+ b_id+'/>";
+			location.href = "<c:url value='/board/deleteNotice?b_id="+ b_id+'/>";
 	}
 </script>
 
@@ -53,11 +53,14 @@
 				</ul>
 			</div>
 			<div class="buttons">
-				<c:url value='/board/modifyNoticeForm' var='modify_url'>
+				<c:url value='/board/modifyNotice' var='modify_url'>
 					<c:param name='b_id' value='${boardVo.b_id}'/>
 				</c:url>
 				<a class="modify_notice_button" href="${modify_url}">게시글 수정</a>
-				<a class="delete_notice_button" href="javascript:;" onclick="deleteBoard(${boardVo.b_id})">게시글 삭제</a>
+				<c:url value='/board/deleteNotice' var='delete_url'>
+					<c:param name='b_id' value='${boardVo.b_id}'/>
+				</c:url>
+				<a class="delete_notice_button" href="${delete_url}" onclick="deleteBoard(${boardVo.b_id})">게시글 삭제</a>
 			</div>
 		</div>
 	</section>

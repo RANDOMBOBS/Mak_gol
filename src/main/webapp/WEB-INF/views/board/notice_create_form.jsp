@@ -52,10 +52,10 @@
 						<option value="vent">하소연게시판</option>
 					</select> <br> 
 					<span>제목</span><input type="text" name="title" placeholder="제목을 입력해주세요."> 
-					<span>작성자</span><input type="text" name="user_id" value="${user_id}" > <br> 
+					<span>작성자</span><input type="text" name="name" value="${name}" > <br> 
 					<span>내용</span><input type="text" name="contents" placeholder="내용을 입력해주세요."> <br> 
 					<input type="button" value="등록" onclick="noticeAddList()"> 
-					<input type="reset" value="취소">
+					<input type="reset" value="취소" onclick="history.go(-1)">
 				</form>
 			</div>
 		</div>

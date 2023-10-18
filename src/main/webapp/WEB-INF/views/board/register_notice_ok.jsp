@@ -25,7 +25,7 @@ ul{
 
 	<h1>성공</h1>
 
-	<a href="<c:url value='/board/AllNotice' />">공지사항 리스트로 이동</a>
+	<a href="<c:url value='/board/Notice' />">공지사항 리스트로 이동</a>
 
 </body>
 </html>

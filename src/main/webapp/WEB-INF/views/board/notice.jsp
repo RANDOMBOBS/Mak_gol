@@ -36,7 +36,7 @@
 							<tr>
 								<td>${fn:length(boardVo)-(status.index)}</td>
 								<td>
-								<c:url value='/board/detailNoticeForm' var='detail_url'>
+								<c:url value='/board/detailNotice' var='detail_url'>
 									<c:param name='b_id' value='${item.b_id}'/>
 								</c:url><a href="${detail_url}" >${item.title}</a></td>
 								<td>${item.name}</td>
