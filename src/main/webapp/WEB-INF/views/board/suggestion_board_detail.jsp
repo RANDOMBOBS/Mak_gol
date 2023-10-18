@@ -40,10 +40,11 @@ request.setCharacterEncoding("utf-8");
 	<c:url value='/board/suggestion/modify' var='modify_url'>
 		<c:param name='b_id' value='${boardVo.b_id}' />
 	</c:url>
-	<c:url value='/board/suggestion/detail' var='detail_url'>
+	
+	<c:url value='/board/suggestion/delete' var='delete_url'>
 		<c:param name='b_id' value='${boardVo.b_id}' />
 	</c:url>
 	<a href="${modify_url}">글수정</a>
-	<a href="${detail_url}">글삭제</a>
+	<a href="${delete_url}">글삭제</a>
 </body>
 </html>

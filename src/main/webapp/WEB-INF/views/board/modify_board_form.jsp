@@ -48,9 +48,9 @@
 					게시판</option>
 			</select><br> <span>제목</span> <input type="text" name="title"
 				value="${boardVo.title}" placeholder="글제목"> <span>작성자</span>
-			<input type="text" name="name" value="${boardVo.name}" readonly
-				disabled> <br> <span>내용</span> <input type="text"
-				name="contents" value="${boardVo.contents}"
+			<input type="text" name="name" value="${boardVo.name}" readonly disabled><br>
+			
+			<span>내용</span><input type="text" name="contents" value="${boardVo.contents}"
 				placeholder="글내용을 입력해주세요"> <br> <input type="button"
 				value="수정" onclick="ModifyBoardForm();"> <input type="reset"
 				value="취소">
