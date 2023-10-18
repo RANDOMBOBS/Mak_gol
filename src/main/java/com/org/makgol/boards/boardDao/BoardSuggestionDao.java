@@ -22,7 +22,7 @@ public class BoardSuggestionDao {
 //
 //	@Autowired
 //	private SqlSession sqlSession;
-	/** suggestion °Ô½ÃÆÇ °¡Á®¿À±â**/
+	/** suggestion ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½**/
 	public List<BoardVo> selectAllSuggestionBoard() {
 		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo FROM boards AS b JOIN users AS u ON b.user_id = u.id Where category='suggestion' ORDER BY date DESC";
 		List<BoardVo> boardVos = new ArrayList<BoardVo>();
@@ -36,7 +36,7 @@ public class BoardSuggestionDao {
 		return boardVos.size() > 0 ? boardVos : null;
 	}
 
-	/** suggestion ±Û »ó¼¼º¸±â **/
+	/** suggestion ï¿½ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½ **/
 	public BoardVo showDetailSuggestionBoard(int b_id) {
 		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
 				+ "FROM boards AS b "
@@ -56,7 +56,7 @@ public class BoardSuggestionDao {
 	
 
 
-	/** suggestion ±Û ¾²±â Æû Á¦Ãâ **/
+	/** suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ **/
 	public int insertSuggestionBoard(BoardVo boardVo) {
 		String sql = "INSERT INTO boards (user_id, title, date, contents, category) values (1, ?, NOW(), ?, ?)";
 		int result = -1;
@@ -70,14 +70,14 @@ public class BoardSuggestionDao {
 		return result;
 	}
 	
-//	¸¶ÀÌ¹ÙÆ¼½º¸¦ ÀÌ¿ëÇÑ ÄÚµå (½ÇÆÐÇÔ)
+//	ï¿½ï¿½ï¿½Ì¹ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½Úµï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 //	public int insertSuggestionBoard(BoardVo boardVo) throws DataAccessException {
 //		int result = -1;
 //			result = sqlSession.insert("mapper.boardSuggestion.insertAdminAccount", boardVo);
 //			return result;
 //	}
 	
-	/** suggestion ±Û ¼öÁ¤ **/
+	/** suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ **/
 	public BoardVo selectBoard(int b_id) {
 		String sql = "SELECT * FROM boards WHERE id = ?";
 		List<BoardVo> boardVo = null;
@@ -91,7 +91,7 @@ public class BoardSuggestionDao {
 		return boardVo.size() > 0 ? boardVo.get(0) : null;
 	}
 	
-	/** suggestion ±Û ¼öÁ¤ Æû Á¦Ãâ **/
+	/** suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ **/
 	public int updateBoard(BoardVo boardVo) {
 		String sql = "UPDATE boards SET title=?, contents=? WHERE id=? ";
 		int result = -1;
@@ -106,7 +106,7 @@ public class BoardSuggestionDao {
 	}
 	
 	
-	/** suggestion ±Û »èÁ¦ **/
+	/** suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ **/
 	public int deleteBoard(int b_id) {
 		String sql = "DELETE FROM boards WHERE id = ?";
 		int result = -1;
@@ -119,7 +119,7 @@ public class BoardSuggestionDao {
 	}
 
 	
-	/** suggestion ´ñ±Û INSERT  **/
+	/** suggestion ï¿½ï¿½ï¿½ INSERT  **/
 	public int insertComment(CommentVo commentVo) {
 		String sql = "INSERT INTO comments(user_id, board_id, date, content, nickname) VALUES (1, ?, now(), ?, ?)";
 		int result = -1;
@@ -132,12 +132,12 @@ public class BoardSuggestionDao {
 	}
 	
 	
-	public List<CommentVo> selectCommentList() {
+	public List<CommentVo> selectCommentList(int board_id) {
 		String sql = "SELECT * FROM comments where board_id = ?";
 		List<CommentVo> CommentVos = null;
 		try {
 			RowMapper<CommentVo> rowMapper = BeanPropertyRowMapper.newInstance(CommentVo.class);
-			CommentVos = jdbcTemplate.query(sql, rowMapper, º¸µå¾ÆÀÌµð ¾îµð¼­ ¹Þ¾Æ¿Í¾ßÇÒ°¡¿ä);
+			CommentVos = jdbcTemplate.query(sql, rowMapper, board_id);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -16,42 +16,42 @@ public class BoardSuggestionService {
 
 	@Autowired
 	BoardSuggestionDao boardDao;
-	/** suggestion °Ô½ÃÆÇ °¡Á®¿À±â**/
+	/** suggestion ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½**/
 	public List<BoardVo> getSuggestionBoard() {
 		return boardDao.selectAllSuggestionBoard();
 	}
 	
-	/** suggestion ±Û »ó¼¼º¸±â **/
+	/** suggestion ï¿½ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½ **/
 	public BoardVo readSuggestionBoard(int b_id){
 		return boardDao.showDetailSuggestionBoard(b_id);
 	}
 	
-	/** suggestion ±Û ¾²±â Æû Á¦Ãâ **/
+	/** suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ **/
 	public int createBoardConfirm(BoardVo boardVo) {
 		return boardDao.insertSuggestionBoard(boardVo);
 	}
 	
-	/** suggestion ±Û ¼öÁ¤ **/
+	/** suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ **/
 	public BoardVo modifyBoard(int b_id) {
 		return boardDao.selectBoard(b_id);
 	}
 	
-	/** suggestion ±Û ¼öÁ¤ Æû Á¦Ãâ **/
+	/** suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ **/
 	public int modifyBoardConfirm(BoardVo boardVo) {		
 		return boardDao.updateBoard(boardVo);
 	}
 	
-	/** suggestion ±Û »èÁ¦ **/
+	/** suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ **/
 	public int deleteBoard(int b_id) {
 		return boardDao.deleteBoard(b_id);
 	}
 	
-	/** suggestion ´ñ±Û INSERT  **/
+	/** suggestion ï¿½ï¿½ï¿½ INSERT  **/
 	public void addComment(CommentVo commentVo) {
 		boardDao.insertComment(commentVo);
 	}
 	
-	public List<CommentVo> getCommentList(){
-		return boardDao.selectCommentList(); 
+	public List<CommentVo> getCommentList(int board_id){
+		return boardDao.selectCommentList(board_id); 
 	}
 }

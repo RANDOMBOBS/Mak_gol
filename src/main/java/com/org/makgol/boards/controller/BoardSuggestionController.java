@@ -1,6 +1,7 @@
 package com.org.makgol.boards.controller;
 
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import com.org.makgol.boards.service.BoardSuggestionService;
 import com.org.makgol.boards.vo.BoardVo;
@@ -23,9 +25,9 @@ public class BoardSuggestionController {
 
 	@GetMapping({ "/", "" })
 	/**
-	 * suggestion °Ô½ÃÆÇ °Ô½Ã±Û¸®½ºÆ®
-	 * @param model ´ÙÀ½ È­¸éÀ¸·Î °ª(boardVos : category°¡ suggestionÀÎ °Ô½Ã±Û ¹è¿­)À» Àü´Þ
-	 * @return suggestion.jsp·Î ÀÌµ¿
+	 * suggestion ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±Û¸ï¿½ï¿½ï¿½Æ®
+	 * @param model ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(boardVos : categoryï¿½ï¿½ suggestionï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½è¿­)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * @return suggestion.jspï¿½ï¿½ ï¿½Ìµï¿½
 	 */
 	public String showList(Model model) {
 		String nextPage = "board/suggestion";
@@ -39,10 +41,10 @@ public class BoardSuggestionController {
 
 	@GetMapping("/detail")
 	/**
-	 * suggestion ±Û »ó¼¼º¸±â ¹öÆ°
-	 * @param b_id : °Ô½Ã±Û ¹øÈ£
-	 * @param model : ´ÙÀ½ È­¸éÀ¸·Î °ª(boardVo: ¼±ÅÃÇÑ b_id°¡ Æ÷ÇÔµÈ ·¹ÄÚµå °ª)À» Àü´Þ
-	 * @return suggestion_board_detail.jsp·Î ÀÌµ¿
+	 * suggestion ï¿½ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
+	 * @param b_id : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£
+	 * @param model : ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(boardVo: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ b_idï¿½ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * @return suggestion_board_detail.jspï¿½ï¿½ ï¿½Ìµï¿½
 	 */
 	public String detail(@RequestParam("b_id") int b_id, Model model) {
 		String nextPage = "board/suggestion_board_detail";
@@ -54,15 +56,15 @@ public class BoardSuggestionController {
 	
 	@GetMapping("/create")
 	/**
-	 * suggestion ±Û ¾²±â ¹öÆ°
-	 * @param name : ·Î±×ÀÎ ÇÑ È¸¿ø¸í
-	 * @param model : ´ÙÀ½ È­¸éÀ¸·Î name °ªÀ» Àü´Þ
+	 * suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
+	 * @param name : ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½
+	 * @param model : ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ name ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * @param session : 
-	 * @return create_board_form.jsp·Î ÀÌµ¿
+	 * @return create_board_form.jspï¿½ï¿½ ï¿½Ìµï¿½
 	 */
 	public String create(@RequestParam("name") String name, Model model, HttpSession session) {
 		String nextPage = "board/create_board_form";
-//		¼¼¼Ç¿¡ ·Î±×ÀÎ Á¤º¸°¡ ÀÖÀ»¶§¸¸ ½ÇÇà (¾øÀ¸¸é ·Î±×ÀÎÆûÀ¸·Î °¡±â)
+//		ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 		model.addAttribute("name", name);
 		return nextPage;
 	}
@@ -70,15 +72,15 @@ public class BoardSuggestionController {
 	
 	@PostMapping("/createConfirm")
 	/**
-	 * suggestion ±Û ¾²±â Æû Á¦Ãâ
+	 * suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * @param boardVo --
-	 * 		  Ä«Å×°í¸® : category
-	 * 		  Á¦¸ñ : title
-	 * 		  ÀÛ¼ºÀÚ : user_id
-	 * 		  ³»¿ë : contents
-	 * @return ±Û¾²±â ¼º°ø ¿©ºÎ
-	 * 		   ¼º°ø ½Ã : board/create_board_ok.jsp
-	 * 		   ½ÇÆÐ ½Ã : board/create_board_ng.jsp
+	 * 		  Ä«ï¿½×°ï¿½ : category
+	 * 		  ï¿½ï¿½ï¿½ï¿½ : title
+	 * 		  ï¿½Û¼ï¿½ï¿½ï¿½ : user_id
+	 * 		  ï¿½ï¿½ï¿½ï¿½ : contents
+	 * @return ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * 		   ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ : board/create_board_ok.jsp
+	 * 		   ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ : board/create_board_ng.jsp
 	 */
 	public String createConfirm(BoardVo boardVo) {
 		String nextPage = "board/create_board_ok";
@@ -92,14 +94,14 @@ public class BoardSuggestionController {
 	
 	@GetMapping("/modify")
 	/**
-	 * suggestion ±Û ¼öÁ¤ ¹öÆ°
-	 * @param b_id : °Ô½Ã±Û ¹øÈ£
-	 * @param model : ´ÙÀ½ È­¸éÀ¸·Î °ª(boardVo : ¼öÁ¤Æû¿¡ ÀÔ·ÂÇÑ °ª)À» Àü´ÞÇØÁÖ´Â °´Ã¼
-	 * @return modify_board_form.jsp·Î ÀÌµ¿
+	 * suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
+	 * @param b_id : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£
+	 * @param model : ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(boardVo : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½Ã¼
+	 * @return modify_board_form.jspï¿½ï¿½ ï¿½Ìµï¿½
 	 */
 	public String modify(@RequestParam("b_id") int b_id, Model model) {
 		String nextPage = "board/modify_board_form";
-//		¼¼¼Ç¿¡ ·Î±×ÀÎ Á¤º¸°¡ ÀÖÀ»¶§¸¸ ½ÇÇà (¾øÀ¸¸é ·Î±×ÀÎÆûÀ¸·Î °¡±â)
+//		ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 		BoardVo boardVo = boardService.modifyBoard(b_id);
 		boardVo.setB_id(b_id);
 		model.addAttribute("boardVo", boardVo);
@@ -109,16 +111,16 @@ public class BoardSuggestionController {
 
 	@PostMapping("/modifyConfirm")
 	/**
-	 * suggestion ±Û ¼öÁ¤ Æû Á¦Ãâ 
+	 * suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	 * @param boardVo --
-	 * 		  Ä«Å×°í¸® : category
-	 * 		  Á¦¸ñ : title
-	 * 		  ÀÛ¼ºÀÚ : user_id
-	 * 		  ³»¿ë : contents
+	 * 		  Ä«ï¿½×°ï¿½ : category
+	 * 		  ï¿½ï¿½ï¿½ï¿½ : title
+	 * 		  ï¿½Û¼ï¿½ï¿½ï¿½ : user_id
+	 * 		  ï¿½ï¿½ï¿½ï¿½ : contents
 	 * 
-	 * @return ¼öÁ¤ ¼º°ø ¿©ºÎ
-	 * 		   ¼º°ø ½Ã : modify_board_ok.jsp
-	 * 		   ½ÇÆÐ ½Ã : modify_board_ng.jsp 
+	 * @return ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * 		   ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ : modify_board_ok.jsp
+	 * 		   ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ : modify_board_ng.jsp 
 	 */
 	public String modifyConfirm(BoardVo boardVo) {
 		String nextPage = "board/modify_board_ok";
@@ -132,11 +134,11 @@ public class BoardSuggestionController {
 	
 	@GetMapping("/delete")
 	/**
-	 * suggestion ±Û »èÁ¦¹öÆ°
-	 * @param b_id : °Ô½Ã±Û ¹øÈ£
-	 * @return »èÁ¦ ¼º°ø ¿©ºÎ
-	 * 		   ¼º°ø ½Ã : delete_board_ok.jsp
-	 * 		   ½ÇÆÐ ½Ã : delete_board_ng.jsp 
+	 * suggestion ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ°
+	 * @param b_id : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£
+	 * @return ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * 		   ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ : delete_board_ok.jsp
+	 * 		   ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ : delete_board_ng.jsp 
 	 */
 	public String delete(@RequestParam("b_id") int b_id) {
 		String nextPage = "board/delete_board_ok";
@@ -150,17 +152,25 @@ public class BoardSuggestionController {
 	}
 	
 	
-	/** suggestion ´ñ±Û INSERT  **/
+	/** suggestion ï¿½ï¿½ï¿½ INSERT  **/
 	@PostMapping("/createComment")
-	public void createComment(CommentVo commentVo) {
+	public String createComment(CommentVo commentVo,Model model,@RequestParam("b_id") int b_id) {
 		boardService.addComment(commentVo);
+		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
+		model.addAttribute("commentVo", commentVo);
+		model.addAttribute("boardVo", boardVo);
+		return "/board/suggestion_board_detail";
 	}
 	
+
 	
 	@GetMapping("/commentList")
-	public List<CommentVo> commentList(){
-		System.out.println("´ñ±Û¸®½ºÆ® ÄÁÆ®·Ñ·¯");
-		List<CommentVo> commentVos = boardService.getCommentList();
-		return commentVos;
+	public String commentList(CommentVo commentVo, Model model){
+		System.out.println("ï¿½ï¿½Û¸ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Æ®ï¿½Ñ·ï¿½");
+		int board_id = commentVo.getBoard_id();
+		System.out.println(board_id);
+		List<CommentVo> commentVos = boardService.getCommentList(board_id);
+		model.addAttribute("commentVos", commentVos);
+		return "/board/suggestion_board_detail";
 	}
 }

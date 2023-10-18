@@ -31,28 +31,26 @@ request.setCharacterEncoding("utf-8");
 			form.submit();
 			alert("jhkjkjhj");
 			comlist();
-
 		}
+			
 
 	}
 
 	function comlist() {
-		$.ajax({
-			type : 'get', // 타입 (get, post, put 등등)
-			url : '/board/suggestion/commentList', // 요청할 서버url
-			async : true, // 비동기화 여부 (default : true)
-			/* headers : { // Http header
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "POST"
-			}, */
-			dataType : 'json', // 데이터 타입 (html, xml, json, text 등등)
-			success : function(result) { // 결과 성공 콜백함수
-				console.log(result);
-			},
-			error : function(request, status, error) { // 결과 에러 콜백함수
-				console.log(error)
-			}
-		})
+		 $.ajax({
+	            type: "POST",
+	            url: "/board/suggestion/commentList",
+	            data: JSON.stringify(commentData),
+	            contentType: "application/json",
+	            success: function (data) {
+	                // 성공적인 응답을 처리합니다.
+	                console.log(data);
+	            },
+	            error: function (error) {
+	                // 오류 응답을 처리합니다.
+	                console.log(error);
+	            }
+	        });
 	}
 </script>
 
