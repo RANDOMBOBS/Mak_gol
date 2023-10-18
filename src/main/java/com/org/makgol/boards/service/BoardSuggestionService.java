@@ -20,9 +20,9 @@ public class BoardSuggestionService {
 	}
 	
 	
-//	public BoardVo readSuggestionBoard(){
-//		return boardDao.
-//	}
+	public BoardVo readSuggestionBoard(int b_id){
+		return boardDao.showDetailSuggestionBoard(b_id);
+	}
 	
 	
 	public int createBoardConfirm(BoardVo boardVo) {

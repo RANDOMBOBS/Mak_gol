@@ -34,6 +34,24 @@ public class BoardSuggestionDao {
 		return boardVos.size() > 0 ? boardVos : null;
 	}
 
+	
+	public BoardVo showDetailSuggestionBoard(int b_id) {
+		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
+				+ "FROM boards AS b "
+				+ "JOIN users AS u ON b.user_id = u.id "
+				+ "WHERE b.id = ?";
+		
+		List<BoardVo> boardVo = null;
+		try {
+			RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
+			boardVo = jdbcTemplate.query(sql, rowMapper, b_id);;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return boardVo.size() > 0 ? boardVo.get(0) : null;
+	}
+	
+	// 마이바티스 시도했다가 실패한 코드
 //	public int insertSuggestionBoard(BoardVo boardVo) throws DataAccessException {
 //		int result = -1;
 //			result = sqlSession.insert("mapper.boardSuggestion.insertAdminAccount", boardVo);
@@ -41,15 +59,17 @@ public class BoardSuggestionDao {
 //	}
 
 	public int insertSuggestionBoard(BoardVo boardVo) {
+		
 		String sql = "INSERT INTO boards(user_id, title, date, contents, category) values (?,?,now(),?,?)";
 		int result = -1;
 		try {
-			System.out.println("Ʈ���̵��Ծ��");
+			System.out.println("트라이로들어옴");
 	        result = jdbcTemplate.update(sql, boardVo.getUser_id(), boardVo.getTitle(), boardVo.getContents(), boardVo.getCategory());
 		} catch (Exception e) {
-			System.out.println("ĳġ���Ծ��");
+			System.out.println("캐치로들어옴");
 			e.printStackTrace();
 		}
+	
 		return result;
 	}
 
