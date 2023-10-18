@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.ui.Model;		
+import org.springframework.ui.Model;
 import com.org.makgol.boards.service.BoardSuggestionService;
 import com.org.makgol.boards.vo.BoardVo;
 
@@ -21,47 +21,73 @@ public class BoardSuggestionController {
 	@Autowired
 	BoardSuggestionService boardService;
 
-// ê±´ì˜ê²Œì‹œíŒ ê¸€ëª©ë¡ ë³´ê¸°
-	@GetMapping({"/",""})
+	/** suggestion °Ô½ÃÆÇ ¸®½ºÆ® **/
+	@GetMapping({ "/", "" })
 	public String showList(Model model) {
 		String nextPage = "board/suggestion";
 		List<BoardVo> boardVos = boardService.getSuggestionBoard();
-		
-		if(boardVos != null) {
+
+		if (boardVos != null) {
 			model.addAttribute("boardVos", boardVos);
 		}
 		return nextPage;
 	}
-	
-//	ê¸€ ìƒì„¸ë³´ê¸°
+
+	/** suggestion ±Û »ó¼¼º¸±â ¹öÆ° **/
 	@GetMapping("/detail")
 	public String detail(@RequestParam("b_id") int b_id, Model model) {
 		String nextPage = "board/suggestion_board_detail";
 		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
-		model.addAttribute("boardVo" , boardVo);
+		model.addAttribute("boardVo", boardVo);
 		return nextPage;
 	}
-	
-//	ìƒˆ ê¸€ì“°ê¸°
+
+	/** suggestion ±Û ¾²±â **/
 	@GetMapping("/create")
-	public String create(@RequestParam("name") String name, Model model) {
+	public String create(@RequestParam("name") String name, Model model, HttpSession session) {
 		String nextPage = "board/create_board_form";
+//		¼¼¼Ç¿¡ ·Î±×ÀÎ Á¤º¸°¡ ÀÖÀ»¶§¸¸ ½ÇÇà (¾øÀ¸¸é ·Î±×ÀÎÆûÀ¸·Î °¡±â)
 		model.addAttribute("name", name);
-//		if(name==null || name=="") {
-//			nextPage = "login_form";
-//		}
 		return nextPage;
 	}
-			
-//	ê¸€ì“°ê¸° í¼ ì „ì†¡
+
+	/** suggestion ±Û ¾²±â Æû Á¦Ãâ **/
 	@PostMapping("/createConfirm")
 	public String createConfirm(BoardVo boardVo) {
-		String nextPage = "board/suggestion_ok";
+		String nextPage = "board/create_board_ok";
 		int result = boardService.createBoardConfirm(boardVo);
-		if(result < 1) {
-			nextPage = "board/suggestion_ng";
+		if (result < 1) {
+			nextPage = "board/create_board_ng";
 		}
 		return nextPage;
 	}
 
+	/** suggestion ±Û ¼öÁ¤ **/
+	@GetMapping("/modify")
+	public String modify(@RequestParam("b_id") int b_id, Model model) {
+		String nextPage = "board/modify_board_form";
+//		¼¼¼Ç¿¡ ·Î±×ÀÎ Á¤º¸°¡ ÀÖÀ»¶§¸¸ ½ÇÇà (¾øÀ¸¸é ·Î±×ÀÎÆûÀ¸·Î °¡±â)
+	
+		BoardVo boardVo = boardService.modifyBoard(b_id);
+		boardVo.setB_id(b_id);
+		System.out.println("-------> :  "+b_id);
+		System.out.println("-------> :  "+boardVo.getB_id());
+		model.addAttribute("boardVo", boardVo);
+		return nextPage;
+	}
+
+	/** suggestion ±Û ¼öÁ¤ Æû Á¦Ãâ **/
+	@PostMapping("/modifyConfirm")
+	public String modifyConfirm(BoardVo boardVo) {
+		String nextPage = "board/modify_board_ok";
+		int result = boardService.modifyBoardConfirm(boardVo);
+		System.out.println("result´Â " + result);
+		if (result < 1) {
+			nextPage = "board/modify_board_ng";
+		}
+		return nextPage;
+	}
+	
+	/** suggestion ±Û »èÁ¦ **/
+	
 }

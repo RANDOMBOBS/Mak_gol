@@ -9,6 +9,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
+
 //import org.apache.ibatis.session.SqlSession;
 import com.org.makgol.boards.vo.BoardVo;
 
@@ -20,7 +22,7 @@ public class BoardSuggestionDao {
 //
 //	@Autowired
 //	private SqlSession sqlSession;
-
+	/** suggestion °Ô½ÃÆÇ °¡Á®¿À±â**/
 	public List<BoardVo> selectAllSuggestionBoard() {
 		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo FROM boards AS b JOIN users AS u ON b.user_id = u.id Where category='suggestion' ORDER BY date DESC";
 		List<BoardVo> boardVos = new ArrayList<BoardVo>();
@@ -34,7 +36,7 @@ public class BoardSuggestionDao {
 		return boardVos.size() > 0 ? boardVos : null;
 	}
 
-	
+	/** suggestion ±Û »ó¼¼º¸±â **/
 	public BoardVo showDetailSuggestionBoard(int b_id) {
 		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
 				+ "FROM boards AS b "
@@ -51,26 +53,60 @@ public class BoardSuggestionDao {
 		return boardVo.size() > 0 ? boardVo.get(0) : null;
 	}
 	
-	// ë§ˆì´ë°”í‹°ìŠ¤ ì‹œë„í–ˆë‹¤ê°€ ì‹¤íŒ¨í•œ ì½”ë“œ
-//	public int insertSuggestionBoard(BoardVo boardVo) throws DataAccessException {
-//		int result = -1;
-//			result = sqlSession.insert("mapper.boardSuggestion.insertAdminAccount", boardVo);
-//			return result;
-//	}
 
+
+	/** suggestion ±Û ¾²±â Æû Á¦Ãâ **/
 	public int insertSuggestionBoard(BoardVo boardVo) {
-		
-		String sql = "INSERT INTO boards(user_id, title, date, contents, category) values (?,?,now(),?,?)";
+		String sql = "INSERT INTO boards (user_id, title, date, contents, category) values (1, ?, NOW(), ?, ?)";
 		int result = -1;
 		try {
-			System.out.println("íŠ¸ë¼ì´ë¡œë“¤ì–´ì˜´");
-	        result = jdbcTemplate.update(sql, boardVo.getUser_id(), boardVo.getTitle(), boardVo.getContents(), boardVo.getCategory());
+			System.out.println("Æ®¶óÀÌ·Î µé¾î¿È");
+	        result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getCategory());
 		} catch (Exception e) {
-			System.out.println("ìºì¹˜ë¡œë“¤ì–´ì˜´");
+			System.out.println("Ä³Ä¡·Î µé¾î¿È");
 			e.printStackTrace();
 		}
 	
 		return result;
 	}
+	
+//	¸¶ÀÌ¹ÙÆ¼½º¸¦ ÀÌ¿ëÇÑ ÄÚµå (½ÇÆĞÇÔ)
+//	public int insertSuggestionBoard(BoardVo boardVo) throws DataAccessException {
+//		int result = -1;
+//			result = sqlSession.insert("mapper.boardSuggestion.insertAdminAccount", boardVo);
+//			return result;
+//	}
+	
+	/** suggestion ±Û ¼öÁ¤ **/
+	public BoardVo selectBoard(int b_id) {
+		String sql = "SELECT * FROM boards WHERE id = ?";
+		List<BoardVo> boardVo = null;
+		
+		try{
+			RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
+			boardVo = jdbcTemplate.query(sql, rowMapper, b_id);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return boardVo.size() > 0 ? boardVo.get(0) : null;
+	}
+	
+	/** suggestion ±Û ¼öÁ¤ Æû Á¦Ãâ **/
+	public int updateBoard(BoardVo boardVo) {
+		String sql = "UPDATE boards SET title=?, contents=? WHERE id=? ";
+		int result = -1;
+		try {
+			result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getB_id());
+			
+		} catch(Exception e) {
+		 e.printStackTrace();
+		}
+		return result;
+	
+	}
+	
+	
+	/** suggestion ±Û »èÁ¦ **/
+
 
 }

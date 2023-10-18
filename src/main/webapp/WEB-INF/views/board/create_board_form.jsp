@@ -17,15 +17,15 @@
 		
 		if (form.category.value == '') {
 			alert('카테고리를 선택해주세요.');
-			form.a_m_name.focus();
+			form.category.focus();
 
 		} else if (form.title.value == '') {
 			alert('제목을 입력해주세요');
-			form.a_m_gender.focus();
+			form.title.focus();
 
 		} else if (form.contents.value == '') {
 			alert('글 내용을 입력해주세요.');
-			form.a_m_part.focus();
+			form.contents.focus();
 
 		}  else {
 			form.submit();
@@ -51,7 +51,7 @@
 			<input type="text" name="title"	placeholder="글제목">
 			
 			<span>작성자</span>
-			<input type="text" name="user_id" value="" readonly disabled> <br>
+			<input type="text" name="name" value="${name}" readonly disabled> <br>
 			
 			<span>내용</span>
 			<input type="text" name="contents" placeholder="글내용을 입력해주세요"> <br>

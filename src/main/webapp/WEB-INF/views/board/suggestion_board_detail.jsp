@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<% request.setCharacterEncoding("utf-8"); %>
-	
+<%
+request.setCharacterEncoding("utf-8");
+%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -31,8 +33,17 @@
 			<td>내용</td>
 			<td>${boardVo.contents}</td>
 		</tr>
-		
 	</table>
 
+
+<!-- 로그인한 아이디와 작성자가 같을때만 보이기 -->
+	<c:url value='/board/suggestion/modify' var='modify_url'>
+		<c:param name='b_id' value='${boardVo.b_id}' />
+	</c:url>
+	<c:url value='/board/suggestion/detail' var='detail_url'>
+		<c:param name='b_id' value='${boardVo.b_id}' />
+	</c:url>
+	<a href="${modify_url}">글수정</a>
+	<a href="${detail_url}">글삭제</a>
 </body>
 </html>
