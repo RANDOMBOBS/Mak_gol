@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.org.makgol.boards.boardDao.BoardSuggestionDao;
 
 import com.org.makgol.boards.vo.BoardVo;
+import com.org.makgol.comment.vo.CommentVo;
 
 @Service()
 public class BoardSuggestionService {
@@ -40,5 +41,13 @@ public class BoardSuggestionService {
 	}
 	
 	/** suggestion 글 삭제 **/
-
+	public int deleteBoard(int b_id) {
+		return boardDao.deleteBoard(b_id);
+	}
+	
+	/** suggestion 댓글 작성  **/
+	public int addComment(CommentVo commentvo) {
+		return boardDao.insertComment(commentvo);
+	}
+	
 }

@@ -35,25 +35,19 @@
 			action="<c:url value='/board/suggestion/modifyConfirm' ><c:param name='b_id' value='${boardVo.b_id}' />
 		</c:url>"
 			method="post" name="modify_board_form">
-			<span>카테고리 선택</span> <select name="category" readonly disabled>
+			<span>카테고리 선택</span>
+			<select name="category" readonly disabled>
 				<option value="">카테고리 선택</option>
-				<option value="notice"
-					<c:if test="${boardVo.category == 'notice'}">selected</c:if>>
-					공지사항 게시판</option>
-				<option value="suggestion"
-					<c:if test="${boardVo.category == 'suggestion'}">selected</c:if>>건의사항
-					게시판</option>
-				<option value="vent"
-					<c:if test="${boardVo.category == 'vent'}"> selected </c:if>>하소연
-					게시판</option>
-			</select><br> <span>제목</span> <input type="text" name="title"
-				value="${boardVo.title}" placeholder="글제목"> <span>작성자</span>
-			<input type="text" name="name" value="${boardVo.name}" readonly disabled><br>
+				<option value="notice"	<c:if test="${boardVo.category == 'notice'}">selected</c:if>>공지사항 게시판</option>
+				<option value="suggestion" <c:if test="${boardVo.category == 'suggestion'}">selected</c:if>>건의사항 게시판</option>
+				<option value="vent" <c:if test="${boardVo.category == 'vent'}"> selected </c:if>>하소연 게시판</option>
+			</select><br>
 			
-			<span>내용</span><input type="text" name="contents" value="${boardVo.contents}"
-				placeholder="글내용을 입력해주세요"> <br> <input type="button"
-				value="수정" onclick="ModifyBoardForm();"> <input type="reset"
-				value="취소">
+			<span>제목</span> <input type="text" name="title" 	value="${boardVo.title}" placeholder="글제목"><br>
+			<span>작성자</span> <input type="text" name="name" value="${boardVo.name}" readonly disabled><br>
+			<span>내용</span><input type="text" name="contents" value="${boardVo.contents}" placeholder="글내용을 입력해주세요"><br>
+			<input type="button" value="수정" onclick="ModifyBoardForm();">
+			<input type="button" value="취소" onclick="history.go(-1)"/>
 		</form>
 	</div>
 </body>

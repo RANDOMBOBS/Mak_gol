@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class BoardVo {
 
-	int b_id;
+	int b_id;	
 	int user_id;
 	int hit;
 	String title;

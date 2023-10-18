@@ -1,11 +1,22 @@
 package com.org.makgol.users.vo;
 
 public class UsersVo {
+	// user 아이디
 	int id;
+	
+	// user 이름
 	String name;
+	
+	// user 이메일
 	String email;
+	
+	// user 비밀번호
 	String password;
+	
+	// user 전화번호
 	String phone;
+	
+	// user 사진
 	String photo;
 	
 	

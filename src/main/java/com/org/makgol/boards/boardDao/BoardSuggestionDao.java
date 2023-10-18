@@ -5,14 +5,13 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
 
 //import org.apache.ibatis.session.SqlSession;
 import com.org.makgol.boards.vo.BoardVo;
+import com.org.makgol.comment.vo.CommentVo;
 
 @Component
 public class BoardSuggestionDao {
@@ -44,9 +43,10 @@ public class BoardSuggestionDao {
 				+ "WHERE b.id = ?";
 		
 		List<BoardVo> boardVo = null;
+
 		try {
 			RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
-			boardVo = jdbcTemplate.query(sql, rowMapper, b_id);;
+			boardVo = jdbcTemplate.query(sql, rowMapper, b_id);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -59,6 +59,7 @@ public class BoardSuggestionDao {
 	public int insertSuggestionBoard(BoardVo boardVo) {
 		String sql = "INSERT INTO boards (user_id, title, date, contents, category) values (1, ?, NOW(), ?, ?)";
 		int result = -1;
+
 		try {
 			System.out.println("트라이로 들어옴");
 	        result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getCategory());
@@ -95,6 +96,7 @@ public class BoardSuggestionDao {
 	public int updateBoard(BoardVo boardVo) {
 		String sql = "UPDATE boards SET title=?, contents=? WHERE id=? ";
 		int result = -1;
+
 		try {
 			result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getB_id());
 			
@@ -102,11 +104,26 @@ public class BoardSuggestionDao {
 		 e.printStackTrace();
 		}
 		return result;
-	
 	}
 	
 	
 	/** suggestion 글 삭제 **/
+	public int deleteBoard(int b_id) {
+		String sql = "DELETE FROM boards WHERE id = ?";
+		int result = -1;
+		try {
+			result = jdbcTemplate.update(sql, b_id);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
-
+	
+	/** suggestion 댓글 작성  **/
+	public int insertComment(CommentVo commentvo) {
+		int result = -1;
+		return result;
+	}
+	
 }
