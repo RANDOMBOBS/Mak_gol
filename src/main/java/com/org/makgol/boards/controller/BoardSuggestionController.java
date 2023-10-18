@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import com.org.makgol.boards.service.BoardSuggestionService;
 import com.org.makgol.boards.vo.BoardVo;
 import com.org.makgol.comment.vo.CommentVo;
-
 @Controller
 @RequestMapping("/board/suggestion")
 public class BoardSuggestionController {
@@ -151,15 +150,17 @@ public class BoardSuggestionController {
 	}
 	
 	
-	/** suggestion ´ñ±Û ÀÛ¼º  **/
+	/** suggestion ´ñ±Û INSERT  **/
 	@PostMapping("/createComment")
-	public String createComment(CommentVo commentvo) {
-		String nextPage = "";
-		int result = boardService.addComment(commentvo);
-		if(result < 1) {
-			
-		}
-		return nextPage;
-		
+	public void createComment(CommentVo commentVo) {
+		boardService.addComment(commentVo);
+	}
+	
+	
+	@GetMapping("/commentList")
+	public List<CommentVo> commentList(){
+		System.out.println("´ñ±Û¸®½ºÆ® ÄÁÆ®·Ñ·¯");
+		List<CommentVo> commentVos = boardService.getCommentList();
+		return commentVos;
 	}
 }

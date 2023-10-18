@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.org.makgol.boards.boardDao.BoardSuggestionDao;
 
@@ -45,9 +46,12 @@ public class BoardSuggestionService {
 		return boardDao.deleteBoard(b_id);
 	}
 	
-	/** suggestion ¥Ò±€ ¿€º∫  **/
-	public int addComment(CommentVo commentvo) {
-		return boardDao.insertComment(commentvo);
+	/** suggestion ¥Ò±€ INSERT  **/
+	public void addComment(CommentVo commentVo) {
+		boardDao.insertComment(commentVo);
 	}
 	
+	public List<CommentVo> getCommentList(){
+		return boardDao.selectCommentList(); 
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 //import org.apache.ibatis.session.SqlSession;
 import com.org.makgol.boards.vo.BoardVo;
@@ -61,10 +62,8 @@ public class BoardSuggestionDao {
 		int result = -1;
 
 		try {
-			System.out.println("트라이로 들어옴");
 	        result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getCategory());
 		} catch (Exception e) {
-			System.out.println("캐치로 들어옴");
 			e.printStackTrace();
 		}
 	
@@ -120,10 +119,29 @@ public class BoardSuggestionDao {
 	}
 
 	
-	/** suggestion 댓글 작성  **/
-	public int insertComment(CommentVo commentvo) {
+	/** suggestion 댓글 INSERT  **/
+	public int insertComment(CommentVo commentVo) {
+		String sql = "INSERT INTO comments(user_id, board_id, date, content, nickname) VALUES (1, ?, now(), ?, ?)";
 		int result = -1;
+		try {
+			result = jdbcTemplate.update(sql, commentVo.getBoard_id(), commentVo.getContent(), commentVo.getNickname());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		return result;
+	}
+	
+	
+	public List<CommentVo> selectCommentList() {
+		String sql = "SELECT * FROM comments where board_id = ?";
+		List<CommentVo> CommentVos = null;
+		try {
+			RowMapper<CommentVo> rowMapper = BeanPropertyRowMapper.newInstance(CommentVo.class);
+			CommentVos = jdbcTemplate.query(sql, rowMapper, 보드아이디 어디서 받아와야할가요);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return CommentVos;
 	}
 	
 }
