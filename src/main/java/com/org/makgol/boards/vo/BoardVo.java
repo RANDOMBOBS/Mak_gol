@@ -77,4 +77,13 @@ public class BoardVo {
 		this.photo = photo;
 	}
 	
+	@Override
+	public String toString() {
+		return "BoardVo [b_id=" + b_id + ", user_id=" + user_id + ", hit=" + hit + ", title=" + title + ", date=" + date
+				+ ", contents=" + contents + ", category=" + category + ", sympathy=" + sympathy + ", name=" + name
+				+ ", photo=" + photo + "]";
+	}
+	
+	
+	
 }

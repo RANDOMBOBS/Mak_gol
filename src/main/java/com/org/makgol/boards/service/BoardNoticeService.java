@@ -14,13 +14,25 @@ public class BoardNoticeService {
 	@Autowired
 	BoardNoticeDao noticeDao;
 	
+	
+	// 전체 게시물 중 공지사항 리스트
 	public List<BoardVo> getAllNotice(){
 		return noticeDao.selectNotice();
 	}
 	
+	// 글쓰기 등록
 	public int noticeAddList(BoardVo boardVo) {
 		return noticeDao.insertNotice(boardVo);
 	}
 	
 	
+	// 게시물 추가 후 공지사항 리스트 
+		public List<BoardVo> allNotice(){
+			return noticeDao.selectAllNotice();
+		}
+		
+	//게시글  버튼
+		public BoardVo detailNoticeForm(int b_id) {
+			return noticeDao.selectDetailNotice(b_id);
+		}
 }

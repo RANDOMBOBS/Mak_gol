@@ -8,11 +8,12 @@
 <meta charset="UTF-8">
 <title></title>
 
+<!-- 미 입력시 alert 문으로 빈공간 알려줌 -->
 <script type="text/javascript">
 
 	function noticeAddList() {
 	 console.log('noticeAddList() CALLED!!');
-	
+
 	 let form = document.notice_create_form;
 	
 	 if (form.category.value == '') {

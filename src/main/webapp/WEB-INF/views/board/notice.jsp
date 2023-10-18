@@ -31,10 +31,14 @@
 					
 					<tbody>
 						
+						<!-- 각 게시판 ( 공지사항 ) 리스트를 보여줌 -->
 						<c:forEach var="item" items="${boardVo}" varStatus="status">
 							<tr>
 								<td>${fn:length(boardVo)-(status.index)}</td>
-								<td>${item.title}</td>
+								<td>
+								<c:url value='/board/detailNoticeForm' var='detail_url'>
+									<c:param name='b_id' value='${item.b_id}'/>
+								</c:url><a href="${detail_url}" >${item.title}</a></td>
 								<td>${item.name}</td>
 								<td>${item.date}</td>
 								<td>${item.hit}</td>

@@ -19,11 +19,11 @@ import org.springframework.ui.Model;
 @RequestMapping("/board")
 
 public class BoardNoticeController {
-// 발송
+
 	@Autowired
 	BoardNoticeService boardService;
 	
-	
+	// 전체 게시물중 공지사항만 보여주는 페이지
 	@GetMapping("/getAllNotice")
 	public String getAllNotice(Model model) {
 		String nextPage = "board/notice";
@@ -32,13 +32,14 @@ public class BoardNoticeController {
 		return nextPage;
 	}
 	
+	// 공지사항 게시판에서 글쓰기를 클릭하면 이동하는 페이지
 	@GetMapping("/noticeCreateForm")
 	public String noticeCreateForm() {
 		String nextPage = "board/notice_create_form";
 		return nextPage;
 	}
 	
-	// 게시글 등록 버튼을 누르면
+	// 게시글 등록 버튼을 누르면 데이터값이 잘 전달되면 ok 페이지로 없을 시 ng 페이지
 	@PostMapping("/noticeAddList")
 	public String noticeAddList(BoardVo boardVo) {
 		String nextPage = "board/register_notice_ok";
@@ -49,4 +50,23 @@ public class BoardNoticeController {
 		return nextPage;
 	}
  
+	//게시글 추가 성공후 이동
+		@GetMapping("/AllNotice")
+		public String AllNotice(Model model) {
+			String nextPage = "board/notice";
+			List<BoardVo> boardVo = boardService.allNotice();
+			model.addAttribute("boardVo",boardVo);
+			return nextPage;
+		}
+		
+		
+		// 게시글 누르면 
+		@GetMapping("/detailNoticeForm")
+		public String detailNoticeForm(@RequestParam("b_id") int b_id, Model model) {
+			String nextPage = "board/notice_detail";
+			BoardVo boardVo = boardService.detailNoticeForm(b_id);
+			model.addAttribute("boardVo", boardVo);
+			return nextPage;
+		}	
+		
 }
