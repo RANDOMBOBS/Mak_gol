@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[2.5.0.201010141000-RC1]]></pluginVersion>
+	<pluginVersion><![CDATA[3.9.22.202204280911-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 	</configs>
+	<autoconfigs>
+<<<<<<< HEAD
+		<config>src/main/webapp/WEB-INF/spring/action-mybatis.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
+=======
+		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/root-context.xml</config>
+>>>>>>> 598d47344806f7201c4ce15f34bd9a98bcc9c79d
+	</autoconfigs>
 	<configSets>
 	</configSets>
 </beansProjectDescription>

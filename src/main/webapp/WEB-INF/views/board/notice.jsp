@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -30,26 +31,24 @@
 					
 					<tbody>
 						
-						<c:forEach var="item" items="${boardVo}">
+						<!-- 각 게시판 ( 공지사항 ) 리스트를 보여줌 -->
+						<c:forEach var="item" items="${boardVo}" varStatus="status">
 							<tr>
-								<td><c:url value='#' var='#'>
-									<c:param name='id' value='${item.id}'/>
-								</c:url></td>
-								<td>${item.title}</td>
-								<td>${item.user_id}</td>
+								<td>${fn:length(boardVo)-(status.index)}</td>
+								<td>
+								<c:url value='/board/detailNotice' var='detail_url'>
+									<c:param name='b_id' value='${item.b_id}'/>
+								</c:url><a href="${detail_url}" >${item.title}</a></td>
+								<td>${item.name}</td>
 								<td>${item.date}</td>
 								<td>${item.hit}</td>
 								<td>${item.sympathy}</td>
 							</tr>
 						</c:forEach>
-						
 					</tbody>
-					
-					
 				</table>
-				
 			</div>
-			
+				<a href="<c:url value='/board/noticeCreateForm'/>">글쓰기</a>			
 		</div>
 		
 	</section>
