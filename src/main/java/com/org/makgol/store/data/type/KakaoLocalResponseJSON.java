@@ -4,7 +4,7 @@ import java.util.List;
 
 public class KakaoLocalResponseJSON {
 
-	public static class KakaoLocalResponseKey {
+	public static class ShopInfo {
 		public String address_name;
 		public String category_group_code;
 		public String category_group_name;
@@ -20,7 +20,7 @@ public class KakaoLocalResponseJSON {
 
 		@Override
 		public String toString() {
-			return "KakaoLocalResponseKey{" + "address_name='" + address_name + '\'' + ", category_group_code='"
+			return "ShopInfo{" + "address_name='" + address_name + '\'' + ", category_group_code='"
 					+ category_group_code + '\'' + ", category_group_name='" + category_group_name + '\''
 					+ ", category_name='" + category_name + '\'' + ", distance='" + distance + '\'' + ", id='" + id
 					+ '\'' + ", phone='" + phone + '\'' + ", place_name='" + place_name + '\'' + ", place_url='"
@@ -29,5 +29,5 @@ public class KakaoLocalResponseJSON {
 		}
 	}
 
-	public List<KakaoLocalResponseKey> documents;
+	public List<ShopInfo> documents;
 }
