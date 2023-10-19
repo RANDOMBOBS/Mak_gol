@@ -1,4 +1,4 @@
-package com.org.makgol.stores.vo;
+package com.org.makgol.stores.data.vo;
 
 import lombok.Builder;
 import lombok.Data;

@@ -12,19 +12,26 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import com.org.makgol.stores.vo.StoreRequestMenuVo;
-import com.org.makgol.stores.vo.StoreRequestVo;
+import com.org.makgol.stores.data.vo.StoreRequestMenuVo;
+import com.org.makgol.stores.data.vo.StoreRequestVo;
 
 public class Crawller {
 	/**
-	 * @param storeRequestVos
-	 * @return
+	 * @param List<StoreRequestVo> storeRequestVos
+	 * 				------StoreRequestVo---------
+	 * 				...
+	 * 				...
+	 * 				...
+	 * 				...
+	 * 
+	 * @return HashMap<String, Object>
+	 * 				---------HashMap KEY--------
+	 * 				식당 정보 : "store_info_" +index
+	 * 				식당 메뉴 : "store_menu_" +index
+	 * 				-----------------------------
 	 * @throws Exception
 	 */
     public HashMap<String, Object> new_crawller(List<StoreRequestVo> storeRequestVos) throws Exception {
-	    
-    	
-    	
     	
     	// 결과를 저장할 HashMap 생성
         HashMap<String, Object> hashMap = new HashMap<>();
