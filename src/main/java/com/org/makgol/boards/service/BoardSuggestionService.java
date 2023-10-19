@@ -16,42 +16,43 @@ public class BoardSuggestionService {
 
 	@Autowired
 	BoardSuggestionDao boardDao;
-	/** suggestion �Խ��� ��������**/
+	/** suggestion 게시판 가져오기**/
 	public List<BoardVo> getSuggestionBoard() {
 		return boardDao.selectAllSuggestionBoard();
 	}
 	
-	/** suggestion �� �󼼺��� **/
+	/** suggestion 글 상세보기 **/
 	public BoardVo readSuggestionBoard(int b_id){
 		return boardDao.showDetailSuggestionBoard(b_id);
 	}
 	
-	/** suggestion �� ���� �� ���� **/
+	/** suggestion 글 쓰기 폼 제출 **/
 	public int createBoardConfirm(BoardVo boardVo) {
 		return boardDao.insertSuggestionBoard(boardVo);
 	}
 	
-	/** suggestion �� ���� **/
+	/** suggestion 글 수정 **/
 	public BoardVo modifyBoard(int b_id) {
 		return boardDao.selectBoard(b_id);
 	}
 	
-	/** suggestion �� ���� �� ���� **/
+	/** suggestion 글 수정 폼 제출 **/
 	public int modifyBoardConfirm(BoardVo boardVo) {		
 		return boardDao.updateBoard(boardVo);
 	}
 	
-	/** suggestion �� ���� **/
+	/** suggestion 글 삭제 **/
 	public int deleteBoard(int b_id) {
 		return boardDao.deleteBoard(b_id);
 	}
 	
-	/** suggestion ��� INSERT  **/
+	/** suggestion 댓글 INSERT  **/
 	public void addComment(CommentVo commentVo) {
 		boardDao.insertComment(commentVo);
 	}
 	
 	public List<CommentVo> getCommentList(int board_id){
+		System.out.println("댓글 SERVICE");
 		return boardDao.selectCommentList(board_id); 
 	}
 }

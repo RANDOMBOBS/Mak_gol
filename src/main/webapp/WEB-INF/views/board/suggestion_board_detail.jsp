@@ -29,8 +29,6 @@ request.setCharacterEncoding("utf-8");
 
 		} else {
 			form.submit();
-			alert("jhkjkjhj");
-			comlist();
 		}
 			
 
