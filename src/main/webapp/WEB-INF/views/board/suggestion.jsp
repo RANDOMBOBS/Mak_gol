@@ -28,7 +28,7 @@
 
 				<c:forEach var="item" items="${boardVos}">
 					<tr>
-						<td><c:url value='/board/suggestion_board_detail'
+						<td><c:url value='/board/suggestion/detail'
 								var='detail_url'>
 								<c:param name='title' value='${item.title}' />
 							</c:url> <a href="${detail_url}">${item.title}</a></td>
@@ -41,7 +41,9 @@
 
 			</tbody>
 		</table>
-
+		<c:url value='/board/suggestion/create' var='create_url'></c:url>
+		<a href="${create_url}">글쓰기</a>
+		
 	</div>
 
 
