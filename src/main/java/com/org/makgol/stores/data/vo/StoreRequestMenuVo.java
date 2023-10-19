@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StoreRequestMenuVo {
 	
+	//식당 메뉴
 	String menu;
+	//식당 메뉴 가격
 	String price;
 	
 	
