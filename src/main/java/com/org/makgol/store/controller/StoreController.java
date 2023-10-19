@@ -25,7 +25,7 @@ public class StoreController {
 	@GetMapping(value = "/kakao-local-api")
 	public String callKakaoLocalApi(KakaoLocalRequestVo kakaoLocalRequestVo) {
 		logger.logRequestDto(kakaoLocalRequestVo);
-		kakaoLocalRequestVo.validateDto();
+		kakaoLocalRequestVo.validateVo();
 
 		KakaoLocalResponseJSON kakaoResponseJSON = storeService.callKakaoLocalAPI(kakaoLocalRequestVo);
 		logger.logResponseJson(kakaoResponseJSON);

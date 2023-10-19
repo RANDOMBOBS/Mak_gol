@@ -11,7 +11,7 @@ public class KakaoLocalRequestVo {
 	public int size;
 	public int page;
 
-	public void validateDto() {
+	public void validateVo() {
 		if (keyword.isEmpty()) {
 			throw new Error("키워드값이 비어있습니다.");
 		}
