@@ -1,5 +1,6 @@
 package com.org.makgol.stores.vo;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,9 +8,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StoreRequestMenuVo {
 	
-	int id;
-	int store_id;
 	String menu;
 	String price;
+	
+	
+	@Builder
+	public StoreRequestMenuVo (String menu, String price) {
+		this.menu = menu;
+		this.price = price;
+	}
 
 }
