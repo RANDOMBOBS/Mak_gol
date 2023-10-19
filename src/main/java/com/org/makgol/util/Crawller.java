@@ -82,8 +82,7 @@ public class Crawller {
     		// 식당의 메뉴들를 저장할 List
     		List<StoreRequestMenuVo> storeRequestMenuVos = new ArrayList<StoreRequestMenuVo>();
     		
-    		//식당의 메뉴를 저장할 객체
-    		StoreRequestMenuVo storeRequestMenuVo = new StoreRequestMenuVo();
+    		
     		
     		//chrome driver 경로 세팅
     		System.setProperty("webdriver.chrome.driver", driverPath); // 윈도우
@@ -173,16 +172,14 @@ public class Crawller {
                 //메뉴 가격 가져오기
                 String price = menu_price.getText();
                 
+                //식당의 메뉴를 저장할 객체
+        		StoreRequestMenuVo storeRequestMenuVo = new StoreRequestMenuVo();
+                
                 //메뉴 객체에 담기
                 storeRequestMenuVo.setMenu(menu);
                 storeRequestMenuVo.setPrice(price);
                 
-                //리스트에 메뉴 담기
-                StoreRequestMenuVo storeRequestMenuCopyVO = StoreRequestMenuVo.builder()
-                .menu(storeRequestMenuVo.getMenu())
-                .price(storeRequestMenuVo.getPrice())
-                .build();
-                storeRequestMenuVos.add(storeRequestMenuCopyVO);
+                storeRequestMenuVos.add(storeRequestMenuVo);
             }
             
          // HashMap에 결과 저장
