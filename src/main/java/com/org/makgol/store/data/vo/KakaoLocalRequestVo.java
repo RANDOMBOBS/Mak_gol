@@ -1,9 +1,9 @@
-package com.org.makgol.store.data.dto;
+package com.org.makgol.store.data.vo;
 
 import lombok.Data;
 
 @Data
-public class KakaoLocalRequestDto {
+public class KakaoLocalRequestVo {
 	public String x;
 	public String y;
 	public String keyword;

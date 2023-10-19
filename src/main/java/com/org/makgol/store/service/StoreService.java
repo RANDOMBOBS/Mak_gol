@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.org.makgol.store.data.type.KakaoLocalResponseJSON;
-import com.org.makgol.store.data.dto.KakaoLocalRequestDto;
+import com.org.makgol.store.data.vo.KakaoLocalRequestVo;
+
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import lombok.AllArgsConstructor;
@@ -17,13 +18,13 @@ public class StoreService {
 	private final RestTemplate restTemplate;
 	private final HttpHeaders headers;
 	
-	public KakaoLocalResponseJSON callKakaoLocalAPI(KakaoLocalRequestDto searchRequestDto) {
-		String x = searchRequestDto.getX();
-		String y = searchRequestDto.getY();
-		String keyword = searchRequestDto.getKeyword();
-		int radius = searchRequestDto.getRadius();
-		int size = searchRequestDto.getSize();
-		int page = searchRequestDto.getPage();
+	public KakaoLocalResponseJSON callKakaoLocalAPI(KakaoLocalRequestVo searchRequestVo) {
+		String x = searchRequestVo.getX();
+		String y = searchRequestVo.getY();
+		String keyword = searchRequestVo.getKeyword();
+		int radius = searchRequestVo.getRadius();
+		int size = searchRequestVo.getSize();
+		int page = searchRequestVo.getPage();
 
 		UriComponents uri = UriComponentsBuilder
 				.fromHttpUrl("https://dapi.kakao.com/v2/local/search/keyword.json")

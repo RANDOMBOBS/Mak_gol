@@ -1,14 +1,14 @@
-package com.org.makgol.store.data.dto;
+package com.org.makgol.store.data.vo;
 
 import lombok.Data;
 
 @Data
-public class KakaoLocalResponseDto<T> {
+public class KakaoLocalResponseVo<T> {
 	public boolean success;
 	public String message;
 	public T result;
 
-	public KakaoLocalResponseDto(boolean success, String message, T result) {
+	public KakaoLocalResponseVo(boolean success, String message, T result) {
 	        this.success = success;
 	        this.message = message;
 	        this.result = result;

@@ -1,9 +1,7 @@
 package com.org.makgol.store.beans.components;
 
 import org.springframework.stereotype.Component;
-
-import com.org.makgol.store.data.dto.KakaoLocalResponseDto;
-
+import com.org.makgol.store.data.vo.KakaoLocalResponseVo;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -30,8 +28,8 @@ public class KakaoLocalResponseBuilder<T> {
         return this;
     }
 
-    public KakaoLocalResponseDto<T> build() {
-        return new KakaoLocalResponseDto<T>(success, message, result);
+    public KakaoLocalResponseVo<T> build() {
+        return new KakaoLocalResponseVo<T>(success, message, result);
     }
 	
 }
