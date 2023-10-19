@@ -32,8 +32,6 @@ public class StoreController {
 		
 		List<ShopInfo> shops = kakaoResponseJSON.documents;
 
-		System.out.println(shops.toString());
-
 		return "store/store_list";
 	}
 
