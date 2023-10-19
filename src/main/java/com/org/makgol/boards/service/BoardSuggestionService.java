@@ -52,7 +52,6 @@ public class BoardSuggestionService {
 	}
 	
 	public List<CommentVo> getCommentList(int board_id){
-		System.out.println("댓글 SERVICE");
 		return boardDao.selectCommentList(board_id); 
 	}
 }

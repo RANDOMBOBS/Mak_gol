@@ -50,7 +50,9 @@ public class BoardSuggestionController {
 	public String detail(@RequestParam("b_id") int b_id, Model model) {
 		String nextPage = "board/suggestion_board_detail";
 		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
+		List<CommentVo> commentVos = boardService.getCommentList(b_id);
 		model.addAttribute("boardVo", boardVo);
+		model.addAttribute("commentVos", commentVos);
 		return nextPage;
 	}
 
@@ -160,17 +162,15 @@ public class BoardSuggestionController {
 		BoardVo boardVo = boardService.readSuggestionBoard(commentVo.getBoard_id());
 		model.addAttribute("commentVo", commentVo);
 		model.addAttribute("boardVo", boardVo);
-		return "forward:/board/suggestion/detail";
+		return "forward:/board/suggestion/commentList";
 	}
 	
-
-//	@ResponseBody
-//	@GetMapping("/commentList")
-//	public String commentList(CommentVo commentVo, Model model){
-//		int board_id = commentVo.getBoard_id();
-//		System.out.println(board_id);
-//		List<CommentVo> commentVos = boardService.getCommentList(board_id);
-//		model.addAttribute("commentVos", commentVos);
-//		return "/board/delete_board_ng";
-//	}
+	/** suggestion 댓글 SELECT **/
+	@RequestMapping(value = "/commentList", method = {RequestMethod.GET, RequestMethod.POST})
+	public String commentList(CommentVo commentVo, Model model){
+		int board_id = commentVo.getBoard_id();
+		List<CommentVo> commentVos = boardService.getCommentList(board_id);
+		model.addAttribute("commentVos", commentVos);
+		return "forward:/board/suggestion/detail";
+	}
 }

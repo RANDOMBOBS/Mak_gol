@@ -12,6 +12,5 @@
 	<h3>글 삭제 오류!!!!!</h3>
 	<c:url value="/board/suggestion" var="suggestion_url" />
 	<a href="${suggestion_url}">목록보기</a>
-	<p>"${commentVos}"</p>
 </body>
 </html>

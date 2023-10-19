@@ -133,8 +133,6 @@ public class BoardSuggestionDao {
 	
 	
 	public List<CommentVo> selectCommentList(int board_id) {
-		System.out.println("댓글 DAO");
-		System.out.println("보드아이디는 "+board_id);
 		String sql = "SELECT * FROM comments where board_id = ?";
 		List<CommentVo> CommentVos = null;
 		try {
@@ -143,7 +141,7 @@ public class BoardSuggestionDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return CommentVos;
+		return CommentVos.size() > 0 ? CommentVos : null;
 	}
 	
 }
