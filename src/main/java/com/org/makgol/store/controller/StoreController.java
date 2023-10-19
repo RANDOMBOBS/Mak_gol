@@ -34,7 +34,7 @@ public class StoreController {
 
 		System.out.println(shops.toString());
 
-		return "store/store_list";
+		return "";
 	}
 
 }
