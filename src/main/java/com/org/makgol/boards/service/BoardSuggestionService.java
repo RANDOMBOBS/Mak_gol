@@ -54,4 +54,9 @@ public class BoardSuggestionService {
 	public List<CommentVo> getCommentList(int board_id){
 		return boardDao.selectCommentList(board_id); 
 	}
+	
+	public int modifyCommentConfirm(CommentVo commentVo) {
+		System.out.println("서비스 도착");
+		return boardDao.updateComment(commentVo);
+	}
 }

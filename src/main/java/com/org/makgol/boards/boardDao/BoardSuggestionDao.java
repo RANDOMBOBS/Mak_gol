@@ -144,4 +144,19 @@ public class BoardSuggestionDao {
 		return CommentVos.size() > 0 ? CommentVos : null;
 	}
 	
+	public int updateComment(CommentVo commentVo) {
+		System.out.println("도착 DAO");
+		System.out.println("닉네임은"+commentVo.getNickname());
+		System.out.println("내용"+commentVo.getContent());
+		System.out.println("닉네임은"+commentVo.getBoard_id());
+		String sql = "UPDATE comments SET nickname=?, content=?,mod_date=now() where id=?";
+		int result = -1;
+		try {
+			result = jdbcTemplate.update(sql, commentVo.getNickname(), commentVo.getContent(), commentVo.getBoard_id());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }
