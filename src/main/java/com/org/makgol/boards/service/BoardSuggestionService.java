@@ -47,8 +47,8 @@ public class BoardSuggestionService {
 	}
 	
 	/** suggestion 댓글 INSERT  **/
-	public void addComment(CommentVo commentVo) {
-		boardDao.insertComment(commentVo);
+	public int addComment(CommentVo commentVo) {
+		return boardDao.insertComment(commentVo);
 	}
 	
 	public List<CommentVo> getCommentList(int board_id){
