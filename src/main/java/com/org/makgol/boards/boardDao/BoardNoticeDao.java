@@ -17,7 +17,7 @@ public class BoardNoticeDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	// ÀüÃ¼ °Ô½Ã¹° Áß °øÁö»çÇ× °Ô½Ã±Û ÆäÀÌÁö ¹× °Ô½Ã±Û Ãß°¡ÈÄ ÀÌµ¿ ¸®½ºÆ®
+	// ï¿½ï¿½Ã¼ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<BoardVo> selectNotice() {
 		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo FROM boards b join users u on u.id = b.user_id "
 				+ "WHERE category = 'notice' order by date DESC";
@@ -31,7 +31,7 @@ public class BoardNoticeDao {
 		return boards.size() > 0 ? boards : null;
 	}
 
-	// °Ô½Ã±ÛÀ» ÀÛ¼ºÇÏ¿© µî·Ï ¹öÆ°À» ´©¸£¸é DB¿¡ Ãß°¡
+	// ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ ï¿½ß°ï¿½
 	public int insertNotice(BoardVo boardVo) {
 		String sql = "insert into boards(category,title,user_id,date,contents) values (?,?,2,now(),?) ";
 		int result = 0;
@@ -43,7 +43,7 @@ public class BoardNoticeDao {
 		return result;
 	}
 
-	// °Ô½Ã±Û ³»¿ë ÆäÀÌÁö
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public BoardVo selectNotice(int b_id) {
 		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
 				+ "FROM boards AS b "
@@ -59,7 +59,7 @@ public class BoardNoticeDao {
 		return boards.size() > 0 ? boards.get(0) : null;
 	}
 	
-	// °Ô½Ã±Û ¼öÁ¤ ¹öÆ°À» ´©¸£¸é
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int updateNotice(BoardVo boardVo) {
 		String sql = "update boards set title=?, contents=?  where id = ?";
 		int result = 0;
@@ -71,7 +71,7 @@ public class BoardNoticeDao {
 		return result;
 	}
 	
-	// °Ô½Ã±Û »èÁ¦ ¹öÆ°
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
 	public int deleteNotice(int b_id) {
 		String sql = "delete from boards where id = ?";
 		int result=0;
