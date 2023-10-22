@@ -13,11 +13,13 @@ import com.org.makgol.users.vo.UserVo;
 public class AdminService {
 	@Autowired
 	AdminDao adminDao;
-
+	
+	/** User리스트 전체 SELECT **/
 	public List<UserVo> getUserList() {
 		return adminDao.selectAllUserList();
 	}
 	
+	/** user 등급 수정 UPDATE **/
 	public int modGrade(UserVo userVo) {
 		System.out.println("서비스+ "+ userVo);
 		return adminDao.UpdateGrade(userVo);

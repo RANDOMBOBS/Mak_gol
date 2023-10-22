@@ -28,6 +28,7 @@ public class AdminDao {
 		}
 		return userVos;
 	}
+	
 	/** user 등급 수정 UPDATE **/
 	public int UpdateGrade(UserVo userVo) {
 		System.out.println("다오 +" + userVo);
