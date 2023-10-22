@@ -34,12 +34,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             board_id: board_id,
           };
           jQ.ajax({
-            url: "${pageContext.request.contextPath}/board/suggestion/createComment",
+            url: "${pageContext.request.contextPath}/board/suggestion/commentCreate",
             type: "POST",
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             success: function (rdata) {
-              /* 	console.log(rdata); */
               if (rdata == 1) {
                 comList();
                 jQ("input[name=nickname]").val("");
@@ -115,12 +114,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <script>
       $.noConflict();
       var jQ = jQuery;
+
       function comList() {
-        let board_id = parseInt(jQ("input[name=board_id]").val());
+    	  let board_id = parseInt(jQ("input[name=board_id]").val());
         jQ.ajax({
-          url:
-            "${pageContext.request.contextPath}/board/suggestion/commentList/" +
-            board_id,
+          url:"${pageContext.request.contextPath}/board/suggestion/commentList/" + board_id,
           type: "GET",
           dataType: "html",
           /* contentType : 'application/json; charset=utf-8', */

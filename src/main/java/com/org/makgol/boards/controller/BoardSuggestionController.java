@@ -66,10 +66,10 @@ public class BoardSuggestionController {
 	 * 
 	 * @param commentVo : 댓글 폼에서 가져온 정보(board_id, nickname, content)
 	 * 
-	 * @return result값(INSERT 쿼리문 성공여부)를 가지고 호출된 ajax로 이동
+	 * @return result값(INSERT 쿼리문 성공여부)를 가지고 suggestion_board_detail.jsp로 이동
 	 */
 	@ResponseBody
-	@PostMapping("/createComment")
+	@PostMapping("/commentCreate")
 	public int createComment(@RequestBody CommentVo commentVo) {
 		int result = boardService.addComment(commentVo);
 		return result;
@@ -90,12 +90,22 @@ public class BoardSuggestionController {
 		return "board/board_comment_list";
 	}
 	
+	
+	/**
+	 * suggestion 댓글 수정 폼 제출
+	 * @param commentVo : 수정폼에서 가져온 데이터(nickname, contents, id) 
+	 * @return result값(UPDATE 쿼리문 성공여부)를 가지고 board_comment_list.jsp로 이동
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/commentModifyConfirm", method = { RequestMethod.GET, RequestMethod.POST })
 	public int commentModifyConfirm(@RequestBody CommentVo commentVo) {
 	int result = boardService.modifyCommentConfirm(commentVo);
 	return result;
 	}
+	
+
+	
+	
 	/**
 	 * suggestion 글 쓰기 버튼
 	 * 

@@ -33,34 +33,37 @@
 </c:forEach>
 
 <script>
-	function modifyCommentForm(button) {
-		var form = button.closest('form');
-		if (form.nickname.value == '') {
-			alert('수정할 닉네임을 입력해주세요.');
-			form.nickname.focus();
-		} else if (form.content.value == '') {
-			alert('수정할 댓글을 입력해주세요');
-			form.content.focus();
-		} else if (window.confirm('수정하시겠습니까?')) {
-			let nickname = form.nickname.value; // 동일 폼 내의 값을 가져오기 위해 form 객체 사용
-			let content = form.content.value;
-			let id = form.id.value;
-			let modData = { nickname : nickname, content : content,	id : id };
-			jQ.ajax({
-				url : "${pageContext.request.contextPath}/board/suggestion/commentModifyConfirm",
-				type : "POST",
-				data : JSON.stringify(modData),
-				contentType : "application/json; charset=utf-8",
-				success : function(rdata) {
-					console.log(rdata);
-					if (rdata == 1) {
-						comList();
-					}
-				},
-				error : function(error) {
-					alert("수정오류");
-				},
-			});
-		}
+function modifyCommentForm(button) {
+	var form = button.closest('form');
+	
+	if (form.nickname.value == '') {
+		alert('수정할 닉네임을 입력해주세요.');
+		form.nickname.focus();
+	} else if (form.content.value == '') {
+		alert('수정할 댓글을 입력해주세요');
+		form.content.focus();
+	} else if (window.confirm('수정하시겠습니까?')) {
+		
+		let nickname = form.nickname.value;
+		let content = form.content.value;
+		let id = form.id.value;
+		let modData = { nickname : nickname, content : content,	id : id };
+		jQ.ajax({
+			url : "${pageContext.request.contextPath}/board/suggestion/commentModifyConfirm",
+			type : "POST",
+			data : JSON.stringify(modData),
+			contentType : "application/json; charset=utf-8",
+			success : function(rdata) {
+				console.log(rdata);
+				if (rdata == 1) {
+					comList();
+				}
+			},
+			error : function(error) {
+				alert("수정오류");
+			},
+		});
 	}
+}
+
 </script>

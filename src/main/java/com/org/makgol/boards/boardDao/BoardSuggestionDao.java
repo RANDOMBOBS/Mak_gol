@@ -125,7 +125,8 @@ public class BoardSuggestionDao {
 		}
 		return result;
 	}
-
+	
+	/** suggestion 댓글 SELECT  **/
 	public List<CommentVo> selectCommentList(int board_id) {
 		String sql = "SELECT * FROM comments where board_id = ?";
 		List<CommentVo> CommentVos = null;
@@ -138,6 +139,7 @@ public class BoardSuggestionDao {
 		return CommentVos.size() > 0 ? CommentVos : null;
 	}
 
+	/** suggestion 댓글 수정 폼 제출 **/
 	public int updateComment(CommentVo commentVo) {
 		String sql = "UPDATE comments SET nickname=?, content=?,mod_date=now() where id=?";
 		int result = -1;
@@ -148,5 +150,6 @@ public class BoardSuggestionDao {
 		}
 		return result;
 	}
+	
 
 }
