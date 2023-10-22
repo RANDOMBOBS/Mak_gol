@@ -16,6 +16,7 @@
 			<li>${item.getContent()}</li>
 			<li>${item.getDate()}</li>
 			<!-- 댓글 작성한 사람만 보이게 하기 -->
+<!-- 질문!!! 수정버튼 누르면 보이게 하는 방법?? -->
 			<li><input type="button" value="수정" /></li>
 			<li><input type="button" value="삭제" 	onclick="delComment(${item.getId()})" /></li>
 		</ul>

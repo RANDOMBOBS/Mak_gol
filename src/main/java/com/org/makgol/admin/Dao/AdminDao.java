@@ -16,6 +16,7 @@ public class AdminDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
+	/** User리스트 전체 SELECT **/
 	public List<UserVo> selectAllUserList() {
 		String sql = "SELECT * FROM users ORDER BY id ASC";
 		List<UserVo> userVos = new ArrayList<UserVo>();
@@ -27,7 +28,7 @@ public class AdminDao {
 		}
 		return userVos;
 	}
-	
+	/** user 등급 수정 UPDATE **/
 	public int UpdateGrade(UserVo userVo) {
 		System.out.println("다오 +" + userVo);
 		System.out.println("등급 +" + userVo.getGrade());
