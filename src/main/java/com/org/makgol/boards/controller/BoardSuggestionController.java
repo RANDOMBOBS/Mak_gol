@@ -45,67 +45,7 @@ public class BoardSuggestionController {
 		return nextPage;
 	}
 
-	/**
-	 * suggestion 글 상세보기 버튼
-	 * 
-	 * @param b_id  : 게시글 번호
-	 * @param model : 다음 화면으로 값(boardVo: 선택한 b_id가 포함된 레코드 값)을 전달
-	 * 
-	 * @return suggestion_board_detail.jsp로 이동
-	 */
-	@RequestMapping(value = "/detail", method = { RequestMethod.GET, RequestMethod.POST })
-	public String detail(@RequestParam("b_id") int b_id, Model model) {
-		String nextPage = "board/suggestion_board_detail";
-		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
-		model.addAttribute("boardVo", boardVo);
-		return nextPage;
-	}
 
-	/**
-	 * suggestion 댓글 INSERT
-	 * 
-	 * @param commentVo : 댓글 폼에서 가져온 정보(board_id, nickname, content)
-	 * 
-	 * @return result값(INSERT 쿼리문 성공여부)를 가지고 suggestion_board_detail.jsp로 이동
-	 */
-	@ResponseBody
-	@PostMapping("/commentCreate")
-	public int createComment(@RequestBody CommentVo commentVo) {
-		int result = boardService.addComment(commentVo);
-		return result;
-	}
-
-	/**
-	 * suggestion 댓글 SELECT
-	 * 
-	 * @param board_id : 게시판 번호
-	 * @param model    : 다음 화면으로 값(commentVo: 선택한 b_id에 적힌 댓글 목록 데이터)을 전달
-	 * 
-	 * @return board_comment_list.jsp로 이동
-	 */
-	@RequestMapping(value = "/commentList/{board_id}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String commentList(@PathVariable("board_id") int board_id, Model model) {
-		List<CommentVo> commentVos = boardService.getCommentList(board_id);
-		model.addAttribute("commentVos", commentVos);
-		return "board/board_comment_list";
-	}
-	
-	
-	/**
-	 * suggestion 댓글 수정 폼 제출
-	 * @param commentVo : 수정폼에서 가져온 데이터(nickname, contents, id) 
-	 * @return result값(UPDATE 쿼리문 성공여부)를 가지고 board_comment_list.jsp로 이동
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/commentModifyConfirm", method = { RequestMethod.GET, RequestMethod.POST })
-	public int commentModifyConfirm(@RequestBody CommentVo commentVo) {
-	int result = boardService.modifyCommentConfirm(commentVo);
-	return result;
-	}
-	
-
-	
-	
 	/**
 	 * suggestion 글 쓰기 버튼
 	 * 
@@ -123,6 +63,7 @@ public class BoardSuggestionController {
 		return nextPage;
 	}
 
+	
 	/**
 	 * suggestion 글 쓰기 폼 제출
 	 * 
@@ -141,6 +82,83 @@ public class BoardSuggestionController {
 		return nextPage;
 	}
 
+	
+	/**
+	 * suggestion 글 상세보기 버튼
+	 * 
+	 * @param b_id  : 게시글 번호
+	 * @param model : 다음 화면으로 값(boardVo: 선택한 b_id가 포함된 레코드 값)을 전달
+	 * 
+	 * @return suggestion_board_detail.jsp로 이동
+	 */
+	@RequestMapping(value = "/detail", method = { RequestMethod.GET, RequestMethod.POST })
+	public String detail(@RequestParam("b_id") int b_id, Model model) {
+		String nextPage = "board/suggestion_board_detail";
+		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
+		model.addAttribute("boardVo", boardVo);
+		return nextPage;
+	}
+
+	
+	/**
+	 * suggestion 댓글 INSERT
+	 * 
+	 * @param commentVo : 댓글 폼에서 가져온 정보(board_id, nickname, content)
+	 * 
+	 * @return result값(INSERT 쿼리문 성공여부)를 가지고 suggestion_board_detail.jsp로 이동
+	 */
+	@ResponseBody
+	@PostMapping("/commentCreate")
+	public int createComment(@RequestBody CommentVo commentVo) {
+		int result = boardService.addComment(commentVo);
+		return result;
+	}
+
+	
+	/**
+	 * suggestion 댓글 SELECT
+	 * 
+	 * @param board_id : 게시판 번호
+	 * @param model    : 다음 화면으로 값(commentVo: 선택한 b_id에 적힌 댓글 목록 데이터)을 전달
+	 * 
+	 * @return board_comment_list.jsp로 이동
+	 */
+	@RequestMapping(value = "/commentList/{board_id}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String commentList(@PathVariable("board_id") int board_id, Model model) {
+		List<CommentVo> commentVos = boardService.getCommentList(board_id);
+		model.addAttribute("commentVos", commentVos);
+		return "board/board_comment_list";
+	}
+
+	
+	/**
+	 * suggestion 댓글 수정 폼 제출
+	 * 
+	 * @param commentVo : 수정폼에서 가져온 데이터(nickname, contents, id)
+	 * @return result값(UPDATE 쿼리문 성공여부)를 가지고 board_comment_list.jsp로 이동
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/commentModifyConfirm", method = { RequestMethod.GET, RequestMethod.POST })
+	public int commentModifyConfirm(@RequestBody CommentVo commentVo) {
+		int result = boardService.modifyCommentConfirm(commentVo);
+		return result;
+	}
+
+	
+	/**
+	 * suggestion 댓글 DELETE
+	 * @param id : 댓글 번호
+	 * @return result값(DELETE 쿼리문 성공여부)를 가지고 board_comment_list.jsp로 이동
+	 */
+	@RequestMapping(value = "/commentDelete/{id}", method = { RequestMethod.GET, RequestMethod.POST })
+	public int deleteComment(@PathVariable("id") int id) {
+		System.out.println("컨트롤러 아이디" + id);
+		int result = boardService.delComment(id);
+		System.out.println("결과는?" + result);
+		return result;
+	}
+
+	
 	/**
 	 * suggestion 글 수정 버튼
 	 * 
@@ -175,8 +193,9 @@ public class BoardSuggestionController {
 		return nextPage;
 	}
 
+	
 	/**
-	 * suggestion 글 삭제버튼
+	 * suggestion 글 DELETE
 	 * 
 	 * @param b_id : 게시글 번호
 	 * @return 삭제 성공 여부 성공 시 : delete_board_ok.jsp 실패 시 : delete_board_ng.jsp

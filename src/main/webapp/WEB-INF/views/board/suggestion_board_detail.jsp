@@ -121,7 +121,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           url:"${pageContext.request.contextPath}/board/suggestion/commentList/" + board_id,
           type: "GET",
           dataType: "html",
-          /* contentType : 'application/json; charset=utf-8', */
           success: function (rdata) {
             console.log(rdata);
             jQ(".boardCommentList").html(rdata);

@@ -17,7 +17,8 @@
 			<li>${item.getDate()}</li>
 			<!-- 댓글 작성한 사람만 보이게 하기 -->
 			<li><input type="button" value="수정" /></li>
-			<li><input type="button" value="삭제" onclick="delComment()"/></li>
+			<li><input type="button" value="삭제"
+				onclick="delComment(${item.getId()})" /></li>
 		</ul>
 		<div>
 			<form name="modify_comment_form" method="POST">
@@ -66,4 +67,23 @@ function modifyCommentForm(button) {
 	}
 }
 
+/* 질문!!!!! 삭제 잘 되고 리턴값 1로 잘 받는데 error로 빠지는 이유?  */
+function delComment(id){
+		if(window.confirm('삭제하시겠습니까?')){ 
+			jQ.ajax({
+				url : "${pageContext.request.contextPath}/board/suggestion/commentDelete/"+id,
+				type: "GET",
+		        dataType: "html",
+				success : function(rdata) {
+					console.log(rdata);
+					if (rdata == 1) {
+						comList();
+					}
+				},
+				error : function(error) {
+					alert("삭제오류");
+				},
+			});
+		}
+}
 </script>

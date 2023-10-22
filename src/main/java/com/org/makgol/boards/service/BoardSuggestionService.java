@@ -22,29 +22,14 @@ public class BoardSuggestionService {
 		return boardDao.selectAllSuggestionBoard();
 	}
 
-	/** suggestion 글 상세보기 **/
-	public BoardVo readSuggestionBoard(int b_id) {
-		return boardDao.showDetailSuggestionBoard(b_id);
-	}
-
 	/** suggestion 글 쓰기 폼 제출 **/
 	public int createBoardConfirm(BoardVo boardVo) {
 		return boardDao.insertSuggestionBoard(boardVo);
 	}
 
-	/** suggestion 글 수정 **/
-	public BoardVo modifyBoard(int b_id) {
-		return boardDao.selectBoard(b_id);
-	}
-
-	/** suggestion 글 수정 폼 제출 **/
-	public int modifyBoardConfirm(BoardVo boardVo) {
-		return boardDao.updateBoard(boardVo);
-	}
-
-	/** suggestion 글 삭제 **/
-	public int deleteBoard(int b_id) {
-		return boardDao.deleteBoard(b_id);
+	/** suggestion 글 상세보기 **/
+	public BoardVo readSuggestionBoard(int b_id) {
+		return boardDao.showDetailSuggestionBoard(b_id);
 	}
 
 	/** suggestion 댓글 INSERT **/
@@ -61,6 +46,27 @@ public class BoardSuggestionService {
 	/** suggestion 댓글 수정 폼 제출 **/
 	public int modifyCommentConfirm(CommentVo commentVo) {
 		return boardDao.updateComment(commentVo);
+	}
+
+	/** suggestion 댓글 DELETE **/
+	public int delComment(int id) {
+		System.out.println("서비스 아이디" + id);
+		return boardDao.deleteComment(id);
+	}
+
+	/** suggestion 글 수정 **/
+	public BoardVo modifyBoard(int b_id) {
+		return boardDao.selectBoard(b_id);
+	}
+
+	/** suggestion 글 수정 폼 제출 **/
+	public int modifyBoardConfirm(BoardVo boardVo) {
+		return boardDao.updateBoard(boardVo);
+	}
+
+	/** suggestion 글 DELETE **/
+	public int deleteBoard(int b_id) {
+		return boardDao.deleteBoard(b_id);
 	}
 
 }

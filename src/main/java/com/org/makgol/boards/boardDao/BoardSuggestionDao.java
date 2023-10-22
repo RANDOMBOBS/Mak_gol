@@ -37,21 +37,6 @@ public class BoardSuggestionDao {
 		return boardVos.size() > 0 ? boardVos : null;
 	}
 
-	/** suggestion 글 상세보기 **/
-	public BoardVo showDetailSuggestionBoard(int b_id) {
-		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
-				+ "FROM boards AS b " + "JOIN users AS u ON b.user_id = u.id " + "WHERE b.id = ?";
-
-		List<BoardVo> boardVo = null;
-
-		try {
-			RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
-			boardVo = jdbcTemplate.query(sql, rowMapper, b_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return boardVo.size() > 0 ? boardVo.get(0) : null;
-	}
 
 	/** suggestion 글 쓰기 폼 제출 **/
 	public int insertSuggestionBoard(BoardVo boardVo) {
@@ -73,10 +58,12 @@ public class BoardSuggestionDao {
 //			result = sqlSession.insert("mapper.boardSuggestion.insertAdminAccount", boardVo);
 //			return result;
 //	}
+	
+	/** suggestion 글 상세보기 **/
+	public BoardVo showDetailSuggestionBoard(int b_id) {
+		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
+				+ "FROM boards AS b " + "JOIN users AS u ON b.user_id = u.id " + "WHERE b.id = ?";
 
-	/** suggestion 글 수정 **/
-	public BoardVo selectBoard(int b_id) {
-		String sql = "SELECT * FROM boards WHERE id = ?";
 		List<BoardVo> boardVo = null;
 
 		try {
@@ -88,31 +75,6 @@ public class BoardSuggestionDao {
 		return boardVo.size() > 0 ? boardVo.get(0) : null;
 	}
 
-	/** suggestion 글 수정 폼 제출 **/
-	public int updateBoard(BoardVo boardVo) {
-		String sql = "UPDATE boards SET title=?, contents=? WHERE id=? ";
-		int result = -1;
-
-		try {
-			result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getB_id());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	/** suggestion 글 삭제 **/
-	public int deleteBoard(int b_id) {
-		String sql = "DELETE FROM boards WHERE id = ?";
-		int result = -1;
-		try {
-			result = jdbcTemplate.update(sql, b_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
 
 	/** suggestion 댓글 INSERT **/
 	public int insertComment(CommentVo commentVo) {
@@ -151,5 +113,59 @@ public class BoardSuggestionDao {
 		return result;
 	}
 	
+
+	/** suggestion 댓글 DELETE **/
+	public int deleteComment(int id) {
+		System.out.println("DAO 아이디"+ id);
+		String sql = "DELETE FROM comments WHERE id = ?";
+		int result = -1;
+		try {
+			result = jdbcTemplate.update(sql, id);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+
+	/** suggestion 글 수정 **/
+	public BoardVo selectBoard(int b_id) {
+		String sql = "SELECT * FROM boards WHERE id = ?";
+		List<BoardVo> boardVo = null;
+
+		try {
+			RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
+			boardVo = jdbcTemplate.query(sql, rowMapper, b_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return boardVo.size() > 0 ? boardVo.get(0) : null;
+	}
+
+	/** suggestion 글 수정 폼 제출 **/
+	public int updateBoard(BoardVo boardVo) {
+		String sql = "UPDATE boards SET title=?, contents=? WHERE id=? ";
+		int result = -1;
+
+		try {
+			result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getB_id());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/** suggestion 글 DELETE **/
+	public int deleteBoard(int b_id) {
+		String sql = "DELETE FROM boards WHERE id = ?";
+		int result = -1;
+		try {
+			result = jdbcTemplate.update(sql, b_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }
