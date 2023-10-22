@@ -39,6 +39,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             contentType: "application/json; charset=utf-8",
             success: function (rdata) {
               console.log(rdata);
+              /* 질문!!! 성공하면 변경된 정보로 바꾸는 방법은? ajax??? */
               if (rdata == 1) {
                 let updateGrade = $("select[name=grade]").val();
                 alert("등급은?" + updateGrade);
