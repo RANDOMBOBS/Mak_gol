@@ -56,7 +56,6 @@ public class BoardSuggestionService {
 	}
 	
 	public int modifyCommentConfirm(CommentVo commentVo) {
-		System.out.println("서비스 도착");
 		return boardDao.updateComment(commentVo);
 	}
 }

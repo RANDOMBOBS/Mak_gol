@@ -93,9 +93,7 @@ public class BoardSuggestionController {
 	@ResponseBody
 	@RequestMapping(value = "/commentModifyConfirm", method = { RequestMethod.GET, RequestMethod.POST })
 	public int commentModifyConfirm(@RequestBody CommentVo commentVo) {
-		System.out.println("선택한 commentVo는 "+commentVo);
 	int result = boardService.modifyCommentConfirm(commentVo);
-	System.out.println("결과값은? "+result);
 	return result;
 	}
 	/**

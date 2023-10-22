@@ -17,7 +17,7 @@
 			<li>${item.getDate()}</li>
 			<!-- 댓글 작성한 사람만 보이게 하기 -->
 			<li><input type="button" value="수정" /></li>
-			<li><input type="button" value="삭제" /></li>
+			<li><input type="button" value="삭제" onclick="delComment()"/></li>
 		</ul>
 		<div>
 			<form name="modify_comment_form" method="POST">
@@ -45,31 +45,22 @@
 			let nickname = form.nickname.value; // 동일 폼 내의 값을 가져오기 위해 form 객체 사용
 			let content = form.content.value;
 			let id = form.id.value;
-			let modData = {
-				nickname : nickname,
-				content : content,
-				id : id
-			};
-			jQ
-					.ajax({
-						url : "${pageContext.request.contextPath}/board/suggestion/commentModifyConfirm",
-						type : "POST",
-						data : JSON.stringify(modData),
-						contentType : "application/json; charset=utf-8",
-						success : function(rdata) {
-							console.log(rdata);
-							if (rdata == 1) {
-								comList();
-								jQ("input[name=nickname]").val('');
-								jQ("input[name=content]").val('');
-							} else {
-								return;
-							}
-						},
-						error : function(error) {
-							alert("수정오류");
-						},
-					});
+			let modData = { nickname : nickname, content : content,	id : id };
+			jQ.ajax({
+				url : "${pageContext.request.contextPath}/board/suggestion/commentModifyConfirm",
+				type : "POST",
+				data : JSON.stringify(modData),
+				contentType : "application/json; charset=utf-8",
+				success : function(rdata) {
+					console.log(rdata);
+					if (rdata == 1) {
+						comList();
+					}
+				},
+				error : function(error) {
+					alert("수정오류");
+				},
+			});
 		}
 	}
 </script>
