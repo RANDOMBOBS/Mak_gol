@@ -49,7 +49,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               }
             },
             error: function (error) {
-              alert(error);
+              alert("추가오류");
             },
           });
         }
@@ -129,7 +129,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             jQ(".boardCommentList").html(rdata);
           },
           error: function (error) {
-            alert(error);
+            alert("리스트업오류");
           },
         });
       }
