@@ -17,8 +17,7 @@
 			<li>${item.getDate()}</li>
 			<!-- 댓글 작성한 사람만 보이게 하기 -->
 			<li><input type="button" value="수정" /></li>
-			<li><input type="button" value="삭제"
-				onclick="delComment(${item.getId()})" /></li>
+			<li><input type="button" value="삭제" 	onclick="delComment(${item.getId()})" /></li>
 		</ul>
 		<div>
 			<form name="modify_comment_form" method="POST">

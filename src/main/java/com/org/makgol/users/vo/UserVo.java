@@ -1,62 +1,81 @@
 package com.org.makgol.users.vo;
 
-public class UsersVo {
-	// user ¾ÆÀÌµð
+public class UserVo {
+	// user ï¿½ï¿½ï¿½Ìµï¿½
 	int id;
 	
-	// user ÀÌ¸§
+	// user ï¿½Ì¸ï¿½
 	String name;
 	
-	// user ÀÌ¸ÞÀÏ
+	// user ï¿½Ì¸ï¿½ï¿½ï¿½
 	String email;
 	
-	// user ºñ¹Ð¹øÈ£
+	// user ï¿½ï¿½Ð¹ï¿½È£
 	String password;
 	
-	// user ÀüÈ­¹øÈ£
+	// user ï¿½ï¿½È­ï¿½ï¿½È£
 	String phone;
 	
-	// user »çÁø
+	// user ï¿½ï¿½ï¿½ï¿½
 	String photo;
 	
-	
+	int grade;
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getPhone() {
 		return phone;
 	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public String getPhoto() {
 		return photo;
 	}
+
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 
+	public int getGrade() {
+		return grade;
+	}
 
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	
 	
 }
