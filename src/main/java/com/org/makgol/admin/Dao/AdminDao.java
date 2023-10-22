@@ -28,4 +28,17 @@ public class AdminDao {
 		return userVos;
 	}
 	
+	public int UpdateGrade(UserVo userVo) {
+		System.out.println("다오 +" + userVo);
+		System.out.println("등급 +" + userVo.getGrade());
+		System.out.println("아이디 +" + userVo.getId());
+		String sql = "UPDATE users SET grade = ? where id = ?";
+		int result = -1;
+		try{
+			result = jdbcTemplate.update(sql, userVo.getGrade(), userVo.getId());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

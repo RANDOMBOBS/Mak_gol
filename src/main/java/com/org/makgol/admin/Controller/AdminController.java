@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.org.makgol.admin.Service.AdminService;
 import com.org.makgol.users.vo.UserVo;
@@ -27,6 +31,13 @@ public class AdminController {
 		return nextPage;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/modifyGrade", method = { RequestMethod.GET, RequestMethod.POST })
+		public int modifyGrade(@RequestBody UserVo userVo) {
+		System.out.println("컨트롤러+ "+ userVo);
+		int result = adminService.modGrade(userVo);
+		System.out.println("결과는?" + result);
+		return result;
+	}
 	
 }

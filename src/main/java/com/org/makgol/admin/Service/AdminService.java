@@ -17,4 +17,9 @@ public class AdminService {
 	public List<UserVo> getUserList() {
 		return adminDao.selectAllUserList();
 	}
+	
+	public int modGrade(UserVo userVo) {
+		System.out.println("서비스+ "+ userVo);
+		return adminDao.UpdateGrade(userVo);
+	}
 }

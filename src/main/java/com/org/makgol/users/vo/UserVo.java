@@ -19,7 +19,7 @@ public class UserVo {
 	// user ����
 	String photo;
 	
-	int grade;
+	String grade;
 
 	public int getId() {
 		return id;
@@ -69,13 +69,14 @@ public class UserVo {
 		this.photo = photo;
 	}
 
-	public int getGrade() {
+	public String getGrade() {
 		return grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
+
 	
 	
 }
