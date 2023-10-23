@@ -44,7 +44,7 @@ public class BoardNoticeDao {
 	}
 
 	// 게시글 내용 페이지
-	public BoardVo selectNotice(int b_id) {
+	public BoardVo selectModNotice(int b_id) {
 		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
 				+ "FROM boards AS b "
 				+ "JOIN users AS u ON b.user_id = u.id "
@@ -57,6 +57,24 @@ public class BoardNoticeDao {
 			e.printStackTrace();
 		}
 		return boards.size() > 0 ? boards.get(0) : null;
+	}
+	// 게시글 조회수 증가 ( + 1 ) 
+	public BoardVo selectNotice(int b_id) {
+		String updatesql = "UPDATE boards AS b JOIN users AS u ON b.user_id = u.id SET b.hit = b.hit + 1 WHERE b.id = ?";
+		String selectsql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
+				+ "FROM boards AS b "
+				+ "JOIN users AS u ON b.user_id = u.id "
+				+ "WHERE b.id = ?";
+		List<BoardVo> boards = null;
+		try {
+			jdbcTemplate.update(updatesql,b_id);
+			RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
+			boards = jdbcTemplate.query(selectsql, rowMapper, b_id);
+			return boards.size() > 0 ? boards.get(0) : null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	// 게시글 수정 버튼을 누르면
@@ -81,6 +99,17 @@ public class BoardNoticeDao {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	// 
+	public BoardVo updateLikeNotice(int b_id) {
+		String updatesql = "UPDATE boards AS b SET b.sympathy= b.sympathy+1 where b.id=?";
+		try {
+			jdbcTemplate.update(updatesql,b_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

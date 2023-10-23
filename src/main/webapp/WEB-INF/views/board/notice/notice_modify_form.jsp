@@ -39,7 +39,7 @@
 				<form action="<c:url value='/board/modifyNoticeConfirm' />" name="notice_modify_form" method="post" >
 					<input type="hidden" name="b_id" value="${boardVo.b_id }">
 					<span>제목</span><input type="text" name="title" value="${boardVo.title}" placeholder="제목을 입력해주세요."> 
-					<span>작성자</span><input type="text" name="name" value="${boardVo.name}" readonly disabled> <br>
+					<span>작성자</span><input type="text" name="name" value="${boardVo.name}" readonly disabled>
 					<span>내용</span><input type="text" name="contents" value="${boardVo.contents}" placeholder="내용을 입력해주세요."> <br>
 					<input type="button" value="등록" onclick="modifyNotice()"> 
 					<input type="reset" value="취소" onclick="history.go(-1)">

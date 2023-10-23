@@ -39,7 +39,7 @@ public class BoardNoticeController {
 	 * nextPage : "board/notice" 이동
 	 */
 	public String Notice(Model model) {
-		String nextPage = "board/notice";
+		String nextPage = "board/notice/notice";
 		List<BoardVo> boardVo = boardService.Notice();
 		model.addAttribute("boardVo",boardVo);
 		return nextPage;
@@ -52,7 +52,14 @@ public class BoardNoticeController {
 	 * nextPage : "board/notice_create_form" 이동
 	 */
 	public String noticeCreateForm() {
-		String nextPage = "board/notice_create_form";
+		String nextPage = "board/notice/notice_create_form";
+		return nextPage;
+	}
+	
+	
+	@GetMapping("/categoryList")
+	public String categoryList() {
+		String nextPage = "category/category_list";
 		return nextPage;
 	}
 	
@@ -66,10 +73,10 @@ public class BoardNoticeController {
 	 * 실패 : "board/register_notice_ng" 이동
 	 */
 	public String noticeAddList(BoardVo boardVo ) {
-		String nextPage = "board/register_notice_ok";
+		String nextPage = "board/notice/notice_register_ok";
 		int result = boardService.noticeAddList(boardVo);
 		if (result <=0) {
-			nextPage = "board/register_notice_ng";
+			nextPage = "board/notice/notice_register_ng";
 		}
 		return nextPage;
 	}
@@ -83,7 +90,7 @@ public class BoardNoticeController {
 		 * nextPage : "board/notice_detail" 이동
 		 */
 		public String detailNotice(@RequestParam("b_id") int b_id, Model model) {
-			String nextPage = "board/notice_detail";
+			String nextPage = "board/notice/notice_detail";
 			BoardVo boardVo = boardService.detailNotice(b_id);
 			model.addAttribute("boardVo", boardVo);
 			return nextPage;
@@ -98,7 +105,7 @@ public class BoardNoticeController {
 		 * nextPage : "/board/notice_modify_form" 이동
 		 */
 		public String modifyNotice(@RequestParam("b_id") int b_id, Model model) {
-			String nextPage = "/board/notice_modify_form";
+			String nextPage = "/board/notice/notice_modify_form";
 			BoardVo boardVo = boardService.modifyNotice(b_id);
 			model.addAttribute("boardVo",boardVo);
 			return nextPage;
@@ -114,21 +121,36 @@ public class BoardNoticeController {
 		 * 실패 : "board/notice_modify_ng" 이동
 		 */
 		public String modifyNoticeConfirm(BoardVo boardVo) {
-			String nextPage = "/board/notice_modify_ok";
+			String nextPage = "/board/notice/notice_modify_ok";
 			int result = boardService.modifyNoticeConfirm(boardVo);
 			if(result <= 0) {
-				nextPage = "/board/notice_modify_ng";
+				nextPage = "/board/notice/notice_modify_ng";
 			}
 			return nextPage;
 		}
 		
 		@GetMapping("/deleteNotice")
+		/***
+		 * 게시글 삭제 버튼
+		 * @param b_id 
+		 * @return = nextPage
+		 * 등록버튼 누를 시 nextPage --
+		 * 성공 : "board/notice_delete_ok" 이동
+		 * 실패 : "board/notice_delete_ng" 이동
+		 */
 		public String deleteNotice(@RequestParam("b_id") int b_id ) {
-			String nextPage = "board/notice_delete_ok";
+			String nextPage = "board/notice/notice_delete_ok";
 			int result = boardService.deleteNotice(b_id);
 			if (result <=0) {
-				nextPage = "board/notice_delete_ng";
+				nextPage = "board/notice/notice_delete_ng";
 			}
 			return nextPage;
+		}
+		
+		@GetMapping("/likeNotice")
+		public String likeNotice (@RequestParam("b_id") int b_id, Model model) {
+			BoardVo boardVo = boardService.likeNotice(b_id);
+			model.addAttribute("boardVo",boardVo);
+			return "forward:/board/detailNotice";
 		}
 }

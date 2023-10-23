@@ -10,7 +10,7 @@ import com.org.makgol.boards.vo.BoardVo;
 
 @Service
 public class BoardNoticeService {
-// 발송
+
 	@Autowired
 	BoardNoticeDao noticeDao;
 	
@@ -32,16 +32,22 @@ public class BoardNoticeService {
 		
 	// 게시글 수정버튼
 		public BoardVo modifyNotice(int b_id) {
-			return noticeDao.selectNotice(b_id);
+			return noticeDao.selectModNotice(b_id);
 		}
+		
    // 게시글 수정 등록
 		public int modifyNoticeConfirm(BoardVo boardVo) {
 			return noticeDao.updateNotice(boardVo);
 		}
 		
-		 // 게시글 삭제
+	 // 게시글 삭제
 		public int deleteNotice(int b_id) {
 			return noticeDao.deleteNotice(b_id);
-		}	
+		}
 		
+	// 
+		public BoardVo likeNotice(int b_id) {
+			return noticeDao.updateLikeNotice(b_id);
+		}
+	
 }

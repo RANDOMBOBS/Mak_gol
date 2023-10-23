@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
- 성공?
+ 성공
  
  
  <a href="<c:url value='/board/Notice' />">게시글로 이동</a>
