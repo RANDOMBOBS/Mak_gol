@@ -90,6 +90,7 @@ function modifyCommentForm(button) {
 	}
 }
 
+
 function modifyCancle(button) {
   let form = $(button).closest('form');
   form[0].reset(); 
