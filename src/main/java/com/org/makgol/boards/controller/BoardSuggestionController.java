@@ -212,5 +212,8 @@ public class BoardSuggestionController {
 		}
 		return nextPage;
 	}
+	
+	
+	
 
 }

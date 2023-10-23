@@ -57,7 +57,6 @@ ul {
 		<c:url value="/board/suggestion/modify" var="modify_url">
 			<c:param name="b_id" value="${boardVo.b_id}" />
 		</c:url>
-
 		<c:url value="/board/suggestion/delete" var="delete_url">
 			<c:param name="b_id" value="${boardVo.b_id}" />
 		</c:url>

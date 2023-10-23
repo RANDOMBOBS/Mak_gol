@@ -1,2 +1,10 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/main/webapp/WEB-INF/views/board/board_comment_list.jsp=UTF-8
+=======
+<<<<<<< HEAD
+encoding//src/main/webapp/WEB-INF/views/store/store_list.jsp=UTF-8
+=======
+encoding/<project>=UTF-8
+>>>>>>> KHJ
+>>>>>>> b3761e9ce8f760f7793885276876b62bf8821e3f
