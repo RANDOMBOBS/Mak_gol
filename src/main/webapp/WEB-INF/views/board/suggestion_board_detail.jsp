@@ -73,7 +73,7 @@ ul {
 		<input type="button" value="등록" onclick="createCommentForm()" /> <br />
 	</form>
 	<div class="boardCommentList"></div>
-<script src="../../resources/js/suggestion_board.js"></script>
+<script src="../../resources/js/suggestion.js"></script>
 <script>comList();</script>
 </body>
 </html>

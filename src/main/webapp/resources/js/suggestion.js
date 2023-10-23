@@ -6,10 +6,8 @@ function comList() {
 	jQ.ajax({
 		url: "/makgol/board/suggestion/commentList/" + board_id,
 		type: "GET",
-		async:false,
 		dataType: "html",
 		success: function(rdata) {
-			console.log("1234");
 			jQ(".boardCommentList").html(rdata);
 		},
 		error: function(error) {
@@ -40,7 +38,6 @@ function createCommentForm() {
 		jQ.ajax({
 			url: "/makgol/board/suggestion/commentCreate",
 			type: "POST",
-			async:false,
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			success: function(rdata) {
@@ -93,18 +90,27 @@ function modifyCommentForm(button) {
 	}
 }
 
+function modifyCancle(button) {
+  let form = $(button).closest('form');
+  form[0].reset(); 
+
+  let div = $(button).closest('.modCancle');
+  div.hide();
+}
+
+
+
+
 function delComment(id) {
 	if (window.confirm('삭제하시겠습니까?')) {
 		jQ.ajax({
 			url: "/makgol/board/suggestion/commentDelete/" + id,
 			type: "DELETE",
-			async:false,
 			dataType: "html",
 			success: function(rdata) {
-				let a = 0;
 				console.log(rdata);
-					if (rdata == 1) {
-						comList();
+				if (rdata == 1) {
+					comList();
 				}
 			},
 			error: function(error) {
@@ -116,7 +122,7 @@ function delComment(id) {
 }
 
 
-function modComment(button){
+function modComment(button) {
 	jQ(button).parent().parent().next().show();
-	
+
 }

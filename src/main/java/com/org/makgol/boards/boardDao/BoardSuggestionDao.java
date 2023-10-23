@@ -116,7 +116,6 @@ public class BoardSuggestionDao {
 
 	/** suggestion 댓글 DELETE **/
 	public int deleteComment(int id) {
-		System.out.println("DAO 아이디"+ id);
 		String sql = "DELETE FROM comments WHERE id = ?";
 		int result = -1;
 		try {

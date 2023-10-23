@@ -50,7 +50,6 @@ public class BoardSuggestionService {
 
 	/** suggestion 댓글 DELETE **/
 	public int delComment(int id) {
-		System.out.println("서비스 아이디" + id);
 		return boardDao.deleteComment(id);
 	}
 

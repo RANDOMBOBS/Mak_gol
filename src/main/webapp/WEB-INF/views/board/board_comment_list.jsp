@@ -22,16 +22,17 @@
 			<li><input type="button" value="삭제"
 				onclick="delComment(${item.getId()})" /></li>
 		</ul>
-		<div style="display:none">
+		<div style="display:none" class="modCancle">
 			<form name="modify_comment_form" method="POST">
 				<p>수정박스입니다.</p>
 				<input type="text" name="nickname" value='${item.getNickname()}' /><br />
 				<input type="text" name="content" value='${item.getContent()}' /><br />
 				<input type="hidden" name="id" value='${item.getId()}' /><br/>
 				<input type="button" value="수정할게용" onclick="modifyCommentForm(this)">
+				<input type="button" value="취소" onclick="modifyCancle(this)">
 				<br>
 			</form>
 		</div>
 	</div>
 </c:forEach>
-<script src="../../resources/js/suggestion_board.js"></script>
+<script src="../../resources/js/suggestion.js"></script>
