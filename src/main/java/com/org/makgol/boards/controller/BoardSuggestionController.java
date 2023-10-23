@@ -95,6 +95,7 @@ public class BoardSuggestionController {
 	public String detail(@RequestParam("b_id") int b_id, Model model) {
 		String nextPage = "board/suggestion_board_detail";
 		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
+		int result = boardService.addHit(b_id);
 		model.addAttribute("boardVo", boardVo);
 		return nextPage;
 	}

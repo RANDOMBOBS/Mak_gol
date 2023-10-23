@@ -75,6 +75,18 @@ public class BoardSuggestionDao {
 		return boardVo.size() > 0 ? boardVo.get(0) : null;
 	}
 
+	/** suggestion 조회수 **/
+	public int updateHit(int b_id) {
+		String sql = "UPDATE boards SET hit = hit+1 WHERE id = ?";
+		int result = -1;
+		try {
+			result = jdbcTemplate.update(sql, b_id);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 
 	/** suggestion 댓글 INSERT **/
 	public int insertComment(CommentVo commentVo) {

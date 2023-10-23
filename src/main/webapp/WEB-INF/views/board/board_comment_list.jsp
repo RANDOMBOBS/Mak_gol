@@ -35,4 +35,4 @@
 		</div>
 	</div>
 </c:forEach>
-<script src="../../resources/js/suggestion.js"></script>
+<jsp:include page="/resources/jsp/suggestion.jsp"></jsp:include>

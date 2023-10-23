@@ -31,7 +31,12 @@ public class BoardSuggestionService {
 	public BoardVo readSuggestionBoard(int b_id) {
 		return boardDao.showDetailSuggestionBoard(b_id);
 	}
-
+	
+	/** suggestion 조회수 **/
+	public int addHit(int b_id) {
+		return boardDao.updateHit(b_id);
+	}
+	
 	/** suggestion 댓글 INSERT **/
 	public int addComment(CommentVo commentVo) {
 
