@@ -21,6 +21,11 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
+	@RequestMapping(value = "/userManagement", method = { RequestMethod.GET, RequestMethod.POST })
+	public String userManagement(){
+		return "admin/user_management";		
+	}
+	
 	/**
 	 * User리스트 전체 SELECT
 	 * 
@@ -28,16 +33,16 @@ public class AdminController {
 	 * 
 	 * @return userList.jsp
 	 */
-	@GetMapping("/userList")
+	@RequestMapping(value = "/userList", method = { RequestMethod.GET, RequestMethod.POST })
 	public String userList(Model model){
-		String nextPage = "admin/userList";
+		String nextPage = "admin/user_list";
 		List<UserVo> userVos = adminService.getUserList();
 		if(userVos != null) {
 			model.addAttribute("userVos", userVos);
 		}
+		System.out.println(nextPage);
 		return nextPage;
 	}
-	
 	
 	/**
 	 * user 등급 수정 UPDATE

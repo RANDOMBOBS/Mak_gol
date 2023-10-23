@@ -18,11 +18,13 @@ public class AdminDao {
 	
 	/** User리스트 전체 SELECT **/
 	public List<UserVo> selectAllUserList() {
+		System.out.println("DAO");
 		String sql = "SELECT * FROM users ORDER BY id ASC";
 		List<UserVo> userVos = new ArrayList<UserVo>();
 		try {
 			RowMapper<UserVo> rowMapper = BeanPropertyRowMapper.newInstance(UserVo.class);
 			userVos = jdbcTemplate.query(sql, rowMapper);
+			System.out.println("DAO + "+ userVos);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
