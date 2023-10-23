@@ -45,7 +45,6 @@ public class BoardSuggestionController {
 		return nextPage;
 	}
 
-
 	/**
 	 * suggestion 글 쓰기 버튼
 	 * 
@@ -63,7 +62,6 @@ public class BoardSuggestionController {
 		return nextPage;
 	}
 
-	
 	/**
 	 * suggestion 글 쓰기 폼 제출
 	 * 
@@ -82,7 +80,6 @@ public class BoardSuggestionController {
 		return nextPage;
 	}
 
-	
 	/**
 	 * suggestion 글 상세보기 버튼
 	 * 
@@ -92,15 +89,14 @@ public class BoardSuggestionController {
 	 * @return suggestion_board_detail.jsp로 이동
 	 */
 	@RequestMapping(value = "/detail", method = { RequestMethod.GET, RequestMethod.POST })
-	public String detail(@RequestParam("b_id") int b_id, Model model) {
+	public String detail(@RequestParam("b_id") int b_id, Model model, HttpSession httpSession) {
 		String nextPage = "board/suggestion_board_detail";
 		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
-		int result = boardService.addHit(b_id);
+		boardService.addHit(b_id);
 		model.addAttribute("boardVo", boardVo);
 		return nextPage;
 	}
 
-	
 	/**
 	 * suggestion 댓글 INSERT
 	 * 
@@ -115,7 +111,6 @@ public class BoardSuggestionController {
 		return result;
 	}
 
-	
 	/**
 	 * suggestion 댓글 SELECT
 	 * 
@@ -131,7 +126,6 @@ public class BoardSuggestionController {
 		return "board/board_comment_list";
 	}
 
-	
 	/**
 	 * suggestion 댓글 수정 폼 제출
 	 * 
@@ -145,9 +139,9 @@ public class BoardSuggestionController {
 		return result;
 	}
 
-	
 	/**
 	 * suggestion 댓글 DELETE
+	 * 
 	 * @param id : 댓글 번호
 	 * @return result값(DELETE 쿼리문 성공여부)를 가지고 board_comment_list.jsp로 이동
 	 */
@@ -158,7 +152,6 @@ public class BoardSuggestionController {
 		return result;
 	}
 
-	
 	/**
 	 * suggestion 글 수정 버튼
 	 * 
@@ -193,7 +186,6 @@ public class BoardSuggestionController {
 		return nextPage;
 	}
 
-	
 	/**
 	 * suggestion 글 DELETE
 	 * 
