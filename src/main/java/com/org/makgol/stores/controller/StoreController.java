@@ -1,6 +1,7 @@
 package com.org.makgol.stores.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import com.org.makgol.stores.beans.components.HttpTransactionLogger;
 import com.org.makgol.stores.data.type.KakaoLocalResponseJSON;
 import com.org.makgol.stores.data.type.KakaoLocalResponseJSON.ShopInfo;
 import com.org.makgol.stores.data.vo.KakaoLocalRequestVo;
+import com.org.makgol.stores.data.vo.StoreRequestVo;
 import com.org.makgol.stores.service.StoreService;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +30,19 @@ public class StoreController {
 		kakaoLocalRequestVo.validateVo();
 
 		KakaoLocalResponseJSON kakaoResponseJSON = storeService.callKakaoLocalAPI(kakaoLocalRequestVo);
-		logger.logResponseJson(kakaoResponseJSON);
+		
+		// ShopInfo 리스트를 가져온다
+		List<KakaoLocalResponseJSON.ShopInfo> shopInfoList = kakaoResponseJSON.documents;
+
+		
+		//logger.logResponseJson(kakaoResponseJSON);
+		
+		// ShopInfo를 StoreRequestVo로 매핑
+		List<StoreRequestVo> storeRequestVoList = shopInfoList.stream()
+			    .map(ShopInfo::mapToStoreRequestVo)
+			    .collect(Collectors.toList());		
+		
+		storeService.getMenu(storeRequestVoList);
 		
 		List<ShopInfo> shops = kakaoResponseJSON.documents;
 

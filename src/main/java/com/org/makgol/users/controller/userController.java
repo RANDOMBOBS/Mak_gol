@@ -6,13 +6,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.org.makgol.users.service.UserService;
 import com.org.makgol.users.vo.AuthNumberVo;
+import com.org.makgol.users.vo.UsersRequestVo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,6 +40,31 @@ public class userController {
 		
 		
 	} // userFindPassword_END
+	
+//	@PostMapping("/join")
+//	 public ResponseEntity<String> joinUser(@RequestParam("name") 	   String name,
+//			    							@RequestParam("email")	   String email,
+//			    							@RequestParam("password")  String password,
+//			    							@RequestParam("phone") 	   String phone,
+//			    							@RequestPart ("photo") 	   MultipartFile photo) {
+//		System.out.println(email);
+//		 	
+//
+//		 	return ResponseEntity.ok("가입이 완료되었습니다.");
+//	 }// ResponseEntity_END
+	
+	@PostMapping("/join")
+	
+	 public ResponseEntity<String> joinUser(@ModelAttribute @Valid UsersRequestVo usersRequestVo) {
+		
+		System.out.println(usersRequestVo.getEmail());
+		
+		
+		
+	 	return ResponseEntity.ok("가입이 완료되었습니다.");
+	 }// ResponseEntity_END
+	
+	
 	
 	@PostMapping("/mailCheck")
 	 @ResponseBody
