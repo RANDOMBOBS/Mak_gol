@@ -21,7 +21,6 @@ public class AdminService {
 	
 	/** user 등급 수정 UPDATE **/
 	public int modGrade(UserVo userVo) {
-		System.out.println("서비스+ "+ userVo);
 		return adminDao.UpdateGrade(userVo);
 	}
 }

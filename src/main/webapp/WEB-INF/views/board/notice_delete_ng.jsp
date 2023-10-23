@@ -9,7 +9,6 @@ request.setCharacterEncoding("utf-8");
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/board/suggestion_board_detail.jsp
 <title>글 보기</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"
@@ -134,11 +133,6 @@ request.setCharacterEncoding("utf-8");
 		</c:url>
 		<a href="${modify_url}">수정</a> <a href="${delete_url}">삭제</a>
 	</div>
-=======
-<title>Insert title here</title>
-</head>
-<body>
 
->>>>>>> 598d47344806f7201c4ce15f34bd9a98bcc9c79d:src/main/webapp/WEB-INF/views/board/notice_delete_ng.jsp
 </body>
 </html>

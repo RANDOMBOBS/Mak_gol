@@ -31,9 +31,6 @@ public class AdminDao {
 	
 	/** user 등급 수정 UPDATE **/
 	public int UpdateGrade(UserVo userVo) {
-		System.out.println("다오 +" + userVo);
-		System.out.println("등급 +" + userVo.getGrade());
-		System.out.println("아이디 +" + userVo.getId());
 		String sql = "UPDATE users SET grade = ? where id = ?";
 		int result = -1;
 		try{
