@@ -2,4 +2,9 @@
 <<<<<<<=HEAD
 >>>>>>>=KHJ
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/main/webapp/WEB-INF/views/store/store_list.jsp=UTF-8
+=======
+encoding//src/main/webapp/WEB-INF/views/admin/user_list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/board_comment_list.jsp=UTF-8
+>>>>>>> KHJ

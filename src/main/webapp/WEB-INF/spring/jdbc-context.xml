@@ -14,8 +14,8 @@
 		<context:property-placeholder location="classpath:application.properties" />
 	<!-- <context:property-placeholder location="/WEB-INF/spring/property/real.info.properties" /> -->
     <!-- 자신의 PC(로컬)에 MySql을 설치했을 경우 -->
-      
-      <!--
+ 
+  <!-- 
    <bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
@@ -25,9 +25,8 @@
         <property name="username" value="root"></property>
         <property name="password" value="1234"></property>
     </bean> 
-    -->
-    
-    
+     -->
+   
      <bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${datasource.driver}"></property>
@@ -36,9 +35,7 @@
         <property name="username" value="${datasource.username}"></property>
         <property name="password" value="${datasource.password}"></property>
     </bean>   	 
-    
-    
-    	
+ 
 <!--     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
 <!-- 		<property name="driverClassName" value="${jdbc.driverClassName}" /> -->
 <!-- 		<property name="url" value="${jdbc.url}?useSSL=false&amp;serverTimezone=UTC" /> -->
