@@ -149,7 +149,6 @@ public class BoardSuggestionController {
 	@RequestMapping(value = "/commentDelete/{id}", method = { RequestMethod.GET, RequestMethod.POST })
 	public int deleteComment(@PathVariable("id") int id) {
 		int result = boardService.delComment(id);
-		System.out.println("결과는???"+result);
 		return result;
 	}
 

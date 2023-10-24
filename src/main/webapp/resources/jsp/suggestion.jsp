@@ -46,7 +46,6 @@
 				data : JSON.stringify(data),
 				contentType : "application/json; charset=utf-8",
 				success : function(rdata) {
-				console.log(typeof rdata)
 					if (rdata === 1) {
 						comList();
 						jQ("input[name=nickname]").val("");
@@ -87,7 +86,6 @@
 				data : JSON.stringify(modData),
 				contentType : "application/json; charset=utf-8",
 				success : function(rdata) {
-					console.log(rdata);
 					if (rdata == 1) {
 						comList();
 					}
@@ -114,9 +112,7 @@
 				type : "GET",
 				dataType : "html",
 				success : function(result) {
-					console.log("결과는?" + result);
 					if (result == 1) {
-						console.log("이프 결과")
 						comList();
 					}
 				},
