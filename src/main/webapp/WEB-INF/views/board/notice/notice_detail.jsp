@@ -46,7 +46,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               </table>
             </li>
           </ul>
-          <div></div>
         </div>
         <div class="buttons">
           <c:url value="/board/Notice" var="notice_url">

@@ -57,12 +57,6 @@ public class BoardNoticeController {
 	}
 	
 	
-	@GetMapping("/categoryList")
-	public String categoryList() {
-		String nextPage = "category/category_list";
-		return nextPage;
-	}
-	
 	@PostMapping("/noticeAddList")
 	/***
 	 * 공지사항 게시글 등록 버튼

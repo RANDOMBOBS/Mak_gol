@@ -101,7 +101,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <a href="<c:url value='/board/Notice'/>">공지사항</a>
       </div>
       <div>
-        <a href="<c:url value='/category/categoryList'/>">카테고리 리스트 </a>
+        <a href="<c:url value='/category/categoryMain'/>">카테고리 리스트 </a>
       </div>
       <div>
         <a href="<c:url value='/board/suggestion'/>">건의사항</a>
