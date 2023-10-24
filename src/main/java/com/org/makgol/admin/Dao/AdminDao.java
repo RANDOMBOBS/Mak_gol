@@ -18,13 +18,11 @@ public class AdminDao {
 	
 	/** User리스트 전체 SELECT **/
 	public List<UserVo> selectAllUserList() {
-		System.out.println("DAO");
 		String sql = "SELECT * FROM users ORDER BY id ASC";
 		List<UserVo> userVos = new ArrayList<UserVo>();
 		try {
 			RowMapper<UserVo> rowMapper = BeanPropertyRowMapper.newInstance(UserVo.class);
 			userVos = jdbcTemplate.query(sql, rowMapper);
-			System.out.println("DAO + "+ userVos);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -33,9 +31,6 @@ public class AdminDao {
 	
 	/** user 등급 수정 UPDATE **/
 	public int UpdateGrade(UserVo userVo) {
-		System.out.println("다오 +" + userVo);
-		System.out.println("등급 +" + userVo.getGrade());
-		System.out.println("아이디 +" + userVo.getId());
 		String sql = "UPDATE users SET grade = ? where id = ?";
 		int result = -1;
 		try{

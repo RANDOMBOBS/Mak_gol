@@ -40,7 +40,6 @@ public class AdminController {
 		if(userVos != null) {
 			model.addAttribute("userVos", userVos);
 		}
-		System.out.println(nextPage);
 		return nextPage;
 	}
 	
@@ -54,9 +53,7 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value = "/modifyGrade", method = { RequestMethod.GET, RequestMethod.POST })
 		public int modifyGrade(@RequestBody UserVo userVo) {
-		System.out.println("컨트롤러+ "+ userVo);
 		int result = adminService.modGrade(userVo);
-		System.out.println("결과는?" + result);
 		return result;
 	}
 	

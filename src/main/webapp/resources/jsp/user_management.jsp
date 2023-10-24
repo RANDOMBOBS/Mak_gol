@@ -5,7 +5,7 @@
 <script>
 	$.noConflict();
 	var jQ = jQuery;
-	
+
 	function userList() {
 		jQ.ajax({
 			url : "${pageContext.request.contextPath}/admin/userList",
@@ -21,7 +21,7 @@
 		});
 	}
 
-	function updateGrade() {			
+	function updateGrade() {
 		let grade = jQ("select[name=grade]").val();
 		let checkboxes = jQ("input[type=checkbox]:checked");
 		checkboxes.each(function() {
@@ -36,12 +36,10 @@
 				data : JSON.stringify(data),
 				contentType : "application/json; charset=utf-8",
 				success : function(rdata) {
-					if (rdata == 1) {
-						let updateGrade = $("select[name=grade]").val();
-						alert("등급은?" + updateGrade);
-						jQ(this).closest("tr").find("td:eq(6)")
-								.text(updateGrade);
-						jQ(".allUserList").html(rdata);
+					if (rdata === 1) {
+						let updateGrade = jQ("select[name=grade]").val();
+						jQ(this).closest("tr").find("td:eq(6)").text(updateGrade);
+						userList();
 					}
 				},
 				error : function(error) {
