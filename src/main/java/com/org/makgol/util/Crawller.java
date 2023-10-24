@@ -40,8 +40,8 @@ public class Crawller {
 
         // 드라이버 경로 윈도우 
         //String driverPath = "D:\\SunhyeonSpring\\mak_gol\\src\\driver\\chromedriver.exe";
-        // 드라이버 절대경로 맥
-        String driverPath = "/Volumes/Data/developer/eclipse-workspace/makgol/src/driver/chromedriver";
+        // 드라이버 절대경로 맥 /Volumes/Data/developer/eclipse-workspace/makgol/src/main/java/com/org/makgol/util/driver/chromedriver_mac
+        String driverPath = "/Volumes/Data/developer/eclipse-workspace/makgol/src/driver/chromedriver_mac";
         
         //스레드를 종료하기위한 List
     	List<JobThread> jobThreads = new ArrayList<>();
@@ -87,6 +87,7 @@ public class Crawller {
     		List<StoreRequestMenuVo> storeRequestMenuVos = new ArrayList<StoreRequestMenuVo>();
     		
     		
+    		System.out.println(driverPath);
     		
     		//chrome driver 경로 세팅
     		System.setProperty("webdriver.chrome.driver", driverPath); 
@@ -158,10 +159,10 @@ public class Crawller {
             storeRequestVo.setOpening_hours(opening_hours);
             
             //데이터 확인
-            //System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getSite());
-            //System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getUpdate_date());
-            //System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getOpening_hours());
-            //System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getMenu_update());
+            System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getSite());
+            System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getUpdate_date());
+            System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getOpening_hours());
+            System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getMenu_update());
 
             // 메뉴 정보 가져오기
             List<WebElement> element_menu = element.findElements(By.cssSelector("#mArticle > div.cont_menu > ul > li"));

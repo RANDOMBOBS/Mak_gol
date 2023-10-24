@@ -105,7 +105,6 @@ $(document).ready(function() {
             data: formData,
             processData: false,
             contentType: false,
-            mimeType: "multipart/form-data"
             success: function (data, status) {
                 if (status === "success") {
                     // Process the response data, e.g., show a success message
@@ -185,5 +184,6 @@ $(document).ready(function() {
         <button type="button" id="joinButton">가입</button>
     </div>
 </div>
+
 </body>
 </html>
