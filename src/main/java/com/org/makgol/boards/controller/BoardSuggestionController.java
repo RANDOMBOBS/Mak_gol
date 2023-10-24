@@ -146,9 +146,10 @@ public class BoardSuggestionController {
 	 * @return result값(DELETE 쿼리문 성공여부)를 가지고 board_comment_list.jsp로 이동
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/commentDelete/{id}", method = { RequestMethod.DELETE, RequestMethod.POST })
+	@RequestMapping(value = "/commentDelete/{id}", method = { RequestMethod.GET, RequestMethod.POST })
 	public int deleteComment(@PathVariable("id") int id) {
 		int result = boardService.delComment(id);
+		System.out.println("결과는???"+result);
 		return result;
 	}
 

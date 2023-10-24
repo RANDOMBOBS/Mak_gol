@@ -46,7 +46,8 @@
 				data : JSON.stringify(data),
 				contentType : "application/json; charset=utf-8",
 				success : function(rdata) {
-					if (rdata == 1) {
+				console.log(typeof rdata)
+					if (rdata === 1) {
 						comList();
 						jQ("input[name=nickname]").val("");
 						jQ("input[name=content]").val("");
@@ -110,11 +111,12 @@
 		if (window.confirm('삭제하시겠습니까?')) {
 			jQ.ajax({
 				url : "/makgol/board/suggestion/commentDelete/" + id,
-				type : "DELETE",
+				type : "GET",
 				dataType : "html",
-				success : function(rdata) {
-					console.log(rdata);
-					if (rdata == 1) {
+				success : function(result) {
+					console.log("결과는?" + result);
+					if (result == 1) {
+						console.log("이프 결과")
 						comList();
 					}
 				},
