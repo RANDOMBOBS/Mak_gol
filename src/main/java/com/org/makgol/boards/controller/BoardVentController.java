@@ -32,7 +32,7 @@ public class BoardVentController {
 	 * @return vent.jsp로 이동
 	 */
 	public String showList(Model model) {
-		String nextPage = "board/vent_board_form";
+		String nextPage = "board/vent/vent_board_form";
 		List<BoardVo> boardVo = ventService.getVentBoard();
 
 		if (boardVo != null) {
@@ -49,7 +49,7 @@ public class BoardVentController {
 	 * @return suggestion_board_detail.jsp로 이동
 	 */
     public String detail(@RequestParam("b_id") int b_id, Model model) {
-		String nextPage = "board/vent_board_detail_form";
+		String nextPage = "board/vent/vent_board_detail_form";
 		BoardVo boardVo = ventService.readVentBoard(b_id);
 		List<CommentVo> commentVos = ventService.getCommentList(b_id);
 		model.addAttribute("boardVo", boardVo);
@@ -68,7 +68,7 @@ public class BoardVentController {
 	 * @return create_board_form.jsp로 이동
 	 */
 	public String create() {
-		String nextPage = "board/vent_board_create_form";
+		String nextPage = "board/vent/vent_board_create_form";
 //		세션에 로그인 정보가 있을때만 실행 (없으면 로그인폼으로 가기)
 		return nextPage;
 	}
@@ -83,14 +83,14 @@ public class BoardVentController {
 	 * 		  작성자 : user_id
 	 * 		  내용 : contents
 	 * @return 글쓰기 성공 여부
-	 * 		   성공 시 : board/vent_board_create_ok.jsp
-	 * 		   실패 시 : board/vent_board_create_ng.jsp
+	 * 		   성공 시 : board/vent/vent_board_create_ok.jsp
+	 * 		   실패 시 : board/vent/vent_board_create_ng.jsp
 	 */
 	public String createConfirm(BoardVo boardVo) {
-		String nextPage = "board/vent_board_create_ok";
+		String nextPage = "board/vent/vent_board_create_ok";
 		int result = ventService.createBoardConfirm(boardVo);
 		if (result < 1) {
-			nextPage = "board/vent_board_create_ng";
+			nextPage = "board/vent/vent_board_create_ng";
 		}
 		return nextPage;
 	}
@@ -103,7 +103,7 @@ public class BoardVentController {
 	 * @return modify_board_form.jsp로 이동
 	 */
 	public String modify(@RequestParam("b_id") int b_id, Model model) {
-		String nextPage = "board/vent_board_modify_form";
+		String nextPage = "board/vent/vent_board_modify_form";
 //		세션에 로그인 정보가 있을때만 실행 (없으면 로그인폼으로 가기)
 		BoardVo boardVo = ventService.modifyBoard(b_id);
 		boardVo.setB_id(b_id);
@@ -121,14 +121,14 @@ public class BoardVentController {
 	 * 		  내용 : contents
 	 * 
 	 * @return 수정 성공 여부
-	 * 		   성공 시 : vent_modify_board_ok.jsp
-	 * 		   실패 시 : vent_modify_board_ng.jsp 
+	 * 		   성공 시 : vent/vent_modify_board_ok.jsp
+	 * 		   실패 시 : vent/vent_modify_board_ng.jsp 
 	 */
 	public String modifyConfirm(BoardVo boardVo) {
-		String nextPage = "board/vent_board_modify_ok";
+		String nextPage = "board/vent/vent_board_modify_ok";
 		int result = ventService.modifyBoardConfirm(boardVo);
 		if (result < 1) {
-			nextPage = "board/vent_board_modify_ng";
+			nextPage = "board/vent/vent_board_modify_ng";
 		}
 		return nextPage;
 	}
@@ -142,12 +142,12 @@ public class BoardVentController {
 	 * 		   실패 시 : delete_board_ng.jsp 
 	 */
 	public String delete(@RequestParam("b_id") int b_id) {
-		String nextPage = "board/vent_board_delete_ok";
+		String nextPage = "board/vent/vent_board_delete_ok";
 		
 		//
 		int result = ventService.deleteVent(b_id);
 		if(result < 1) {
-			nextPage = "board/vent_board_delete_ng";
+			nextPage = "board/vent/vent_board_delete_ng";
 		}
 		return nextPage;
 	}
