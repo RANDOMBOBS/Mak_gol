@@ -35,9 +35,7 @@
 
 </head>
 <body>
-
 	<section>
-
 		<div id="section_wrap">
 			<div class="word">
 				<h3>공지사항 작성</h3>
