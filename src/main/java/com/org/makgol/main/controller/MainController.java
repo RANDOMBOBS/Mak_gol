@@ -27,7 +27,6 @@ public class MainController {
 	@RequestMapping(value = "/allCategory", method = { RequestMethod.GET, RequestMethod.POST })
 	public String allCategory(Model model) {
 		List<CategoryListVo> categorys = mainService.getAllCategory();
-		System.out.println("Controller"+categorys);
 		model.addAttribute("categorys", categorys);
 		return "main/random_wheel";
 	}

@@ -5,7 +5,7 @@
 		// HTML 요소
 		var allCategory = document.querySelectorAll(".category"); // 클래스명이 "category"인 모든 <span> 요소를 가져옵니다.
 		var roulettePin = document.querySelector(".roulette_pin");
-		var roulettePinRect = roulettePin.getBoundingClientRect();
+		var roulettePinRect = roulettePin.getBoundingClientRect(); //좌표
 
 		// 룰렛 핀의 중심 좌표 계산
 		var roulettePinCenterX = roulettePinRect.left + roulettePinRect.width
@@ -33,7 +33,6 @@
 					- categoryCenterX, 2)
 					+ Math.pow(roulettePinCenterY - categoryCenterY, 2));
 
-			// 만약
 			if (distance < closestDistance) {
 				closestCategory = category;
 				closestDistance = distance;
@@ -41,33 +40,35 @@
 		});
 
 		if (closestCategory) {
-			var classNames = closestCategory.className;
-			var classList = classNames.split(" ");
-			console.log(classNames);
+			var textvalue = closestCategory.textContent;
+			console.log(textvalue);
 
-			if (classList.length > 0) {
-				var selectCategory = classList[1];
-				console.log(selectCategory);
-				alert("오늘의 점심 메뉴는? " + selectCategory + " 당첨!");
-			}
+			alert("오늘의 점심 메뉴는? " + textvalue + " 당첨!");
 		}
 	}
 
+
 	let roulette = document.querySelector(".roulette");
 	let btn = document.getElementById("spin");
-	let number = Math.ceil(Math.random() * 30000);
+	let number = Math.ceil(Math.random() * 10000);
 
-	// 버튼 눌렀을 때
 	function handleButtonClick() {
+		// Disable the button
 		btn.disabled = true;
-		roulette.style.transform = "rotate(" + number + "deg)";
-		number += Math.ceil(Math.random() * 30000);
 
+		roulette.style.transform = "rotate(" + number + "deg)";
+		number += Math.ceil(Math.random() * 10000);
+
+		// Set a timeout for the roulette spin
 		setTimeout(function() {
+			// Re-enable the button after the roulette animation is complete
 			btn.disabled = false;
+
+			// Call the category selection function
 			selCategory();
 		}, 4500); // 5.5 seconds (5500 milliseconds)
 	}
 
 	btn.addEventListener("click", handleButtonClick);
+	
 </script>
