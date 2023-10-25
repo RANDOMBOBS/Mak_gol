@@ -26,17 +26,17 @@ public class BoardNoticeController {
 	
 	@GetMapping("/Notice")
 	/**
-	 * ÀüÃ¼ °Ô½Ã¹°À» °øÁö»çÇ×¸¸ º¸¿©ÁÖ´Â ÆäÀÌÁö
-	 * @param model  = BoardVo ´ÙÀ½È­¸éÀ¸·Î °ªÀ» Àü´Þ
+	 * ï¿½ï¿½Ã¼ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param model  = BoardVo ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * BoardVo -- 
-	 * b_id : °Ô½Ã±Û ¹øÈ£
-	 * title : °Ô½Ã±Û Á¦¸ñ
-	 * date : °Ô½Ã±Û ÀÛ¼ºÀÏ
-	 * category : °Ô½Ã±Û À¯Çü
-	 * contents : °Ô½Ã±Û ³»¿ë
-	 * name : °Ô½Ã±Û ÀÛ¼ºÀÚ
+	 * b_id : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£
+	 * title : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * date : ï¿½Ô½Ã±ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½
+	 * category : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * contents : ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * name : ï¿½Ô½Ã±ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½
 	 * @return = nextPage
-	 * nextPage : "board/notice" ÀÌµ¿
+	 * nextPage : "board/notice" ï¿½Ìµï¿½
 	 */
 	public String Notice(Model model) {
 		String nextPage = "board/notice/notice";
@@ -47,9 +47,9 @@ public class BoardNoticeController {
 	
 	@GetMapping("/noticeCreateForm")
 	/***
-	 * °øÁö»çÇ× °Ô½ÃÆÇ ±Û¾²±â
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½
 	 * @return = nextPage
-	 * nextPage : "board/notice_create_form" ÀÌµ¿
+	 * nextPage : "board/notice_create_form" ï¿½Ìµï¿½
 	 */
 	public String noticeCreateForm() {
 		String nextPage = "board/notice/notice_create_form";
@@ -59,12 +59,12 @@ public class BoardNoticeController {
 	
 	@PostMapping("/noticeAddList")
 	/***
-	 * °øÁö»çÇ× °Ô½Ã±Û µî·Ï ¹öÆ°
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
 	 * @param boardVo
 	 * @return = nextPage
-	 * µî·Ï¹öÆ° ´©¸¦ ½Ã nextPage --
-	 * ¼º°ø : "board/register_notice_ok" ÀÌµ¿
-	 * ½ÇÆÐ : "board/register_notice_ng" ÀÌµ¿
+	 * ï¿½ï¿½Ï¹ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ nextPage --
+	 * ï¿½ï¿½ï¿½ï¿½ : "board/register_notice_ok" ï¿½Ìµï¿½
+	 * ï¿½ï¿½ï¿½ï¿½ : "board/register_notice_ng" ï¿½Ìµï¿½
 	 */
 	public String noticeAddList(BoardVo boardVo ) {
 		String nextPage = "board/notice/notice_register_ok";
@@ -77,11 +77,11 @@ public class BoardNoticeController {
  
 		@GetMapping("/detailNotice")
 		/***
-		 * °øÁö»çÇ× Áß °Ô½Ã±Û
-		 * @param b_id = °Ô½Ã±Û ¹øÈ£
+		 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô½Ã±ï¿½
+		 * @param b_id = ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£
 		 * @param model 
 		 * @return = nextPage
-		 * nextPage : "board/notice_detail" ÀÌµ¿
+		 * nextPage : "board/notice_detail" ï¿½Ìµï¿½
 		 */
 		public String detailNotice(@RequestParam("b_id") int b_id, Model model) {
 			String nextPage = "board/notice/notice_detail";
@@ -92,11 +92,11 @@ public class BoardNoticeController {
 		
 		@GetMapping("/modifyNotice")
 		/***
-		 * °øÁö»çÇ× °Ô½Ã±Û ¼öÁ¤ ¹öÆ°
-		 * @param b_id = °Ô½Ã±Û ¹øÈ£
+		 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
+		 * @param b_id = ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£
 		 * @param model
 		 * @return = nextPage
-		 * nextPage : "/board/notice_modify_form" ÀÌµ¿
+		 * nextPage : "/board/notice_modify_form" ï¿½Ìµï¿½
 		 */
 		public String modifyNotice(@RequestParam("b_id") int b_id, Model model) {
 			String nextPage = "/board/notice/notice_modify_form";
@@ -107,12 +107,12 @@ public class BoardNoticeController {
 		
 		@PostMapping	("/modifyNoticeConfirm")
 		/***
-		 * °Ô½Ã±Û ¼öÁ¤ µî·Ï ¹öÆ°
+		 * ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
  		 * @param boardVo
 		 * @return = nextPage
-		 * µî·Ï¹öÆ° ´©¸¦ ½Ã nextPage --
-		 * ¼º°ø : "board/notice_modify_ok" ÀÌµ¿
-		 * ½ÇÆÐ : "board/notice_modify_ng" ÀÌµ¿
+		 * ï¿½ï¿½Ï¹ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ nextPage --
+		 * ï¿½ï¿½ï¿½ï¿½ : "board/notice_modify_ok" ï¿½Ìµï¿½
+		 * ï¿½ï¿½ï¿½ï¿½ : "board/notice_modify_ng" ï¿½Ìµï¿½
 		 */
 		public String modifyNoticeConfirm(BoardVo boardVo) {
 			String nextPage = "/board/notice/notice_modify_ok";

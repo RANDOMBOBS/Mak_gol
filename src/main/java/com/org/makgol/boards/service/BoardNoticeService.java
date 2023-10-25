@@ -10,37 +10,33 @@ import com.org.makgol.boards.vo.BoardVo;
 
 @Service
 public class BoardNoticeService {
-
 	@Autowired
 	BoardNoticeDao noticeDao;
 	
 	
-	// ÀüÃ¼ °Ô½Ã¹° Áß °øÁö»çÇ× ¸®½ºÆ® ¹× °Ô½Ã±Û Ãß°¡ ÈÄ ÀÌµ¿ ¸®½ºÆ®
+	// å ì™ì˜™ì²´ å ìŒ‰ì‹œë±„ì˜™ å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™íŠ¸ å ì™ì˜™ å ìŒ‰ì‹œê¹ì˜™ å ìŒ©ê³¤ì˜™ å ì™ì˜™ å ì‹±ë“¸ì˜™ å ì™ì˜™å ì™ì˜™íŠ¸
 	public List<BoardVo> Notice(){
 		return noticeDao.selectNotice();
 	}
 	
-	// ±Û¾²±â µî·Ï
+	// å ìŒœì–µì˜™å ì™ì˜™ å ì™ì˜™å ï¿½
 	public int noticeAddList(BoardVo boardVo) {
 		return noticeDao.insertNotice(boardVo);
 	}
 	
-	//°Ô½Ã±Û  ¹öÆ°
+	//å ìŒ‰ì‹œê¹ì˜™  å ì™ì˜™íŠ¼
 		public BoardVo detailNotice(int b_id) {
 			return noticeDao.selectNotice(b_id);
 		}
 		
-	// °Ô½Ã±Û ¼öÁ¤¹öÆ°
+	// å ìŒ‰ì‹œê¹ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¼
 		public BoardVo modifyNotice(int b_id) {
 			return noticeDao.selectModNotice(b_id);
 		}
-		
-   // °Ô½Ã±Û ¼öÁ¤ µî·Ï
 		public int modifyNoticeConfirm(BoardVo boardVo) {
 			return noticeDao.updateNotice(boardVo);
 		}
 		
-	 // °Ô½Ã±Û »èÁ¦
 		public int deleteNotice(int b_id) {
 			return noticeDao.deleteNotice(b_id);
 		}

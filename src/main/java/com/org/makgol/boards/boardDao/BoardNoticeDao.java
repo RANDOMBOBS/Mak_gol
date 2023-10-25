@@ -17,7 +17,7 @@ public class BoardNoticeDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	// ÀüÃ¼ °Ô½Ã¹° Áß °øÁö»çÇ× °Ô½Ã±Û ÆäÀÌÁö ¹× °Ô½Ã±Û Ãß°¡ÈÄ ÀÌµ¿ ¸®½ºÆ®
+	// å ì™ì˜™ì²´ å ìŒ‰ì‹œë±„ì˜™ å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ìŒ‰ì‹œê¹ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™ å ìŒ‰ì‹œê¹ì˜™ å ìŒ©ê³¤ì˜™å ì™ì˜™ å ì‹±ë“¸ì˜™ å ì™ì˜™å ì™ì˜™íŠ¸
 	public List<BoardVo> selectNotice() {
 		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo FROM boards b join users u on u.id = b.user_id "
 				+ "WHERE category = 'notice' order by date DESC";
@@ -31,7 +31,7 @@ public class BoardNoticeDao {
 		return boards.size() > 0 ? boards : null;
 	}
 
-	// °Ô½Ã±ÛÀ» ÀÛ¼ºÇÏ¿© µî·Ï ¹öÆ°À» ´©¸£¸é DB¿¡ Ãß°¡
+	// å ìŒ‰ì‹œê¹ì˜™å ì™ì˜™ å ìŒœì‡½ì˜™å ì‹¹ìš¸ì˜™ å ì™ì˜™å ï¿½ å ì™ì˜™íŠ¼å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ DBå ì™ì˜™ å ìŒ©ê³¤ì˜™
 	public int insertNotice(BoardVo boardVo) {
 		String sql = "insert into boards(category,title,user_id,date,contents) values (?,?,2,now(),?) ";
 		int result = 0;
@@ -43,7 +43,7 @@ public class BoardNoticeDao {
 		return result;
 	}
 
-	// °Ô½Ã±Û ³»¿ë ÆäÀÌÁö
+	// ê²Œì‹œê¸€ ë‚´ìš© í˜ì´ì§€
 	public BoardVo selectModNotice(int b_id) {
 		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
 				+ "FROM boards AS b "
@@ -58,7 +58,7 @@ public class BoardNoticeDao {
 		}
 		return boards.size() > 0 ? boards.get(0) : null;
 	}
-	// °Ô½Ã±Û Á¶È¸¼ö Áõ°¡ ( + 1 ) 
+	// ê²Œì‹œê¸€ ì¡°íšŒìˆ˜ ì¦ê°€ ( + 1 ) 
 	public BoardVo selectNotice(int b_id) {
 		String updatesql = "UPDATE boards AS b JOIN users AS u ON b.user_id = u.id SET b.hit = b.hit + 1 WHERE b.id = ?";
 		String selectsql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
@@ -77,7 +77,7 @@ public class BoardNoticeDao {
 		return null;
 	}
 	
-	// °Ô½Ã±Û ¼öÁ¤ ¹öÆ°À» ´©¸£¸é
+	// å ìŒ‰ì‹œê¹ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™íŠ¼å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™
 	public int updateNotice(BoardVo boardVo) {
 		String sql = "update boards set title=?, contents=?  where id = ?";
 		int result = 0;
@@ -89,7 +89,7 @@ public class BoardNoticeDao {
 		return result;
 	}
 	
-	// °Ô½Ã±Û »èÁ¦ ¹öÆ°
+	// å ìŒ‰ì‹œê¹ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™íŠ¼
 	public int deleteNotice(int b_id) {
 		String sql = "delete from boards where id = ?";
 		int result=0;

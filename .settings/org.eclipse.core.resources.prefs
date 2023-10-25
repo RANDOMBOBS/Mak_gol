@@ -2,4 +2,6 @@
 <<<<<<<=HEAD
 >>>>>>>=KHJ
 eclipse.preferences.version=1
+encoding//src/main/java/com/org/makgol/boards/boardDao/BoardNoticeDao.java=UTF-8
+encoding//src/main/java/com/org/makgol/boards/service/BoardNoticeService.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/store/store_list.jsp=UTF-8
