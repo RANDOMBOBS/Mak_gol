@@ -36,7 +36,7 @@ public class BoardSuggestionController {
 	 */
 	@GetMapping({ "/", "" })
 	public String showList(Model model) {
-		String nextPage = "board/suggestion";
+		String nextPage = "board/suggestion/suggestion";
 		List<BoardVo> boardVos = boardService.getSuggestionBoard();
 
 		if (boardVos != null) {
@@ -56,7 +56,7 @@ public class BoardSuggestionController {
 	 */
 	@GetMapping("/create")
 	public String create(@RequestParam("name") String name, Model model, HttpSession session) {
-		String nextPage = "board/create_board_form";
+		String nextPage = "board/suggestion/create_board_form";
 //		세션에 로그인 정보가 있을때만 실행 (없으면 로그인폼으로 가기)
 		model.addAttribute("name", name);
 		return nextPage;
@@ -72,10 +72,10 @@ public class BoardSuggestionController {
 	 */
 	@PostMapping("/createConfirm")
 	public String createConfirm(BoardVo boardVo) {
-		String nextPage = "board/create_board_ok";
+		String nextPage = "board/suggestion/create_board_ok";
 		int result = boardService.createBoardConfirm(boardVo);
 		if (result < 1) {
-			nextPage = "board/create_board_ng";
+			nextPage = "board/suggestion/create_board_ng";
 		}
 		return nextPage;
 	}
@@ -90,7 +90,7 @@ public class BoardSuggestionController {
 	 */
 	@RequestMapping(value = "/detail", method = { RequestMethod.GET, RequestMethod.POST })
 	public String detail(@RequestParam("b_id") int b_id, Model model, HttpSession httpSession) {
-		String nextPage = "board/suggestion_board_detail";
+		String nextPage = "board/suggestion/suggestion_board_detail";
 		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
 		boardService.addHit(b_id);
 		model.addAttribute("boardVo", boardVo);
@@ -123,7 +123,7 @@ public class BoardSuggestionController {
 	public String commentList(@PathVariable("board_id") int board_id, Model model) {
 		List<CommentVo> commentVos = boardService.getCommentList(board_id);
 		model.addAttribute("commentVos", commentVos);
-		return "board/board_comment_list";
+		return "board/suggestion/board_comment_list";
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class BoardSuggestionController {
 	 */
 	@GetMapping("/modify")
 	public String modify(@RequestParam("b_id") int b_id, Model model) {
-		String nextPage = "board/modify_board_form";
+		String nextPage = "board/suggestion/modify_board_form";
 //		세션에 로그인 정보가 있을때만 실행 (없으면 로그인폼으로 가기)
 		BoardVo boardVo = boardService.modifyBoard(b_id);
 		boardVo.setB_id(b_id);
@@ -178,10 +178,10 @@ public class BoardSuggestionController {
 	 */
 	@PostMapping("/modifyConfirm")
 	public String modifyConfirm(BoardVo boardVo) {
-		String nextPage = "board/modify_board_ok";
+		String nextPage = "board/suggestion/modify_board_ok";
 		int result = boardService.modifyBoardConfirm(boardVo);
 		if (result < 1) {
-			nextPage = "board/modify_board_ng";
+			nextPage = "board/suggestion/modify_board_ng";
 		}
 		return nextPage;
 	}
@@ -194,12 +194,12 @@ public class BoardSuggestionController {
 	 */
 	@GetMapping("/delete")
 	public String delete(@RequestParam("b_id") int b_id) {
-		String nextPage = "board/delete_board_ok";
+		String nextPage = "board/suggestion/delete_board_ok";
 
 		//
 		int result = boardService.deleteBoard(b_id);
 		if (result < 1) {
-			nextPage = "board/delete_board_ng";
+			nextPage = "board/suggestion/delete_board_ng";
 		}
 		return nextPage;
 	}
