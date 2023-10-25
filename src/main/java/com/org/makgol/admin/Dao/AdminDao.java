@@ -1,4 +1,4 @@
-package com.org.makgol.admin.Dao;
+package com.org.makgol.admin.dao;
 
 import java.util.ArrayList;
 import java.util.List;
