@@ -30,7 +30,10 @@
 
 		</article>
 	</section>
-
+	
+		<jsp:include page="/resources/jsp/main.jsp"></jsp:include>
+	
+	
 	<script>
 		$.noConflict();
 		var jQ = jQuery;
@@ -40,7 +43,6 @@
 				type : "GET",
 				dataType : "html",
 				success : function(rdata) {
-					console.log(rdata);
 					jQ(".roulette").html(rdata);
 				},
 				error : function(error) {
@@ -50,6 +52,8 @@
 		}
 
 		getAllcategory();
+
+		
 	</script>
 </body>
 </html>
