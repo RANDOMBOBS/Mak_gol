@@ -5,5 +5,5 @@ eclipse.preferences.version=1
 encoding//src/main/java/com/org/makgol/boards/dao/BoardNoticeDao.java=UTF-8
 encoding//src/main/java/com/org/makgol/boards/service/BoardNoticeService.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/user_list.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/board/board_comment_list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/suggestion/board_comment_list.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/store/store_list.jsp=UTF-8
