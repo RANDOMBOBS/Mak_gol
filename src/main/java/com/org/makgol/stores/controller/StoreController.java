@@ -36,13 +36,18 @@ public class StoreController {
 
 		
 		//logger.logResponseJson(kakaoResponseJSON);
+		HttpTransactionLogger httpTransactionLogger = new HttpTransactionLogger();
 		
 		// ShopInfo를 StoreRequestVo로 매핑
 		List<StoreRequestVo> storeRequestVoList = shopInfoList.stream()
 			    .map(ShopInfo::mapToStoreRequestVo)
-			    .collect(Collectors.toList());		
+			    .collect(Collectors.toList());	
 		
-		storeService.getMenu(storeRequestVoList);
+		try {
+			storeService.getMenu(storeRequestVoList);
+		} catch (Exception e) {
+			
+		}
 		
 		List<ShopInfo> shops = kakaoResponseJSON.documents;
 

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.org.makgol.boards.vo.BoardVo;
+import com.org.makgol.users.vo.UsersRequestVo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,8 +47,56 @@ public class UserDao {
 	        e.printStackTrace();
 	        return false; // Handle other exceptions
 	    }
-	} // checkNumber_END
-	
-	
+	}
+
+
+
+	public Boolean createDao(UsersRequestVo usersRequestVo) {
+		Boolean result = false;
+		
+		String name = usersRequestVo.getName();
+		String email = usersRequestVo.getEmail();
+		String password = usersRequestVo.getPassword();
+		String phone = usersRequestVo.getPhone();
+		String photo = "C:\\images\\599e8a0b6a171389b7bc5383e9599175.jpg";
+		
+		
+		try {
+		String sql = "INSERT INTO users (name, email, password, phone, photo, date) VALUES (?, ?, ?, ?, ?, now())";
+        result = (jdbcTemplate.update(sql, name, email, password, phone, photo) > 0);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+
+
+	public Boolean findUserEmail(String userEmail) {
+		Boolean result = false;
+		String sql = "SELECT email FROM user WHERE email = ?";
+		
+		try {
+			result = userEmail.equals(jdbcTemplate.queryForObject(sql, String.class, userEmail));
+		}catch (Exception e) {e.getStackTrace();}
+		
+		return result;
+	}
+
+
+
+	//updatePassword
+	public Boolean updatePassword(String newPassword, String userEmail) {
+		Boolean result = false;
+		
+		String sql = "UPDATE users SET password = ? WHERE email = ?";
+		
+		try {
+			result = (jdbcTemplate.update(sql, newPassword, userEmail) > 0);
+		}catch (Exception e) {e.getStackTrace();}
+		
+		return result;
+	} // updatePassword_END
 	
 }

@@ -9,9 +9,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-	
-	
-	
 	$('#mail-Check-Btn').click(function() {
 		
 		const email = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
@@ -85,13 +82,17 @@ $(document).ready(function() {
 	});// 인증번호 비교
 	
 	// 회원가입 버튼 
-	$("#joinButton").click(function () {
-        var formData = new FormData();
+	/* $("#joinButton").click(function () {
+		
+        const formData = new FormData();
         const email 	= $("#userEmail1").val()+$("#userEmail2").val();
         const name		= $("#name").val();
         const password 	= $("#password").val();
         const phone 	= $("#phone").val();
         const photo 	= $("#photo")[0].files[0];
+        
+        const imageInput = $("#photo")[0];
+        console.log("photo", photo.files)
         
         formData.append("email",	email);
         formData.append("name",  	name);
@@ -100,12 +101,13 @@ $(document).ready(function() {
         formData.append("photo", 	photo); 
 
         $.ajax({
-            type: "POST",
-            url: "/makgol/user/join",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (data, status) {
+            type		: "POST",
+            url			: "makgol/user/join",
+            data		: formData,
+            processData : false,
+            contentType : false,
+            success		: 
+            	function (data) {
                 if (status === "success") {
                     // Process the response data, e.g., show a success message
                 } else {
@@ -113,8 +115,45 @@ $(document).ready(function() {
                 }
             }
         });
-    });// 회원가입 버튼_END
+    });// 회원가입 버튼_END  */
 	
+ 	// 회원가입 버튼 
+	$("#joinButton").click(function () {
+		
+        const email 	= $("#userEmail1").val()+$("#userEmail2").val();
+        const name		= $("#name").val();
+        const password 	= $("#password").val();
+        const phone 	= $("#phone").val();
+        const photo 	= $("#photo")[0].files[0];
+        
+        let form = {
+        		email 	 : email,
+        		name  	 : name,
+        		password : password,
+        		phone	 : phone,
+        };
+
+        $.ajax({
+            type		: "POST",
+            url			: "${pageContext.request.contextPath}/user/join",
+            data		: JSON.stringify(form),
+            dataType	: "json",
+            contentType : "application/json; charset=utf-8",
+            success 	: function (data, status) {
+                if (status === "success") {
+                	if (data === true) {
+                		alert("성공!ㅋ");
+                	} else {
+                		alert("실패!ㅋ");
+                	}
+                } else {
+                	alert(data);
+                    console.error("통신 오류: " + status);
+                }
+            }
+        });
+        
+    });// 회원가입 버튼_END */
 	
 	// 비밀번호 비교 
 	$('#passwordCheckBtn').click(function () {
@@ -157,14 +196,15 @@ $(document).ready(function() {
 <body>
 <div class="form-group email-form">
     <label>회원가입!</label>
+   <form action = "makgol/user/join" method="post" enctype="multipart/form-data">
     <div class="input-group">
         <input type="text" class="form-control" name="userEmail1" id="userEmail1" placeholder="이메일">
         <select class="form-control" name="userEmail2" id="userEmail2">
-            <option>@naver.com</option>
-            <option>@daum.net</option>
-            <option>@gmail.com</option>
-            <option>@hanmail.com</option>
-            <option>@yahoo.co.kr</option>
+            <option value = "@naver.com"   >@naver.com</option>
+            <option value = "@daum.net"    >@daum.net</option>
+            <option value = "@gmail.com"   >@gmail.com</option>
+            <option value = "@hanmail.com" >@hanmail.com</option>
+            <option value = "@yahoo.co.kr" >@yahoo.co.kr</option>
         </select>
     </div>
     <div class="input-group-addon">
@@ -183,6 +223,7 @@ $(document).ready(function() {
         <input type="file" id="photo" name="photo">
         <button type="button" id="joinButton">가입</button>
     </div>
+    </form>
 </div>
 
 </body>
