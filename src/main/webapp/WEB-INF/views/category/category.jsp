@@ -54,9 +54,11 @@ pageEncoding="UTF-8"%>
       </div>
     </section>
     
+     <!-- jsp ( ajax ) 경로 참조  -->
     <jsp:include page="/resources/jsp/category.jsp"></jsp:include>
+    
     <script>
-    	menuList();
+    	menuList();   // 최초 리스트 호출
     </script>
   </body>
 </html>

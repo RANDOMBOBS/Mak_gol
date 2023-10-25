@@ -28,9 +28,9 @@ public class CategoryListController {
 		return "category/category";
 	}
 	
-	@RequestMapping(value={"/categoryList",""} , method = {RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value={"/categoryList"} , method = {RequestMethod.GET, RequestMethod.POST })
 	public String categoryList(Model model) {
-		String nextPage = "category/category_list";
+		String nextPage = "category/category_list"; // ajax
 		List<CategoryListVo> categoryVo = categoryListService.categoryList();
 		model.addAttribute("categoryVo",categoryVo);
 		return nextPage;

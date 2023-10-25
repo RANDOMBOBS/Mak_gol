@@ -13,15 +13,14 @@
 	function menuList() {
 		console.log("${pageContext.request.contextPath}")
 		jQ.ajax({
-			url : "/makgol/category/categoryList", // 이동할 경로
+			url : "/makgol/category/categoryList", // controller에 해당되는 경로 이동
 			type : "GET",
 			dataType : "html",
-			success : function(rdata) {
-				console.log(rdata)
-				jQ(".category_list_div").html(rdata);
+			success : function(rdata) {   //category_list 데이터 값을 가져와 성공하면
+				jQ(".category_list_div").html(rdata);   // class="category_list_div" 인 곳에 가져온 데이터를 넣는다.
 			},
-			error : function(error) {
-				alert('오류');
+			error : function(error) {  			// 실패하면 오류 
+				alert('오류');			
 			}
 		});
 	}
