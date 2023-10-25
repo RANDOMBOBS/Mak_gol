@@ -2,8 +2,13 @@ package com.org.makgol.stores.data.type;
 
 import java.util.List;
 
-public class KakaoLocalResponseJSON {
+import com.org.makgol.stores.data.vo.StoreRequestVo;
 
+
+
+public class KakaoLocalResponseJSON {
+	
+	
 	public static class ShopInfo {
 		public String address_name;
 		public String category_group_code;
@@ -18,6 +23,22 @@ public class KakaoLocalResponseJSON {
 		public String x;
 		public String y;
 
+		
+		public StoreRequestVo mapToStoreRequestVo() {
+            StoreRequestVo storeRequestVo = StoreRequestVo.builder()
+            		.place_name(place_name)
+            		.address_name(address_name)
+            		.road_address_name(road_address_name)
+            		.category_name(category_name)
+            		.phone(phone)
+            		.place_url(place_url)
+            		.x(x)
+            		.y(y)
+            		.build();
+
+            return storeRequestVo;
+        }
+		
 		@Override
 		public String toString() {
 			return "ShopInfo{" + "address_name='" + address_name + '\'' + ", category_group_code='"

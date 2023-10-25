@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StoreRequestMenuVo {
 	
+	int store_id;
 	//식당 메뉴
 	String menu;
 	//식당 메뉴 가격
@@ -15,7 +16,7 @@ public class StoreRequestMenuVo {
 	
 	
 	@Builder
-	public StoreRequestMenuVo (String menu, String price) {
+	public StoreRequestMenuVo (String menu, String price ,String category) {
 		this.menu = menu;
 		this.price = price;
 	}
