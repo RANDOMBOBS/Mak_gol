@@ -35,6 +35,6 @@ public class KakaoLocalRequestVo {
 	}
 
 	private boolean isValidKeyword(String keyword) {
-		return keyword.matches("음식점|한식|중식|일식|양식");
+		return keyword.matches("디저트|분식|카페|한식|중식|일식|양식");
 	}
 }

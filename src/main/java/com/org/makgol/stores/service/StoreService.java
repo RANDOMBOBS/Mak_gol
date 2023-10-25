@@ -1,6 +1,8 @@
 package com.org.makgol.stores.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,9 +13,12 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.org.makgol.stores.dao.StoreDao;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.org.makgol.stores.data.type.KakaoLocalResponseJSON;
 import com.org.makgol.stores.data.vo.KakaoLocalRequestVo;
+import com.org.makgol.stores.data.vo.StoreMenuInfo;
 import com.org.makgol.stores.data.vo.StoreRequestMenuVo;
 import com.org.makgol.stores.data.vo.StoreRequestVo;
 import com.org.makgol.util.Crawller;
@@ -26,7 +31,6 @@ public class StoreService {
 	
 	private final RestTemplate restTemplate;
 	private final HttpHeaders headers;
-	private final StoreDao storeDao;
 	
 	public KakaoLocalResponseJSON callKakaoLocalAPI(KakaoLocalRequestVo searchRequestVo) {
 		String x = searchRequestVo.getX();
@@ -56,12 +60,8 @@ public class StoreService {
 	}
 	
 
-	public void getMenu(List<StoreRequestVo> storeRequestVoList) {
+	public void getMenu(List<StoreRequestVo> storeRequestVoList) throws JsonMappingException, JsonProcessingException {
 		
-		HashMap<String, Object> storeMap_ = new HashMap<String, Object>();
-		
-		storeMap_.put("test", storeRequestVoList);
-		System.out.println(storeMap_);
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String url = "http://localhost:8090/api/v1/crawl/kakaoStoreCrwall";
@@ -74,7 +74,7 @@ public class StoreService {
 		HttpEntity<List<StoreRequestVo>> request = new HttpEntity<>(storeRequestVoList, headers);
 
 		// 서버로 HTTP GET 요청 보내기
-		ResponseEntity<HashMap<String, Object>> resStoreMap = restTemplate.exchange(
+		restTemplate.exchange(
 			    url,
 			    HttpMethod.POST,
 			    request,
@@ -83,39 +83,31 @@ public class StoreService {
 
 		
 		// 응답 처리
-		if (resStoreMap.getStatusCode() == HttpStatus.OK) {
-		    HashMap<String, Object> storeMap = (HashMap<String, Object>)resStoreMap.getBody();
-		    System.out.println(storeMap);
-		    for (int index = 0; index < storeMap.size(); index++) {
-		        StoreRequestVo storeRequestVo = (StoreRequestVo) storeMap.get("store_info_" + index);
-		        List<StoreRequestMenuVo> storeRequestMenuVoList = (List<StoreRequestMenuVo>) storeMap.get("store_menu_" + index);
-
-		        System.err.println("-----------------" + "No." + (index + 1) + " store_info------------------------");
-		        System.out.println("식당 이름  -->  :" + storeRequestVo.getName());
-		        System.out.println("식당 주소 -->  :" + storeRequestVo.getAddress());
-		        System.out.println("식당 카테고리 -->  :" + storeRequestVo.getCategory());
-		        System.out.println("식당 좋아요 -->  :" + storeRequestVo.getLikes());
-		        System.out.println("식당 도로명주소  -->  :" + storeRequestVo.getLoad_address());
-		        System.out.println("식당 경도  -->  :" + storeRequestVo.getLongitude());
-		        System.out.println("식당 위도  -->  :" + storeRequestVo.getLatitude());
-		        System.out.println("식당 전화번호  -->  :" + storeRequestVo.getPhone());
-		        System.out.println("식당 상세페이지  -->  :" + storeRequestVo.getPlace_url());
-		        System.out.println("식당 운영시간  -->  :" + storeRequestVo.getOpening_hours());
-		        System.out.println("식당 사이트  -->  :" + storeRequestVo.getSite());
-		        System.out.println("식당 업데이트 날짜  -->  :" + storeRequestVo.getUpdate_date());
-		        System.out.println("식당 메뉴 업데이트 날짜  -->  :" + storeRequestVo.getMenu_update());
-
-		        for (int menuIndex = 0; menuIndex < storeRequestMenuVoList.size(); menuIndex++) {
-		            System.out.println("메뉴 :  " + storeRequestMenuVoList.get(menuIndex).getMenu() + ",   가격  :  " + storeRequestMenuVoList.get(menuIndex).getPrice());
-		        }
-		    }
-		    try {
-				storeDao.insertStore(storeMap);
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-		    System.out.println("서버 응답 오류: " + resStoreMap.getStatusCode());
-		}
+//		if (resStoreMap.getStatusCode() == HttpStatus.OK) {
+//			for (int index = 0; index < storeMap.size()/2; index++) {
+//		    	System.out.println("====================="+index+"=====================");
+//
+//		        System.err.println("-----------------" + "No." + (index + 1) + " store_info------------------------");
+//		        System.out.println("식당 이름  -->  :" + storeRequestVo.getName());
+//		        System.out.println("식당 주소 -->  :" + storeRequestVo.getAddress());
+//		        System.out.println("식당 카테고리 -->  :" + storeRequestVo.getCategory());
+//		        System.out.println("식당 좋아요 -->  :" + storeRequestVo.getLikes());
+//		        System.out.println("식당 도로명주소  -->  :" + storeRequestVo.getLoad_address());
+//		        System.out.println("식당 경도  -->  :" + storeRequestVo.getLongitude());
+//		        System.out.println("식당 위도  -->  :" + storeRequestVo.getLatitude());
+//		        System.out.println("식당 전화번호  -->  :" + storeRequestVo.getPhone());
+//		        System.out.println("식당 상세페이지  -->  :" + storeRequestVo.getPlace_url());
+//		        System.out.println("식당 운영시간  -->  :" + storeRequestVo.getOpening_hours());
+//		        System.out.println("식당 사이트  -->  :" + storeRequestVo.getSite());
+//		        System.out.println("식당 업데이트 날짜  -->  :" + storeRequestVo.getUpdate_date());
+//		        System.out.println("식당 메뉴 업데이트 날짜  -->  :" + storeRequestVo.getMenu_update());
+//
+//		        for (int menuIndex = 0; menuIndex < storeRequestMenuVoList.size(); menuIndex++) {
+//		            System.out.println("메뉴 :  " + storeRequestMenuVoList.get(menuIndex).getMenu() + ",   가격  :  " + storeRequestMenuVoList.get(menuIndex).getPrice());
+//		        }
+//		    }
+//		} else {
+//		    System.out.println("서버 응답 오류: " + resStoreMap.getStatusCode());
+//		}
 	}
 }
