@@ -28,40 +28,20 @@ public class userController {
 	
 	private final UserService userService;
 	
-	@PostMapping("/findId")
-	public void userFindId() {
-		String userEmail = "tjsgus223@naver.com";
-		
-	} // userFindId_END
-	
 	@PostMapping("/findPassword")
 	public void userFindPassword() {
 		String userEmail = "tjsgus223@naver.com";
-		
+		userService.userFindPassword(userEmail);
 		
 	} // userFindPassword_END
 	
-//	@PostMapping("/join")
-//	 public ResponseEntity<String> joinUser(@RequestParam("name") 	   String name,
-//			    							@RequestParam("email")	   String email,
-//			    							@RequestParam("password")  String password,
-//			    							@RequestParam("phone") 	   String phone,
-//			    							@RequestPart ("photo") 	   MultipartFile photo) {
-//		System.out.println(email);
-//		 	
-//
-//		 	return ResponseEntity.ok("가입이 완료되었습니다.");
-//	 }// ResponseEntity_END
 	
-	@PostMapping("/join")
-	
-	 public ResponseEntity<String> joinUser(@ModelAttribute @Valid UsersRequestVo usersRequestVo) {
-		
-		System.out.println(usersRequestVo.getEmail());
-		
-		
-		
-	 	return ResponseEntity.ok("가입이 완료되었습니다.");
+	//joinUser
+     @PostMapping("/join")
+	 public ResponseEntity<?> joinUser(@RequestBody @Valid UsersRequestVo usersRequestVo) {
+    	 Boolean result = userService.joinUser(usersRequestVo);
+    	 
+    	 return new ResponseEntity<>(result, HttpStatus.OK); 
 	 }// ResponseEntity_END
 	
 	
