@@ -9,7 +9,6 @@
 
 	function comList() {
 		let board_id = parseInt(jQ("input[name=board_id]").val());
-		console.log("${pageContext.request.contextPath}")
 		jQ.ajax({
 			url : "/makgol/board/suggestion/commentList/" + board_id,
 			type : "GET",

@@ -1,4 +1,4 @@
-package com.org.makgol.boards.boardDao;
+package com.org.makgol.boards.dao;
 
 import java.util.ArrayList;
 import java.util.List;

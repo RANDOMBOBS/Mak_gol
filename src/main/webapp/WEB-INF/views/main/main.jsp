@@ -27,7 +27,6 @@
 			<div class="roullette_position">
 				<div class="roulette"></div>
 			</div>
-
 		</article>
 	</section>
 
@@ -51,5 +50,7 @@
 
 		getAllcategory();
 	</script>
+	
+	<jsp:include page="/resources/jsp/user_management.jsp"></jsp:include>
 </body>
 </html>

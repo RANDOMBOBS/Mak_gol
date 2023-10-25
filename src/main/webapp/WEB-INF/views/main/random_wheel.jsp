@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<p class="roulette_pin"></p>
-<button id="spin">시작!</button>
-<div class="roulette">
-	<c:forEach var="item" items="${categoryVos}">
+
+
+	<c:forEach var="item" items="${categorys}">
 		<div>
-			<span class="category 한식">한식</span>
+			<span class="category">${item.category}</span>
 		</div>
 	</c:forEach>
-</div>
-<div>
-	<p class="support1"></p>
-	<p class="support2"></p>
-</div>
+
+

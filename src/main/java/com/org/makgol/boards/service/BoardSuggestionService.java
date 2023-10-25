@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.org.makgol.boards.boardDao.BoardSuggestionDao;
-
+import com.org.makgol.boards.dao.BoardSuggestionDao;
 import com.org.makgol.boards.vo.BoardVo;
 import com.org.makgol.comment.vo.CommentVo;
 

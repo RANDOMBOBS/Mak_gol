@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.org.makgol.admin.Dao.AdminDao;
+import com.org.makgol.admin.dao.AdminDao;
 import com.org.makgol.users.vo.UserVo;
 
 @Service
