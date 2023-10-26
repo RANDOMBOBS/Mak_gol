@@ -1,4 +1,4 @@
-package com.org.makgol.admin.Controller;
+package com.org.makgol.admin.controller;
 
 import java.util.List;
 

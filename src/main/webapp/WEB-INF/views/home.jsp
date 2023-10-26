@@ -95,6 +95,11 @@ h1 {
 
 	<section>
 		<article id="article1">
+			<p class="selectedCategory">
+				오늘의 점심 메뉴는 ?
+			
+			</p>
+			
 			<p class="roulette_pin"></p>
 			<button id="spin">시작!</button>
 			<div class="roullette_position">
@@ -154,6 +159,7 @@ h1 {
 		}
 
 		getAllcategory();
+
 	</script>
 </body>
 </html>

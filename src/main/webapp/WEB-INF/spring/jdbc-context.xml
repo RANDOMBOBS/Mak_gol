@@ -26,7 +26,7 @@
     </bean> 
      -->
     
-   
+<!--    
       <bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
@@ -36,9 +36,11 @@
         <property name="username" value="randombobs"></property>
         <property name="password" value="Skills12##"></property>
     </bean>   	 
-   
+    -->
      
-<!--
+
+     
+     
      <bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${datasource.driver}"></property>
@@ -47,7 +49,6 @@
         <property name="username" value="${datasource.username}"></property>
         <property name="password" value="${datasource.password}"></property>
     </bean>   	 
--->
 
 <!--     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
 <!-- 		<property name="driverClassName" value="${jdbc.driverClassName}" /> -->
