@@ -15,7 +15,6 @@ var jQ = jQuery;
 			type : "GET",
 			dataType : "html",
 			success : function(rdata) {   
-				console.log("결과는")
 				jQ(".selectedCategory").html(rdata);
 				jQ("#spin").text("다시!");
 			},
@@ -66,7 +65,6 @@ var jQ = jQuery;
 		if (closestCategory) {
 			var menu = closestCategory.textContent;
 			console.log(menu);
-			alert("오늘의 점심 메뉴는? " + menu + " 당첨!");
 			
 			resultMenu(menu);
 		}
