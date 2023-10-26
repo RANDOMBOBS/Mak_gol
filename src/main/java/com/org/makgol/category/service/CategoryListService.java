@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.org.makgol.category.categoryDao.CategoryListDao;
+import com.org.makgol.category.dao.CategoryListDao;
 import com.org.makgol.category.vo.CategoryListVo;
 
 @Service
@@ -15,32 +15,34 @@ public class CategoryListService {
 	@Autowired
 	CategoryListDao categoryDao;
 	
+
 	
-	// Ä«Å×°í¸® ¸®½ºÆ® (ÀüÃ¼¸®½ºÆ®, ÇÑ½Ä,¾ç½Ä,Áß½Ä,ºÐ½Ä,ÀÏ½Ä,Ä«Æä/µðÀúÆ®)
+	
+	// Ä«ï¿½×°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® (ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½Æ®, ï¿½Ñ½ï¿½,ï¿½ï¿½ï¿½,ï¿½ß½ï¿½,ï¿½Ð½ï¿½,ï¿½Ï½ï¿½,Ä«ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½Æ®)
 	public List<CategoryListVo> categoryList() {
 		return categoryDao.selectCategory();
 	}
-	//ÇÑ½Ä ¹öÆ° - Ä«Å×°í¸® 
+	//ï¿½Ñ½ï¿½ ï¿½ï¿½Æ° - Ä«ï¿½×°ï¿½ 
 	public List<CategoryListVo> categoryKor() {
 		return categoryDao.selectCategoryKor();
 	}
-	//¾ç½Ä ¹öÆ° - Ä«Å×°í¸®
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° - Ä«ï¿½×°ï¿½
 	public List<CategoryListVo> categoryWest() {
 		return categoryDao.selectCategoryWest();
 	}
-	//Áß½Ä ¹öÆ° - Ä«Å×°í¸®
+	//ï¿½ß½ï¿½ ï¿½ï¿½Æ° - Ä«ï¿½×°ï¿½
 	public List<CategoryListVo> categoryChi() {
 		return categoryDao.selectCategoryChi();
 	}
-	//ºÐ½Ä ¹öÆ° - Ä«Å×°í¸®
+	//ï¿½Ð½ï¿½ ï¿½ï¿½Æ° - Ä«ï¿½×°ï¿½
 	public List<CategoryListVo> categorySnack() {
 		return categoryDao.selectCategorySnack();
 	}
-	//ÀÏ½Ä ¹öÆ° - Ä«Å×°í¸®
+	//ï¿½Ï½ï¿½ ï¿½ï¿½Æ° - Ä«ï¿½×°ï¿½
 	public List<CategoryListVo> categoryJpn() {
 		return categoryDao.selectCategoryJpn();
 	}
-	//Ä«Æä/µðÀúÆ® ¹öÆ° - Ä«Å×°í¸®
+	//Ä«ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Æ° - Ä«ï¿½×°ï¿½
 	public List<CategoryListVo> categoryCafe() {
 		return categoryDao.selectCategoryCafe();
 	}
