@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.org.makgol.boards.boardDao.BoardSuggestionDao;
-
+import com.org.makgol.boards.dao.BoardSuggestionDao;
 import com.org.makgol.boards.vo.BoardVo;
 import com.org.makgol.comment.vo.CommentVo;
 
@@ -31,7 +30,12 @@ public class BoardSuggestionService {
 	public BoardVo readSuggestionBoard(int b_id) {
 		return boardDao.showDetailSuggestionBoard(b_id);
 	}
-
+	
+	/** suggestion 조회수 **/
+	public int addHit(int b_id) {
+		return boardDao.updateHit(b_id);
+	}
+	
 	/** suggestion 댓글 INSERT **/
 	public int addComment(CommentVo commentVo) {
 
@@ -50,7 +54,6 @@ public class BoardSuggestionService {
 
 	/** suggestion 댓글 DELETE **/
 	public int delComment(int id) {
-		System.out.println("서비스 아이디" + id);
 		return boardDao.deleteComment(id);
 	}
 

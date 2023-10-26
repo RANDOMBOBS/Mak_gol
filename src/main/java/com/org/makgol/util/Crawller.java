@@ -1,6 +1,7 @@
 package com.org.makgol.util;
 
 import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.org.makgol.stores.data.vo.StoreRequestMenuVo;
 import com.org.makgol.stores.data.vo.StoreRequestVo;
+
 
 public class Crawller {
 	/**
@@ -36,13 +38,15 @@ public class Crawller {
     	// 결과를 저장할 HashMap 생성
         HashMap<String, Object> hashMap = new HashMap<>();
 
-        // 드라이버 경로
-        String driverPath = "D:\\SunhyeonSpring\\mak_gol\\src\\driver\\chromedriver.exe";
-    	
+        // 드라이버 경로 윈도우 
+        //String driverPath = "D:\\SunhyeonSpring\\mak_gol\\src\\driver\\chromedriver.exe";
+        // 드라이버 절대경로 맥 /Volumes/Data/developer/eclipse-workspace/makgol/src/main/java/com/org/makgol/util/driver/chromedriver_mac
+        String driverPath = "/Volumes/Data/developer/eclipse-workspace/makgol/src/driver/chromedriver_mac";
+        
         //스레드를 종료하기위한 List
     	List<JobThread> jobThreads = new ArrayList<>();
     	
-    	//스레드 시작
+    	//storeRequestVos의 사이즈 많금스레드를 생성하겠다.
     	for(int i=0; i < storeRequestVos.size(); i++) {
     		//스레드에 주소값을 넘겨줌
     		JobThread jobThread = new JobThread(driverPath, storeRequestVos.get(i).getPlace_url(), storeRequestVos.get(i), hashMap, i);
@@ -83,10 +87,10 @@ public class Crawller {
     		List<StoreRequestMenuVo> storeRequestMenuVos = new ArrayList<StoreRequestMenuVo>();
     		
     		
+    		System.out.println(driverPath);
     		
     		//chrome driver 경로 세팅
-    		System.setProperty("webdriver.chrome.driver", driverPath); // 윈도우
-
+    		System.setProperty("webdriver.chrome.driver", driverPath); 
             // 크롬 옵션 설정
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=*");	//브라우저가 다른 출처(origin)의 리소스에 대한 요청을 수행할 수있음.
@@ -137,6 +141,7 @@ public class Crawller {
             String getMenu_update;
             String date_revise;
             LocalDate update_date;
+            LocalDate menu_update;
             
             try {
             	update_getMenu = element.findElement(By.cssSelector("span.txt_updated > span"));
@@ -144,7 +149,8 @@ public class Crawller {
             	date_revise = span_date_revise.getText();
             	
             	update_date = LocalDate.parse(date_revise.substring(0, date_revise.length() - 1), DateTimeFormatter.ofPattern("yyyy.MM.dd"));
-            	storeRequestVo.setMenu_update(getMenu_update.substring(0, date_revise.length() - 1));
+            	menu_update = LocalDate.parse(getMenu_update.substring(0, date_revise.length() - 1),  DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+            	storeRequestVo.setMenu_update(menu_update);
             	storeRequestVo.setUpdate_date(update_date);
     		} catch (Exception e) {}
             
@@ -153,10 +159,10 @@ public class Crawller {
             storeRequestVo.setOpening_hours(opening_hours);
             
             //데이터 확인
-            //System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getSite());
-            //System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getUpdate_date());
-            //System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getOpening_hours());
-            //System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getMenu_update());
+            System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getSite());
+            System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getUpdate_date());
+            System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getOpening_hours());
+            System.out.println("thread "+ thread_count +" : "+ storeRequestVo.getMenu_update());
 
             // 메뉴 정보 가져오기
             List<WebElement> element_menu = element.findElements(By.cssSelector("#mArticle > div.cont_menu > ul > li"));

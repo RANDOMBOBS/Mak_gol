@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+ xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+ <context:property-placeholder location="classpath:application.properties" />
+   <!-- 이메일 인증 관련 빈 등록 -->
+   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="${email.host}" />
+      <property name="port" value="${email.port}" />
+      <property name="username" value="${email.account}" />
+      <property name="password" value="${email.password}" />
+      <property name="javaMailProperties">
+         <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth" >true</prop>
+                <!-- gmail의 경우 보안문제 업데이트로 인해 SSLSocketFactory를 추가해야 smtp 사용 가능. -->
+                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+            </props>
+      </property>
+      
+   </bean>
+   </beans>

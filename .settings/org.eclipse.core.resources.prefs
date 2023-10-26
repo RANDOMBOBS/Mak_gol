@@ -1,6 +1,10 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
->>>>>>>=b3761e9ce8f760f7793885276876b62bf8821e3f
+>>>>>>>=feac3c790db8312a0e859fcccd63be5e3c372b4c
 eclipse.preferences.version=1
-encoding//src/main/webapp/WEB-INF/views/board/board_comment_list.jsp=UTF-8
+encoding//src/main/java/com/org/makgol/admin/service/AdminService.java=UTF-8
+encoding//src/main/java/com/org/makgol/boards/dao/BoardNoticeDao.java=UTF-8
+encoding//src/main/java/com/org/makgol/boards/service/BoardNoticeService.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin/user_list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/suggestion/board_comment_list.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/store/store_list.jsp=UTF-8
