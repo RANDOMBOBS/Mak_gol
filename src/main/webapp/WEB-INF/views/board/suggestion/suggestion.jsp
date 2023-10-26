@@ -47,6 +47,7 @@
 		<c:param name='name' value='${boardVo.name}' />
 		</c:url>
 		<a href="${create_url}">글쓰기</a>
+		<input type="text" />
 
 	</div>
 

@@ -66,7 +66,6 @@ var jQ = jQuery;
 		if (closestCategory) {
 			var menu = closestCategory.textContent;
 			console.log(menu);
-			alert("오늘의 점심 메뉴는? " + menu + " 당첨!");
 			
 			resultMenu(menu);
 		}

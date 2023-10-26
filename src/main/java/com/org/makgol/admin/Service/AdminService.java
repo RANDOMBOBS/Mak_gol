@@ -14,12 +14,10 @@ public class AdminService {
 	@Autowired
 	AdminDao adminDao;
 	
-	/** User由ъ뒪�듃 �쟾泥� SELECT **/
 	public List<UserVo> getUserList() {
 		return adminDao.selectAllUserList();
 	}
 	
-	/** user �벑湲� �닔�젙 UPDATE **/
 	public int modGrade(UserVo userVo) {
 		return adminDao.UpdateGrade(userVo);
 	}

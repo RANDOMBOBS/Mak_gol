@@ -1,64 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Insert title here</title>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<link href="<c:url value='/resources/css/category.css' />"
+	rel="stylesheet" type="text/css" />
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"
+	integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <style>
-      ul,
-      li {
-        list-style: none;
-      }
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
 
-#category_main_ul {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      
-      #category_main_ul li {
-      
-      margin-right : 30px;
-      }
+#header {
+	height: 100px;
+	line-height: 100px;
+	border: 1px solid #000;
+}
+</style>
 
+</head>
+<body>
+	<h1 id="header">Header</h1>
+	<section>
+		<div id="category_main_div">
+			<ul class="category_main_ul">
+				<li><button type="button" class="active" onclick="menuList()">전체보기</button></li>
+				<li><button type="button" onclick="korMenu()">한식</button></li>
+				<li><button type="button" onclick="westMenu()">양식</button></li>
+				<li><button type="button" onclick="chiMenu()">중식</button></li>
+				<li><button type="button" onclick="snackMenu()">분식</button></li>
+				<li><button type="button" onclick="jpnMenu()">일식</button></li>
+				<li><button type="button" onclick="cafeMenu()">카페/디저트</button></li>
+			</ul>
+		</div>
+		<div id="category_list_div"></div>
+	</section>
+	<jsp:include page="/resources/jsp/category.jsp"></jsp:include>
+	<script>
+	
+	// 버튼 클릭시 색 변화
+		$("button").on("click", function() {
+			$("button").removeClass("active");
+			$(this).addClass("active");
+		});
 
-      #category_list_ul {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-
-      #category_list_ul li  {
-        width: 24%;
-      }
-    </style>
-  </head>
-  <body>
-    <header></header>
-    <section>
-      <div id="category_main_div">
-        <ul id="category_main_ul">
-          <li><button type="button" onclick="menuList()">전체보기</button></li>
-          <li><button type="button" onclick="korMenu()">한식</button></li>
-          <li><button type="button" onclick="westMenu()">양식</button></li>
-          <li><button type="button" onclick="chiMenu()">중식</button></li>
-          <li><button type="button" onclick="snackMenu()">분식</button></li>
-          <li><button type="button" onclick="jpnMenu()">일식</button></li>
-          <li><button type="button" onclick="cafeMenu()">카페/디저트</button></li>
-        </ul>
-      </div>
-      <div class="category_list_div">
-        
-      </div>
-    </section>
-    
-     <!-- jsp ( ajax ) 경로 참조  -->
-    <jsp:include page="/resources/jsp/category.jsp"></jsp:include>
-    
-    <script>
-    	menuList();   // 최초 리스트 호출
-    </script>
-  </body>
+		menuList(); // 최초 리스트 호출
+	</script>
+</body>
 </html>

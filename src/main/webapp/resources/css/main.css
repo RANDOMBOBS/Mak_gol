@@ -9,8 +9,14 @@
   width: 100%;
   position: relative;
   height: 800px;
+  background-image: url(../image/background.jpeg);
+  background-size:cover;
+  background-position:center;
 }
 
+body::-webkit-scrollbar{
+	display:none;
+}
 #header {
   height: 100px;
   line-height: 100px;
@@ -38,14 +44,12 @@
   transform: translate(-50%, -50%);
   z-index: 10;
   background-color: white;
-  text-transform: uppercase;
   border: 8px solid #ffa500;
   font-weight: bold;
   font-size: 23px;
   color: #a2a2a2;
   width: 100px;
   height: 100px;
-  font-family: sans-serif;
   border-radius: 50%;
   cursor: pointer;
   outline: none;

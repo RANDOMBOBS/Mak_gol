@@ -37,10 +37,10 @@ public class CategoryListDao {
 	}
 
 	public List<CategoryListVo> selectCategoryKor() {
-	    return selectCategory("WHERE category=''");
+	    return selectCategory("WHERE category='한식'");
 	}
 	public List<CategoryListVo> selectCategoryWest() {
-	    return selectCategory("WHERE category='한식'");
+	    return selectCategory("WHERE category='양식'");
 	}
 	public List<CategoryListVo> selectCategoryChi() {
 	    return selectCategory("WHERE category='중식'");
