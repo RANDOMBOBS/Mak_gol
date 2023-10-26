@@ -14,8 +14,7 @@
 
 <title>막내야 골라봐 | 메인 (MAIN)</title>
 
-<link href="<c:url value='/resources/css/main.css' />" rel="stylesheet"
-	type="text/css" />
+<link href="<c:url value='/resources/css/main.css' />" rel="stylesheet" type="text/css" />
 
 <style>
 * {
@@ -23,6 +22,8 @@
 	margin: 0;
 	padding: 0;
 }
+
+
 
 h2 {
 	text-align: center;
@@ -83,7 +84,7 @@ h1 {
 }
 </style>
 </head>
-<body>
+<body background="/resources/image/chick.jpg">
 	<h1 id="header">Header</h1>
 
 	<div id="pratice">
@@ -94,7 +95,7 @@ h1 {
 	</div>
 
 	<section>
-		<article id="article1">
+		<article id="article1" >
 			<p class="roulette_pin"></p>
 			<button id="spin">시작!</button>
 			<div class="roullette_position">

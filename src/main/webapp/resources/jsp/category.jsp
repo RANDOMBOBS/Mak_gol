@@ -17,7 +17,7 @@
 			type : "GET",
 			dataType : "html",
 			success : function(rdata) {   //category_list 데이터 값을 가져와 성공하면
-				jQ(".category_list_div").html(rdata);   // class="category_list_div" 인 곳에 가져온 데이터를 넣는다.
+				jQ("#category_list_div").html(rdata);   // class="category_list_div" 인 곳에 가져온 데이터를 넣는다.
 			},
 			error : function(error) {  			// 실패하면 오류 
 				alert('오류');			
@@ -32,7 +32,7 @@
 			type : "GET",
 			dataType : "html",
 			success : function(rdata) {
-				jQ(".category_list_div").html(rdata);
+				jQ("#category_list_div").html(rdata);
 			},
 			error : function(error) {
 				alert('한식메뉴실패');
@@ -47,7 +47,7 @@
 			type : "GET",
 			dataType : "html",
 			success : function(rdata) {
-				jQ(".category_list_div").html(rdata);
+				jQ("#category_list_div").html(rdata);
 			},
 			error : function(error) {
 				alert('양식메뉴실패');
@@ -62,7 +62,7 @@
 			type : "GET",
 			dataType : "html",
 			success : function(rdata) {
-				jQ(".category_list_div").html(rdata);
+				jQ("#category_list_div").html(rdata);
 			},
 			error : function(error) {
 				alert('중식메뉴실패');
@@ -77,7 +77,7 @@
 			type : "GET",
 			dataType : "html",
 			success : function(rdata) {
-				jQ(".category_list_div").html(rdata);
+				jQ("#category_list_div").html(rdata);
 			},
 			error : function(error) {
 				alert('분식메뉴실패');
@@ -92,7 +92,7 @@
 			type : "GET",
 			dataType : "html",
 			success : function(rdata) {
-				jQ(".category_list_div").html(rdata);
+				jQ("#category_list_div").html(rdata);
 			},
 			error : function(error) {
 				alert('일식메뉴실패');
@@ -107,7 +107,7 @@
 			type : "GET",
 			dataType : "html",
 			success : function(rdata) {
-				jQ(".category_list_div").html(rdata);
+				jQ("#category_list_div").html(rdata);
 			},
 			error : function(error) {
 				alert('카페/디저트메뉴실패');
