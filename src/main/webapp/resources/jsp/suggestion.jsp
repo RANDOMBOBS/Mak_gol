@@ -127,4 +127,37 @@
 		jQ(button).parent().parent().next().show();
 
 	}
+
+	function searchBoard() {
+		let form = document.search_board_form;
+		let searchOption = jQ("select[name=search]").val();
+		let searchWord = jQ("input[name=searchWord]").val();
+		if (searchOption == '') {
+			alert('검색옵션을 입력해주세요');
+			form.search.focus();
+		} else if (searchWord == '') {
+			alert('검색어를 입력해주세요');
+			form.searchWord.focus();
+		} else {
+			let data = {
+				searchOption : searchOption,
+				searchWord : searchWord
+			}
+			console.log(data); //성공
+			jQ.ajax({
+				url : "/makgol/board/suggestion/search",
+				type : "POST",
+				data : JSON.stringify(data),
+				contentType : "application/json; charset=utf-8",
+				success : function(rdata) {
+					jQ(".board_list").html(rdata);
+					jQ("select[name=search]").val("");
+					jQ("input[name=searchWord]").val("");
+				},
+				error : function(error) {
+					alert("검색오류");
+				}
+			});
+		}
+	}
 </script>

@@ -72,4 +72,8 @@ public class BoardSuggestionService {
 		return boardDao.deleteBoard(b_id);
 	}
 
-}
+	/** suggestion 글 검색 **/
+	public List<BoardVo> searchBoard(String searchOption, String searchWord) {
+		return boardDao.selectSearchBoard(searchOption, searchWord);
+	}
+ }
