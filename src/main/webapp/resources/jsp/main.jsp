@@ -15,7 +15,6 @@ var jQ = jQuery;
 			type : "GET",
 			dataType : "html",
 			success : function(rdata) {   
-				console.log("결과는")
 				jQ(".selectedCategory").html(rdata);
 				jQ("#spin").text("다시!");
 			},
