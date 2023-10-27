@@ -103,8 +103,29 @@ h1 {
 			</div>
 		</article>
 
-		<div id="todaymenu">
-			<h1>오늘의 메뉴</h1>
+		<div id="article2">
+			 <div class="today_menu">
+        <div class="todaymenu_main_div">
+          <ul class="todaymenu_main_ul">
+            <li class="today">오늘의메뉴</li>
+            <li>한식</li>
+            <li>양식</li>
+            <li>중식</li>
+            <li>분식</li>
+            <li>일식</li>
+            <li>카페</li>
+          </ul>
+        </div>
+        <div class="todaymenu_list_div">
+          <ul class="todaymenu_list_ul">
+            <li>추천메뉴1</li>
+            <li>추천메뉴2</li>
+            <li>추천메뉴3</li>
+            <li>추천메뉴4</li>
+            <li>추천메뉴5</li>
+          </ul>
+        </div>
+      </div>
 		</div>
 
 		<div id="top">

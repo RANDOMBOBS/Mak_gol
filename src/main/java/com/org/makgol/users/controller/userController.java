@@ -35,7 +35,6 @@ public class userController {
 		
 	} // userFindPassword_END
 	
-	
 	//joinUser
      @PostMapping("/join")
 	 public ResponseEntity<?> joinUser(@RequestBody @Valid UsersRequestVo usersRequestVo) {
@@ -44,8 +43,6 @@ public class userController {
     	 return new ResponseEntity<>(result, HttpStatus.OK); 
 	 }// ResponseEntity_END
 	
-	
-	
 	@PostMapping("/mailCheck")
 	 @ResponseBody
 	public ResponseEntity<?> mailCheck(@Valid @RequestBody AuthNumberVo authNumberVo) {
@@ -53,11 +50,9 @@ public class userController {
 		
 		Boolean result = userService.checkEmail(authNumberVo.getEmail());
 		
-		//인증번호 송신 성공
 		if(result) {
 			return new ResponseEntity<>("true", HttpStatus.OK);	
 		
-		//실패
 		} else {
 			return new ResponseEntity<>("false", HttpStatus.OK);
 		}
@@ -68,23 +63,17 @@ public class userController {
 	public ResponseEntity<?>  authNumberCheck(@Valid @RequestBody AuthNumberVo authNumberVo) {
 		//int number = Integer.parseInt(auth_number);
 		boolean result = userService.checkNumber(authNumberVo.getAuth_number(), authNumberVo.getEmail());
-		
 		System.out.println(result);
-		//인증 성공
 		if(result) {
 			return new ResponseEntity<>("true", HttpStatus.OK);	
-		
-		//실패
 		} else {
 			return new ResponseEntity<>("false", HttpStatus.OK);
 		
 		}
 	} //authNumberCheck_END
 	
-	
 	@GetMapping("/join")
 	public String userJoinPage() {
-		
 		String nextPage = "user/user_join";
 		return nextPage;
 	} // userJoinPage_END

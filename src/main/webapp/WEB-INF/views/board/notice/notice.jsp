@@ -16,6 +16,10 @@
 			<div class="word">
 				<h3>공지사항</h3>
 			</div>
+			<div class="search_notice">
+				<input type="text" placeholder="검색할 게시판을 입력하세요.">
+				<button type="button" onclick="searchNotice()">검색</button>
+				</div>
 			<div class="book_list">
 				<table>
 					<thead>
@@ -53,6 +57,6 @@
 		</div>
 		
 	</section>
-	
+		<jsp:include page="/resources/jsp/searchNotice.jsp"></jsp:include>
 </body>
 </html>

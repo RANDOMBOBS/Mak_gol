@@ -31,6 +31,7 @@ public class BoardVentController {
 	 * @param model 다음 화면으로 값(boardVos : category가 vent인 게시글 배열)을 전달
 	 * @return vent.jsp로 이동
 	 */
+    
 	public String showList(Model model) {
 		String nextPage = "board/vent/vent_board_form";
 		List<BoardVo> boardVo = ventService.getVentBoard();

@@ -4,6 +4,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/org/makgol/admin/Dao/AdminDao.java=UTF-8
 encoding//src/main/java/com/org/makgol/admin/Service/AdminService.java=UTF-8
+encoding//src/main/java/com/org/makgol/boards/controller/BoardSuggestionController.java=UTF-8
 encoding//src/main/java/com/org/makgol/boards/dao/BoardNoticeDao.java=UTF-8
 encoding//src/main/java/com/org/makgol/boards/service/BoardNoticeService.java=UTF-8
 encoding//src/main/java/com/org/makgol/category/categoryDao/CategoryListDao.java=UTF-8
