@@ -29,12 +29,12 @@
    
       <bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="driverClassName" value="${datasource.driver}"></property>
         <property name="url"
-            value="jdbc:mysql://192.168.150.35:3306/makgol?useSSL=false&amp;serverTimezone=UTC">
+            value="${datasource.url}">
         </property>
-        <property name="username" value="randombobs"></property>
-        <property name="password" value="Skills12##"></property>
+        <property name="username" value="${datasource.username}"></property>
+        <property name="password" value="${datasource.password}"></property>
     </bean>   	 
    
      
