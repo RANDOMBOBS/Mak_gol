@@ -125,12 +125,12 @@ public class BoardNoticeController {
 		
 		@GetMapping("/deleteNotice")
 		/***
-		 * °Ô½Ã±Û »èÁ¦ ¹öÆ°
+		 * ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
 		 * @param b_id 
 		 * @return = nextPage
-		 * µî·Ï¹öÆ° ´©¸¦ ½Ã nextPage --
-		 * ¼º°ø : "board/notice_delete_ok" ÀÌµ¿
-		 * ½ÇÆÐ : "board/notice_delete_ng" ÀÌµ¿
+		 * ï¿½ï¿½Ï¹ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ nextPage --
+		 * ï¿½ï¿½ï¿½ï¿½ : "board/notice_delete_ok" ï¿½Ìµï¿½
+		 * ï¿½ï¿½ï¿½ï¿½ : "board/notice_delete_ng" ï¿½Ìµï¿½
 		 */
 		public String deleteNotice(@RequestParam("b_id") int b_id ) {
 			String nextPage = "board/notice/notice_delete_ok";

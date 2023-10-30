@@ -68,17 +68,32 @@ public class UserService {
 	public Boolean joinUser(UsersRequestVo usersRequestVo) {
 		usersRequestVo.setPassword(BCrypt.hashpw(usersRequestVo.getPassword(), BCrypt.gensalt()));
 		
-		if(userDao.createDao(usersRequestVo)) {
-			
-			
-		} else {
+		return userDao.createDao(usersRequestVo);
 		
-		
-		}
-		return null;
+
 		
 	}// joinUser_END
 
-	
+	 // 로그인 확인
+	 public UsersRequestVo loginConfirm(UsersRequestVo usersRequestVo) {
+	    // 로그인 정보 확인
+		 
+		 
+	    String encriptPassword = userDao.selectUser(usersRequestVo);
+	    
+	    if (encriptPassword != null) {
+	    	
+	        if (BCrypt.checkpw(usersRequestVo.getPassword(), encriptPassword)) {
+	        	
+	        	System.out.println("성공");
+	        	
+	        	UsersRequestVo loginedUsersRequestVo = new UsersRequestVo();
+	        	
+	            return loginedUsersRequestVo;
+	        }
+	    }
+	    // 로그인 실패
+	    return null;
+	}
 	
 }

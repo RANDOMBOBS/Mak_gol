@@ -2,10 +2,16 @@
 <<<<<<<=HEAD
 >>>>>>>=c9d0b76017a04ad0ad031da8e6c3b1bff5658416
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/main/java/com/org/makgol/admin/Dao/AdminDao.java=UTF-8
 encoding//src/main/java/com/org/makgol/admin/service/AdminService.java=UTF-8
+=======
+encoding//src/main/java/com/org/makgol/admin/Service/AdminService.java=UTF-8
+encoding//src/main/java/com/org/makgol/admin/dao/AdminDao.java=UTF-8
+>>>>>>> origin/SH
 encoding//src/main/java/com/org/makgol/boards/dao/BoardNoticeDao.java=UTF-8
 encoding//src/main/java/com/org/makgol/boards/service/BoardNoticeService.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/user_list.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/board/suggestion/board_comment_list.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/store/store_list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/user/user_login.jsp=UTF-8

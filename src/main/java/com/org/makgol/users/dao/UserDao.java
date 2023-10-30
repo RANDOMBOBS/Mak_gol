@@ -1,5 +1,9 @@
 package com.org.makgol.users.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -11,6 +15,7 @@ import com.org.makgol.boards.vo.BoardVo;
 import com.org.makgol.users.vo.UsersRequestVo;
 
 import lombok.RequiredArgsConstructor;
+
 
 @RequiredArgsConstructor
 @Component
@@ -98,5 +103,27 @@ public class UserDao {
 		
 		return result;
 	} // updatePassword_END
+	
+	// 사용자 정보 조회 (로그인)
+	public String selectUser(UsersRequestVo usersRequestVo) {
+		
+		 String sql = "SELECT password FROM users WHERE email = ?";
+		 String encriptPassword = "";
+	    try {
+	    	
+	        // 사용자 정보를 데이터베이스에서 조회
+	        //RowMapper<UsersRequestVo> rowMapper = BeanPropertyRowMapper.newInstance(UsersRequestVo.class);
+	    	encriptPassword = jdbcTemplate.queryForObject(sql, String.class, usersRequestVo.getEmail());
+	        
+	    	
+	       
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    // 로그인 실패 시 null 반환
+	    return encriptPassword;
+	}
 	
 }

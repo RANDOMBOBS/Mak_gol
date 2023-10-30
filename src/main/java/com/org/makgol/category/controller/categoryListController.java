@@ -26,28 +26,6 @@ public class CategoryListController {
 	@GetMapping("/rouletteResult")
 	public String rouletteResult(@RequestParam("category") String category, Model model) {
 		String nextPage = "category/category"; 
-//		List<CategoryListVo> categoryVos = null;
-//		switch (category) {
-//		case "한식":
-//			categoryVos = categoryListService.categoryKor();
-//			break;
-//		case "양식":
-//			categoryVos = categoryListService.categoryWest();
-//			break;
-//		case "중식":
-//			categoryVos = categoryListService.categoryChi();
-//			break;
-//		case "분식":
-//			categoryVos = categoryListService.categorySnack();
-//			break;
-//		case "일식":
-//			categoryVos = categoryListService.categoryJpn();
-//			break;
-//		case "카페":
-//			categoryVos = categoryListService.categoryCafe();
-//			break;
-//		}
-//		model.addAttribute("categoryVo", categoryVos );	
 		model.addAttribute("category", category );
 		return nextPage;
 	}
