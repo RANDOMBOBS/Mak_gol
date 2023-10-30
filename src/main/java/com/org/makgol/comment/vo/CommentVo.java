@@ -2,63 +2,28 @@ package com.org.makgol.comment.vo;
 
 import java.time.LocalDate;
 
+import lombok.Data;
+
+@Data
 public class CommentVo {
-	// ´ñ±Û ¹øÈ£
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½È£
 	int id;
 	
-	// user ¾ÆÀÌµð
+	// user ï¿½ï¿½ï¿½Ìµï¿½
 	int user_id;
 	
-	// °Ô½Ã±Û ¹øÈ£
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£
 	int board_id;
 	
-	// ÀÛ¼º ½Ã°£
+	// ï¿½Û¼ï¿½ ï¿½Ã°ï¿½
 	LocalDate date;
 	
-	// ´ñ±Û ³»¿ë
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	String content;
 	
-	// ´ñ±Û ÀÛ¼ºÀÚ ´Ð³×ÀÓ
+	// ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½ï¿½ï¿½
 	String nickname;
-	
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public int getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
-	public int getBoard_id() {
-		return board_id;
-	}
-	public void setBoard_id(int board_id) {
-		this.board_id = board_id;
-	}
-	public LocalDate getDate() {
-		return date;
-	}
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	
+
 	
 	
 }
