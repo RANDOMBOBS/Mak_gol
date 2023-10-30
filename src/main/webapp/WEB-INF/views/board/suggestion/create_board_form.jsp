@@ -55,7 +55,8 @@
 			
 			<span>내용</span>
 			<input type="text" name="contents" placeholder="글내용을 입력해주세요"> <br>
-			
+			<input type="file" name="file"><br>
+
 		
 			<input type="button" value="작성" onclick="CreateBoardForm();">
 			<input type="reset" value="취소">

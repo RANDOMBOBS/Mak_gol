@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
+
+import com.org.makgol.boards.UploadFileService;
 import com.org.makgol.boards.service.BoardSuggestionService;
 import com.org.makgol.boards.vo.BoardVo;
 import com.org.makgol.comment.vo.CommentVo;
@@ -29,6 +32,8 @@ public class BoardSuggestionController {
 	@Autowired
 	BoardSuggestionService boardService;
 
+	@Autowired
+	UploadFileService uploadFileService;
 	/**
 	 * suggestion 게시판 게시글리스트
 	 * 
@@ -78,8 +83,14 @@ public class BoardSuggestionController {
 	 *         board/create_board_ng.jsp
 	 */
 	@PostMapping("/createConfirm")
-	public String createConfirm(BoardVo boardVo) {
+	public String createConfirm(BoardVo boardVo, @RequestParam("file") MultipartFile file) {
+		System.out.println("컨트롤러"+file);
 		String nextPage = "board/suggestion/create_board_ok";
+		String fileName = uploadFileService.upload(file);
+		System.out.println("파일이름은?"+fileName);
+		if(fileName != null) {
+			boardVo.setPhoto(fileName);
+		}
 		int result = boardService.createBoardConfirm(boardVo);
 		if (result < 1) {
 			nextPage = "board/suggestion/create_board_ng";

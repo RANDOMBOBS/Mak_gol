@@ -39,11 +39,11 @@ public class BoardSuggestionDao {
 
 	/** suggestion 글 쓰기 폼 제출 **/
 	public int insertSuggestionBoard(BoardVo boardVo) {
-		String sql = "INSERT INTO boards (user_id, title, date, contents, category) values (1, ?, NOW(), ?, ?)";
+		String sql = "INSERT INTO boards (user_id, title, date, contents, category, photo) values (1, ?, NOW(), ?, ?,?)";
 		int result = -1;
 
 		try {
-			result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getCategory());
+			result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getCategory(), boardVo.getPhoto());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
