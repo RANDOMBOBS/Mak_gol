@@ -100,7 +100,7 @@ public class BoardSuggestionDao {
 
 	/** suggestion 댓글 SELECT **/
 	public List<CommentVo> selectCommentList(int board_id) {
-		String sql = "SELECT * FROM comments where board_id = ?";
+		String sql = "SELECT * FROM comments join users on comments.user_id = users.id where board_id = ?";
 		List<CommentVo> CommentVos = null;
 		try {
 			RowMapper<CommentVo> rowMapper = BeanPropertyRowMapper.newInstance(CommentVo.class);

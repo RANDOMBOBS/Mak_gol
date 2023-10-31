@@ -14,9 +14,10 @@
 <c:forEach var="item" items="${commentVos}">
 	<div class="one_comment">
 		<ul>
-			<li>${item.getNickname()}</li>
-			<li>${item.getContent()}</li>
-			<li>${item.getDate()}</li>
+			<li><img src="<c:url value="/boardUploadImg/${item.getPhoto()}"/>"></li>
+			<li>닉네임은 ${item.getNickname()}</li>
+			<li>내용은 ${item.getContent()}</li>
+			<li>작성일은 ${item.getDate()}</li>
 			<!-- 댓글 작성한 사람만 보이게 하기 -->
 			<li><input type="button" value="수정" onclick="modComment(this)"/></li>
 			<li><input type="button" value="삭제"

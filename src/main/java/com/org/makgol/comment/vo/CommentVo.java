@@ -24,6 +24,6 @@ public class CommentVo {
 	// ��� �ۼ��� �г���
 	String nickname;
 
-	
+	String photo;
 	
 }

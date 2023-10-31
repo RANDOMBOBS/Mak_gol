@@ -27,6 +27,10 @@ ul {
 	width: 800px;
 	list-style: none;
 }
+ul img{
+width : 20px;
+height : 20px;
+}
 </style>
 </head>
 <body>
