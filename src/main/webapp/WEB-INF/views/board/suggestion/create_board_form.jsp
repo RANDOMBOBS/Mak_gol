@@ -39,7 +39,7 @@
 
 	<div>
 		<form action="<c:url value='/board/suggestion/createConfirm' />"
-			method="post" name="create_board_form">
+			method="post" name="create_board_form"  enctype="multipart/form-data">
 			<span>카테고리 선택</span>
 			<select name="category" >
 				<option value="">카테고리 선택</option>

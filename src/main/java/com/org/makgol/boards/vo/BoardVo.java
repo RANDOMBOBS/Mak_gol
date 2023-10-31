@@ -17,7 +17,7 @@ public class BoardVo {
 	String category;
 	int sympathy;
 	String name;
-	String photo;
+	String attachment;
 	
 	
 

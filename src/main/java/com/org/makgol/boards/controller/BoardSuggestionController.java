@@ -79,17 +79,16 @@ public class BoardSuggestionController {
 	 * 
 	 * @param boardVo -- 카테고리 : category 제목 : title 작성자 : user_id 내용 : contents
 	 * 
-	 * @return 글쓰기 성공 여부 성공 시 : board/create_board_ok.jsp 실패 시 :
-	 *         board/create_board_ng.jsp
+	 * @return 글쓰기 성공 여부
+	 * 			성공 시 : board/create_board_ok.jsp
+	 * 			실패 시 : board/create_board_ng.jsp
 	 */
 	@PostMapping("/createConfirm")
 	public String createConfirm(BoardVo boardVo, @RequestParam("file") MultipartFile file) {
-		System.out.println("컨트롤러"+file);
 		String nextPage = "board/suggestion/create_board_ok";
 		String fileName = uploadFileService.upload(file);
-		System.out.println("파일이름은?"+fileName);
 		if(fileName != null) {
-			boardVo.setPhoto(fileName);
+			boardVo.setAttachment(fileName);
 		}
 		int result = boardService.createBoardConfirm(boardVo);
 		if (result < 1) {
@@ -111,6 +110,7 @@ public class BoardSuggestionController {
 		String nextPage = "board/suggestion/suggestion_board_detail";
 		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
 		boardService.addHit(b_id);
+		
 		model.addAttribute("boardVo", boardVo);
 		return nextPage;
 	}

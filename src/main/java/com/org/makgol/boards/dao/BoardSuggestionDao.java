@@ -39,11 +39,11 @@ public class BoardSuggestionDao {
 
 	/** suggestion 글 쓰기 폼 제출 **/
 	public int insertSuggestionBoard(BoardVo boardVo) {
-		String sql = "INSERT INTO boards (user_id, title, date, contents, category, photo) values (1, ?, NOW(), ?, ?,?)";
+		String sql = "INSERT INTO boards (user_id, title, date, contents, category, attachment) values (1, ?, NOW(), ?, ?,?)";
 		int result = -1;
 
 		try {
-			result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getCategory(), boardVo.getPhoto());
+			result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getCategory(), boardVo.getAttachment());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -60,7 +60,7 @@ public class BoardSuggestionDao {
 
 	/** suggestion 글 상세보기 **/
 	public BoardVo showDetailSuggestionBoard(int b_id) {
-		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
+		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, b.attachment, u.name, u.photo "
 				+ "FROM boards AS b " + "JOIN users AS u ON b.user_id = u.id " + "WHERE b.id = ?";
 
 		List<BoardVo> boardVo = null;
@@ -200,7 +200,6 @@ public class BoardSuggestionDao {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    System.out.println(sql);
 	    return boardVos.size() > 0 ? boardVos : null;
 	}
 }

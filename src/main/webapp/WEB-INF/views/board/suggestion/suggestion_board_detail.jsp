@@ -50,6 +50,12 @@ ul {
 			<td>내용</td>
 			<td>${boardVo.contents}</td>
 		</tr>
+
+		<c:if test="${not empty boardVo.attachment}">
+		<tr>
+		<img src="<c:url value="/boardUploadImg/${boardVo.attachment}"/>">
+		</tr>
+		</c:if>		
 	</table>
 
 	<div>
