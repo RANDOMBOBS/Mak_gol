@@ -182,6 +182,16 @@
 			<version>1.3.0</version>
 		</dependency>
 
+
+		<!-- MyBatis 11/1 효 추가-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+	
+
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -261,9 +271,9 @@
 		<!-- File upload -->
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
-		    <groupId>commons-fileupload</groupId>
-		    <artifactId>commons-fileupload</artifactId>
-		    <version>1.5</version>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.5</version>
 		</dependency>
 
 	</dependencies>

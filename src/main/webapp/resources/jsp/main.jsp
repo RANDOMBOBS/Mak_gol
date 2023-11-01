@@ -19,7 +19,7 @@ var jQ = jQuery;
 				jQ("#spin").text("다시!");
 			},
 			error : function(error) { 
-				alert('오류');			
+				alert('메뉴결과?');			
 			}
 		});
 	}

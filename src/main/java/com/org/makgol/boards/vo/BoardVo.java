@@ -12,7 +12,7 @@ public class BoardVo {
 	int user_id;
 	int hit;
 	String title;
-	LocalDate date;
+	String date;
 	String contents;
 	String category;
 	int sympathy;

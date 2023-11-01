@@ -25,26 +25,16 @@
 			<option value="title">글제목</option>
 			<option value="contents">글내용</option>
 			<option value="name">작성자</option>
-		</select> <input type="text" name="searchWord" placeholder="검색어를 입력해주세요" /> <input
-			type="button" value="검색" onclick="searchBoard()" />
+		</select>
+		<input type="text" name="searchWord" placeholder="검색어를 입력해주세요" />
+		<input type="button" value="검색" onclick="searchBoard()" />
 	</form>
 
 
 	<jsp:include page="/resources/jsp/suggestion.jsp"></jsp:include>
 
 <script>
-function allBoardList(){
-jQuery.ajax({
-	url : "/makgol/board/suggestion/showAllList",
-	type : "GET",
- 	dataType : "html",
-	success : function(rdata) {
-		jQuery(".board_list").html(rdata);
-	},
-	error : function(error) {
-		alert("검색오류");
-	}
-});}
+
 allBoardList();
 </script>
 

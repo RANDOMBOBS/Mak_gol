@@ -6,6 +6,19 @@
 	$.noConflict();
 	var jQ = jQuery;
 
+	function allBoardList(){
+		jQuery.ajax({
+			url : "/makgol/board/suggestion/showAllList",
+			type : "GET",
+		 	dataType : "html",
+			success : function(rdata) {
+				jQuery(".board_list").html(rdata);
+			},
+			error : function(error) {
+				alert("allBoardList 오류");
+			}
+		});}
+	
 	function comList() {
 		let board_id = parseInt(jQ("input[name=board_id]").val());
 		jQ.ajax({
@@ -16,7 +29,7 @@
 				jQ(".boardCommentList").html(rdata);
 			},
 			error : function(error) {
-				alert("리스트업오류");
+				alert("comList 오류");
 			},
 		});
 	}
@@ -54,7 +67,7 @@
 					}
 				},
 				error : function(error) {
-					alert("추가오류");
+					alert("createCommentForm 오류");
 				},
 			});
 		}
@@ -86,11 +99,12 @@
 				contentType : "application/json; charset=utf-8",
 				success : function(rdata) {
 					if (rdata == 1) {
+						alert("성공")
 						comList();
 					}
 				},
 				error : function(error) {
-					alert("수정오류");
+					alert("modifyCommentForm 오류");
 				},
 			});
 		}
@@ -116,7 +130,7 @@
 					}
 				},
 				error : function(error) {
-					alert("삭제오류");
+					alert("delComment 오류");
 				},
 
 			});
@@ -155,7 +169,7 @@
 					jQ("input[name=searchWord]").val("");
 				},
 				error : function(error) {
-					alert("검색오류");
+					alert("searchBoard 오류");
 				}
 			});
 		}

@@ -153,6 +153,7 @@ public class BoardSuggestionController {
 	@ResponseBody
 	@RequestMapping(value = "/commentModifyConfirm", method = { RequestMethod.GET, RequestMethod.POST })
 	public int commentModifyConfirm(@RequestBody CommentVo commentVo) {
+		System.out.println("댓글수정 controller");
 		int result = boardService.modifyCommentConfirm(commentVo);
 		return result;
 	}
@@ -195,8 +196,12 @@ public class BoardSuggestionController {
 	 * @return 수정 성공 여부 성공 시 : modify_board_ok.jsp 실패 시 : modify_board_ng.jsp
 	 */
 	@PostMapping("/modifyConfirm")
-	public String modifyConfirm(BoardVo boardVo) {
+	public String modifyConfirm(BoardVo boardVo, @RequestParam("attachment") MultipartFile file) {
 		String nextPage = "board/suggestion/modify_board_ok";
+		String fileName = uploadFileService.upload(file);
+		if(fileName != null) {
+			boardVo.setAttachment(fileName);
+		}
 		int result = boardService.modifyBoardConfirm(boardVo);
 		if (result < 1) {
 			nextPage = "board/suggestion/modify_board_ng";
