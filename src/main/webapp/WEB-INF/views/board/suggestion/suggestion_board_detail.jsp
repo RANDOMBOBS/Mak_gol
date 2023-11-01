@@ -91,7 +91,7 @@ ul img {
 	<form name="create_comment_form">
 		<p>댓글</p>
 		<c:choose>
-			<c:when test="로그인 정보가 없다면?">
+			<c:when test="로그인 정보가 없다면?!!!!">
 				<input type="hidden" name="board_id" value="${boardVo.b_id}" />
 				<input type="text" name="nickname" placeholder="로그인 후 댓글 작성이 가능합니다." disabled />
 				<br />

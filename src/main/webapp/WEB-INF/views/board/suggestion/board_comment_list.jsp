@@ -18,7 +18,7 @@
 			<li>닉네임은 ${item.getNickname()}</li>
 			<li>내용은 ${item.getContent()}</li>
 			<li>작성일은 ${item.getDate()}</li>
-			<c:if test="로그인 아이디와 등록한 아이디가 같다면 보여주기!!!!!!!!!!">
+			<c:if test="로그인 아이디와 등록한 아이디가 같다면 보여주기!!!!!!!!!!!!!">
 			<li><input type="button" value="수정" onclick="modComment(this)"/></li>
 			<li><input type="button" value="삭제" onclick="delComment(${item.getId()})" /></li>
 			</c:if>

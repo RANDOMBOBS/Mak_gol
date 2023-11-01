@@ -22,7 +22,7 @@
 	<c:param name='name' value='${boardVo.name}' />
 </c:url>
 
-<c:if test="">
+<c:if test="로그인 여부 확인하기!!!">
 <a href="${create_url}">글쓰기</a>
 <br>
 </c:if>
