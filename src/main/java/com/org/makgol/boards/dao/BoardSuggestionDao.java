@@ -1,7 +1,9 @@
 package com.org.makgol.boards.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,31 +72,20 @@ public class BoardSuggestionDao {
 
 	/** suggestion 댓글 수정 폼 제출 **/
 	public int updateComment(CommentVo commentVo) {
-		System.out.println("댓글수정 DAO");
-		String sql = "UPDATE comments SET nickname=?, content=?,  mod_date=now() where id=?";
 		int result = -1;
-		try {
-			result = jdbcTemplate.update(sql, commentVo.getNickname(), commentVo.getContent(), commentVo.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("수정 결과는???" + result);
+		result = sqlSession.update("mapper.boardSuggestion.updateComment", commentVo);
 		return result;
 	}
 
 	/** suggestion 댓글 DELETE **/
 	public int deleteComment(int id) {
-		String sql = "DELETE FROM comments WHERE id = ?";
 		int result = -1;
-		try {
-			result = jdbcTemplate.update(sql, id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		result = sqlSession.delete("mapper.boardSuggestion.deleteComment", id);
 		return result;
 	}
 
 	/** suggestion 글 수정 **/
+//	실패
 	public BoardVo selectBoard(int b_id) {
 		String sql = "SELECT * FROM boards WHERE id = ?";
 		List<BoardVo> boardVo = null;
@@ -109,6 +100,7 @@ public class BoardSuggestionDao {
 	}
 
 	/** suggestion 글 수정 폼 제출 **/
+//	실패
 	public int updateBoard(BoardVo boardVo) {
 		String sql = "UPDATE boards SET title=?, contents=?, attachment=? WHERE id=? ";
 		int result = -1;
@@ -125,41 +117,19 @@ public class BoardSuggestionDao {
 
 	/** suggestion 글 DELETE **/
 	public int deleteBoard(int b_id) {
-		String sql = "DELETE FROM boards WHERE id = ?";
 		int result = -1;
-		try {
-			result = jdbcTemplate.update(sql, b_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		result = sqlSession.delete("mapper.boardSuggestion.deleteBoard", b_id);
+//		글 삭제할때 폴더에 있는 사진도 지워지게 하기!(폴더 경로 잡히면 진행하기)
 		return result;
 	}
 
 	/** suggestion 글 검색 **/
 	public List<BoardVo> selectSearchBoard(String searchOption, String searchWord) {
-		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo"
-				+ " FROM boards AS b JOIN users AS u ON b.user_id = u.id" + " WHERE category = 'suggestion' AND "
-				+ searchOption;
-
-		if ("name".equals(searchOption)) {
-			sql += " = ?";
-		} else {
-			sql += " LIKE ?";
-		}
-
 		List<BoardVo> boardVos = new ArrayList<BoardVo>();
-
-		try {
-			RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
-
-			if ("name".equals(searchOption)) {
-				boardVos = jdbcTemplate.query(sql, rowMapper, searchWord);
-			} else {
-				boardVos = jdbcTemplate.query(sql, rowMapper, "%" + searchWord + "%");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Map<String, String> map = new HashMap<>();
+		map.put("searchOption", searchOption);
+		map.put("searchWord", searchWord);
+		boardVos = sqlSession.selectList("mapper.boardSuggestion.selectSearchBoard", map);
 		return boardVos.size() > 0 ? boardVos : null;
 	}
 }

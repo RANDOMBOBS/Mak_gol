@@ -99,7 +99,6 @@
 				contentType : "application/json; charset=utf-8",
 				success : function(rdata) {
 					if (rdata == 1) {
-						alert("성공")
 						comList();
 					}
 				},

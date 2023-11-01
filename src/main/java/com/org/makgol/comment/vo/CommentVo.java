@@ -16,7 +16,7 @@ public class CommentVo {
 	int board_id;
 	
 	// �ۼ� �ð�
-	LocalDate date;
+	String date;
 	
 	// ��� ����
 	String content;
