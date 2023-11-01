@@ -1,6 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"
+	integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
+$.noConflict();
+var jQ = jQuery;
+
+	function resultMenu(menu) {
+		jQ.ajax({
+			url : "/makgol/main/resultMenu/"+menu,
+			type : "GET",
+			dataType : "html",
+			success : function(rdata) {   
+				jQ(".selectedCategory").html(rdata);
+				jQ("#spin").text("다시!");
+			},
+			error : function(error) { 
+				alert('오류');			
+			}
+		});
+	}
+
 	function selCategory() {
 		// HTML 요소
 		var allCategory = document.querySelectorAll(".category"); // 클래스명이 "category"인 모든 <span> 요소를 가져옵니다.
@@ -40,35 +63,28 @@
 		});
 
 		if (closestCategory) {
-			var textvalue = closestCategory.textContent;
-			console.log(textvalue);
-
-			alert("오늘의 점심 메뉴는? " + textvalue + " 당첨!");
+			var menu = closestCategory.textContent;
+			console.log(menu);
+			
+			resultMenu(menu);
 		}
 	}
-
 
 	let roulette = document.querySelector(".roulette");
 	let btn = document.getElementById("spin");
 	let number = Math.ceil(Math.random() * 10000);
 
 	function handleButtonClick() {
-		// Disable the button
 		btn.disabled = true;
 
 		roulette.style.transform = "rotate(" + number + "deg)";
 		number += Math.ceil(Math.random() * 10000);
 
-		// Set a timeout for the roulette spin
 		setTimeout(function() {
-			// Re-enable the button after the roulette animation is complete
 			btn.disabled = false;
 
-			// Call the category selection function
 			selCategory();
-		}, 4500); // 5.5 seconds (5500 milliseconds)
-	}
+		}, 4500); 	}
 
 	btn.addEventListener("click", handleButtonClick);
-	
 </script>

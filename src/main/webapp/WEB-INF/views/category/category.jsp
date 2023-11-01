@@ -53,8 +53,38 @@
 			$("button").removeClass("active");
 			$(this).addClass("active");
 		});
-
-		menuList(); // 최초 리스트 호출
+		
+	
+		
+		if("${category}" == "한식"){
+			korMenu();
+			$("button").removeClass("active");
+			$(".category_main_ul button").eq(1).addClass("active");
+		} else if("${category}" == "양식"){
+			westMenu();
+			$("button").removeClass("active");
+			$(".category_main_ul button").eq(2).addClass("active");
+		} else if("${category}" == "중식"){
+			chiMenu();
+			$("button").removeClass("active");
+			$(".category_main_ul button").eq(3).addClass("active");
+		} else if("${category}" == "분식"){
+			snackMenu();
+			$("button").removeClass("active");
+			$(".category_main_ul button").eq(4).addClass("active");
+		} else if("${category}" == "일식"){
+			jpnMenu();
+			$("button").removeClass("active");
+			$(".category_main_ul button").eq(5).addClass("active");
+		} else if("${category}" == "카페"){
+			cafeMenu();
+			$("button").removeClass("active");
+			$(".category_main_ul button").eq(6).addClass("active");
+		} else {
+			menuList();
+			$("button").removeClass("active");
+			$(".category_main_ul button").eq(0).addClass("active");
+		}
 	</script>
 </body>
 </html>

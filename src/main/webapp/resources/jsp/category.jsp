@@ -40,7 +40,7 @@
 		});
 	}
 	
-	// 양식 클릭시 한식관련 메뉴 
+	// 양식 클릭시 양식관련 메뉴 
 	function westMenu(){
 		jQ.ajax({
 			url: "/makgol/category/categoryWest",
@@ -55,7 +55,7 @@
 		});
 	}
 	
-	// 중식 클릭시 한식관련 메뉴 
+	// 중식 클릭시 중식관련 메뉴 
 	function chiMenu(){
 		jQ.ajax({
 			url: "/makgol/category/categoryChi",
@@ -70,7 +70,7 @@
 		});
 	}
 	
-	// 분식 클릭시 한식관련 메뉴 
+	// 분식 클릭시 분식관련 메뉴 
 	function snackMenu(){
 		jQ.ajax({
 			url: "/makgol/category/categorySnack",
@@ -85,7 +85,7 @@
 		});
 	}
 	
-	// 일식 클릭시 한식관련 메뉴 
+	// 일식 클릭시 일식관련 메뉴 
 	function jpnMenu(){
 		jQ.ajax({
 			url: "/makgol/category/categoryJpn",
@@ -100,7 +100,7 @@
 		});
 	}
 	
-	// 카페/디저트 클릭시 한식관련 메뉴 
+	// 카페 클릭시 카페관련 메뉴 
 	function cafeMenu(){
 		jQ.ajax({
 			url: "/makgol/category/categoryCafe",

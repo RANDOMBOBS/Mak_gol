@@ -2,7 +2,9 @@ package com.org.makgol.boards.controller;
 
 import java.net.http.HttpResponse;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,16 +31,21 @@ public class BoardSuggestionController {
 	BoardSuggestionService boardService;
 	
 	@GetMapping({ "/", "" })
-	public String showList(Model model) {
+	public String showmain() {
 		String nextPage = "board/suggestion/suggestion";
+		return nextPage;
+	}
+
+	@GetMapping("/showAllList")
+	public String showAllList(Model model) {
 		List<BoardVo> boardVos = boardService.getSuggestionBoard();
 
 		if (boardVos != null) {
 			model.addAttribute("boardVos", boardVos);
 		}
-		return nextPage;
+		return "board/suggestion/all_suggestion_list";
 	}
-
+	
 	@GetMapping("/create")
 	public String create(@RequestParam("name") String name, Model model, HttpSession session) {
 		String nextPage = "board/suggestion/create_board_form";
@@ -126,4 +133,21 @@ public class BoardSuggestionController {
 		return nextPage;
 	}
 
+	
+	/** suggestion 글 검색 **/
+	@RequestMapping(value = "/search", method = { RequestMethod.GET, RequestMethod.POST })
+	public String search(@RequestBody Map<String, String> map, Model model) {
+		String nextPage = "board/suggestion/search_suggestion_list";
+		String searchOption = (String) map.get("searchOption");
+		String searchWord = (String) map.get("searchWord");
+		List<BoardVo> boardVos = boardService.searchBoard(searchOption, searchWord);
+		if (boardVos != null) {
+		
+			model.addAttribute("boardVos", boardVos);
+		}
+
+		return nextPage;
+		
+	}
+	
 }

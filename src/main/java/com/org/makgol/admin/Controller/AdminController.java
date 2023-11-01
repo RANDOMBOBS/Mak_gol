@@ -1,4 +1,4 @@
-package com.org.makgol.admin.Controller;
+package com.org.makgol.admin.controller;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.org.makgol.admin.Service.AdminService;
+import com.org.makgol.admin.service.AdminService;
 import com.org.makgol.users.vo.UserVo;
 
 @Controller

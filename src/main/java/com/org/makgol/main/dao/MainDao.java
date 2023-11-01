@@ -19,7 +19,7 @@ public class MainDao {
 	JdbcTemplate jdbcTemplate;
 	
 	public List<CategoryListVo> selectAllCategory() {
-		String sql = "SELECT DISTINCT category FROM category_list";
+		String sql = "SELECT DISTINCT category FROM stores";
 		List <CategoryListVo> categorys = new ArrayList<CategoryListVo>();
 		try {
 		RowMapper<CategoryListVo> rowMapper = BeanPropertyRowMapper.newInstance(CategoryListVo.class);

@@ -37,7 +37,6 @@ public class BoardSuggestionDao {
 		return boardVos.size() > 0 ? boardVos : null;
 	}
 
-
 	/** suggestion 글 쓰기 폼 제출 **/
 	public int insertSuggestionBoard(BoardVo boardVo) {
 		String sql = "INSERT INTO boards (user_id, title, date, contents, category) values (1, ?, NOW(), ?, ?)";
@@ -58,7 +57,7 @@ public class BoardSuggestionDao {
 //			result = sqlSession.insert("mapper.boardSuggestion.insertAdminAccount", boardVo);
 //			return result;
 //	}
-	
+
 	/** suggestion 글 상세보기 **/
 	public BoardVo showDetailSuggestionBoard(int b_id) {
 		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
@@ -81,12 +80,11 @@ public class BoardSuggestionDao {
 		int result = -1;
 		try {
 			result = jdbcTemplate.update(sql, b_id);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
 
 	/** suggestion 댓글 INSERT **/
 	public int insertComment(CommentVo commentVo) {
@@ -99,8 +97,8 @@ public class BoardSuggestionDao {
 		}
 		return result;
 	}
-	
-	/** suggestion 댓글 SELECT  **/
+
+	/** suggestion 댓글 SELECT **/
 	public List<CommentVo> selectCommentList(int board_id) {
 		String sql = "SELECT * FROM comments where board_id = ?";
 		List<CommentVo> CommentVos = null;
@@ -124,7 +122,6 @@ public class BoardSuggestionDao {
 		}
 		return result;
 	}
-	
 
 	/** suggestion 댓글 DELETE **/
 	public int deleteComment(int id) {
@@ -132,12 +129,11 @@ public class BoardSuggestionDao {
 		int result = -1;
 		try {
 			result = jdbcTemplate.update(sql, id);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-
 
 	/** suggestion 글 수정 **/
 	public BoardVo selectBoard(int b_id) {
@@ -179,4 +175,32 @@ public class BoardSuggestionDao {
 		return result;
 	}
 
+	
+	/** suggestion 글 검색 **/
+	public List<BoardVo> selectSearchBoard(String searchOption, String searchWord) {
+		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo"
+				+ " FROM boards AS b JOIN users AS u ON b.user_id = u.id" + " WHERE category = 'suggestion' AND " + searchOption;
+		
+		if ("name".equals(searchOption)) {
+	        sql += " = ?";
+	    } else  {
+	        sql += " LIKE ?";
+	    }
+
+	    List<BoardVo> boardVos = new ArrayList<BoardVo>();
+
+	    try {
+	        RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
+
+	        if ("name".equals(searchOption)) {
+	            boardVos = jdbcTemplate.query(sql, rowMapper, searchWord);
+	        } else {
+	            boardVos = jdbcTemplate.query(sql, rowMapper, "%" + searchWord + "%");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    System.out.println(sql);
+	    return boardVos.size() > 0 ? boardVos : null;
+	}
 }

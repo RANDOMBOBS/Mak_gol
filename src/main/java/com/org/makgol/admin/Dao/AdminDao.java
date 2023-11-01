@@ -1,4 +1,4 @@
-package com.org.makgol.admin.Dao;
+package com.org.makgol.admin.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class AdminDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	/** User由ъ뒪�듃 �쟾泥� SELECT **/
+	/** User?��?�뒪�듃 �쟾泥� SELECT **/
 	public List<UserVo> selectAllUserList() {
 		String sql = "SELECT * FROM users ORDER BY id ASC";
 		List<UserVo> userVos = new ArrayList<UserVo>();
