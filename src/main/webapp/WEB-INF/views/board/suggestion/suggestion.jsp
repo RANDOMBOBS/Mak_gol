@@ -18,6 +18,15 @@
 	<div class="board_list"></div>
 
 	
+<c:url value='/board/suggestion/create' var='create_url'>
+	<c:param name='name' value='${boardVo.name}' />
+</c:url>
+
+<c:if test="">
+<a href="${create_url}">글쓰기</a>
+<br>
+</c:if>
+
 
 	<form name="search_board_form">
 		<select name="search">

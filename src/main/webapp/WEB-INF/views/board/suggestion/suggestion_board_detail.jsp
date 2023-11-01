@@ -27,9 +27,10 @@ ul {
 	width: 800px;
 	list-style: none;
 }
-ul img{
-width : 20px;
-height : 20px;
+
+ul img {
+	width: 20px;
+	height: 20px;
 }
 </style>
 </head>
@@ -56,17 +57,17 @@ height : 20px;
 		</tr>
 
 		<c:if test="${not empty boardVo.attachment}">
-		<tr>
-		<img src="<c:url value="/boardUploadImg/${boardVo.attachment}"/>">
-		</tr>
-		</c:if>		
+			<tr>
+				<img src="<c:url value="/boardUploadImg/${boardVo.attachment}"/>">
+			</tr>
+		</c:if>
 	</table>
 
 	<div>
 		<p>
-			<label for="like" onclick="boardlike()">
-				<input type="checkbox" style="display: none" />
-				<i class="fa-regular fa-thumbs-up"> ${boardVo.sympathy}</i>
+			<label for="like" onclick="boardlike()"> <input
+				type="checkbox" style="display: none" /> <i
+				class="fa-regular fa-thumbs-up"> ${boardVo.sympathy}</i>
 			</label>
 		</p>
 		<c:url value="/board/suggestion" var="suggestion_url" />
@@ -80,16 +81,37 @@ height : 20px;
 		<c:url value="/board/suggestion/delete" var="delete_url">
 			<c:param name="b_id" value="${boardVo.b_id}" />
 		</c:url>
-		<a href="${modify_url}">수정</a> <a href="${delete_url}">삭제</a>
+
+		<c:if test="">
+			<a href="${modify_url}">수정</a>
+			<a href="${delete_url}">삭제</a>
+		</c:if>
 	</div>
 
 	<form name="create_comment_form">
 		<p>댓글</p>
-		<input type="hidden" name="board_id" value="${boardVo.b_id}" /> <input
-			type="text" name="nickname" placeholder="닉네임" /><br /> <input
-			type="text" name="content" placeholder="댓글을 입력해주세요." /> <input
-			type="button" value="등록" onclick="createCommentForm()" /> <br />
+		<c:choose>
+			<c:when test="로그인 정보가 없다면?">
+				<input type="hidden" name="board_id" value="${boardVo.b_id}" />
+				<input type="text" name="nickname" placeholder="로그인 후 댓글 작성이 가능합니다." disabled />
+				<br />
+				<input type="text" name="content" placeholder="로그인 후 댓글 작성이 가능합니다." disabled/>
+				<br />
+				<a href="/makgol/user/login">로그인하러가기</a>
+				<br />
+			</c:when>
+
+			<c:otherwise>
+				<input type="hidden" name="board_id" value="${boardVo.b_id}" />
+				<input type="text" name="nickname" placeholder="닉네임" />
+				<br />
+				<input type="text" name="content" placeholder="댓글을 입력해주세요." />
+				<input type="button" value="등록" onclick="createCommentForm()" />
+				<br />
+			</c:otherwise>
+		</c:choose>
 	</form>
+
 	<div class="boardCommentList"></div>
 	<jsp:include page="/resources/jsp/suggestion.jsp"></jsp:include>
 

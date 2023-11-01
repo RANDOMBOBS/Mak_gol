@@ -3,6 +3,7 @@ package com.org.makgol.admin.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,27 +16,19 @@ import com.org.makgol.users.vo.UserVo;
 public class AdminDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
+
+	@Autowired
+	private SqlSession sqlSession;
+
 	public List<UserVo> selectAllUserList() {
-		String sql = "SELECT * FROM users ORDER BY id ASC";
 		List<UserVo> userVos = new ArrayList<UserVo>();
-		try {
-			RowMapper<UserVo> rowMapper = BeanPropertyRowMapper.newInstance(UserVo.class);
-			userVos = jdbcTemplate.query(sql, rowMapper);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+		userVos = sqlSession.selectList("mapper.admin.selectAllUserList");
 		return userVos;
 	}
-	
+
 	public int UpdateGrade(UserVo userVo) {
-		String sql = "UPDATE users SET grade = ? where id = ?";
 		int result = -1;
-		try{
-			result = jdbcTemplate.update(sql, userVo.getGrade(), userVo.getId());
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+		result = sqlSession.update("mapper.admin.UpdateGrade", userVo);
 		return result;
 	}
 }

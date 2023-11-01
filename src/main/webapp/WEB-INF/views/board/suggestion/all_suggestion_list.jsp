@@ -34,13 +34,5 @@
 				<td>${item.hit}</td>
 			</tr>
 		</c:forEach>
-
-
 	</tbody>
 </table>
-
-<c:url value='/board/suggestion/create' var='create_url'>
-	<c:param name='name' value='${boardVo.name}' />
-</c:url>
-<a href="${create_url}">글쓰기</a>
-<br>
