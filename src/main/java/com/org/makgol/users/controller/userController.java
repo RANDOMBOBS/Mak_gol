@@ -113,8 +113,6 @@ public class userController {
 	    } else {
 	        // 로그인 성공 시 사용자 정보를 세션에 저장하고 세션
 	        session.setAttribute("loginedUsersRequestVo", loginedUsersRequestVo);
-
-	        // session.setMaxInactiveInterval(60 * 30); // 세션 유지 시간을 30분으로 설정
 	    }
 	    
 	    return nextPage;

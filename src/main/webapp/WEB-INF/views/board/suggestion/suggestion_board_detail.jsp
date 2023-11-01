@@ -64,9 +64,9 @@ height : 20px;
 
 	<div>
 		<p>
-			<label for="like"> <input type="checkbox"
-				style="display: none" /><i class="fa-regular fa-thumbs-up">
-					${boardVo.sympathy}</i>
+			<label for="like" onclick="boardlike()">
+				<input type="checkbox" style="display: none" />
+				<i class="fa-regular fa-thumbs-up"> ${boardVo.sympathy}</i>
 			</label>
 		</p>
 		<c:url value="/board/suggestion" var="suggestion_url" />

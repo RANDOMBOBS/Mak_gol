@@ -77,13 +77,12 @@ public class UserService {
 	 // 로그인 확인
 	 public UsersRequestVo loginConfirm(UsersRequestVo usersRequestVo) {
 	    // 로그인 정보 확인
-		 
-		 
 	    String encriptPassword = userDao.selectUser(usersRequestVo);
-	    
+	    System.out.println("입력한 비밀번호"+usersRequestVo.getPassword()+" DAO비밀번호 " + encriptPassword);
 	    if (encriptPassword != null) {
-	    	
-	        if (BCrypt.checkpw(usersRequestVo.getPassword(), encriptPassword)) {
+	    	System.out.println("함수들어왔어용");
+	       
+	    	if (BCrypt.checkpw(usersRequestVo.getPassword(), encriptPassword)) {
 	        	
 	        	System.out.println("성공");
 	        	
@@ -91,6 +90,7 @@ public class UserService {
 	        	
 	            return loginedUsersRequestVo;
 	        }
+	    	System.out.println("일치하지않음");
 	    }
 	    // 로그인 실패
 	    return null;

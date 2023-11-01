@@ -108,20 +108,15 @@ public class UserDao {
 	public String selectUser(UsersRequestVo usersRequestVo) {
 		
 		 String sql = "SELECT password FROM users WHERE email = ?";
-		 String encriptPassword = "";
+		 String encriptPassword = "sss";
 	    try {
-	    	
 	        // 사용자 정보를 데이터베이스에서 조회
 	        //RowMapper<UsersRequestVo> rowMapper = BeanPropertyRowMapper.newInstance(UsersRequestVo.class);
 	    	encriptPassword = jdbcTemplate.queryForObject(sql, String.class, usersRequestVo.getEmail());
-	        
-	    	
-	       
-	        
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    
+	    System.out.println("비밀번호는?" + encriptPassword);
 	    // 로그인 실패 시 null 반환
 	    return encriptPassword;
 	}
