@@ -6,6 +6,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import com.org.makgol.users.dao.UserDao;
+import com.org.makgol.users.vo.UserVo;
 import com.org.makgol.users.vo.UsersRequestVo;
 import com.org.makgol.util.MailSendUtil;
 import com.org.makgol.util.RedisUtil;
@@ -75,22 +76,16 @@ public class UserService {
 	}// joinUser_END
 
 	 // 로그인 확인
-	 public UsersRequestVo loginConfirm(UsersRequestVo usersRequestVo) {
+	 public UserVo loginConfirm(UsersRequestVo usersRequestVo) {
 	    // 로그인 정보 확인
 	    String encriptPassword = userDao.selectUser(usersRequestVo);
-	    System.out.println("입력한 비밀번호"+usersRequestVo.getPassword()+" DAO비밀번호 " + encriptPassword);
 	    if (encriptPassword != null) {
-	    	System.out.println("함수들어왔어용");
 	       
 	    	if (BCrypt.checkpw(usersRequestVo.getPassword(), encriptPassword)) {
-	        	
-	        	System.out.println("성공");
-	        	
-	        	UsersRequestVo loginedUsersRequestVo = new UsersRequestVo();
+	        	UserVo loginedUsersRequestVo = userDao.getUser(usersRequestVo);
 	        	
 	            return loginedUsersRequestVo;
 	        }
-	    	System.out.println("일치하지않음");
 	    }
 	    // 로그인 실패
 	    return null;

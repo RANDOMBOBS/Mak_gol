@@ -1,3 +1,4 @@
+<%@page import="com.org.makgol.users.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -17,16 +18,22 @@
 	<h3>건의게시판</h3>
 	<div class="board_list"></div>
 
-	
-<c:url value='/board/suggestion/create' var='create_url'>
-	<c:param name='name' value='${boardVo.name}' />
-</c:url>
 
-<c:if test="로그인 여부 확인하기!!!">
-<a href="${create_url}">글쓰기</a>
-<br>
-</c:if>
 
+
+	<c:url value='/board/suggestion/create' var='create_url'>
+		<c:param name='name' value='${boardVo.name}' />
+	</c:url>
+	<%
+	UserVo loginedUserVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
+	if (loginedUserVo != null) {
+	%>
+
+	<a href="${create_url}">글쓰기</a>
+	<br>
+	<%
+	}
+	%>
 
 	<form name="search_board_form">
 		<select name="search">
@@ -34,18 +41,16 @@
 			<option value="title">글제목</option>
 			<option value="contents">글내용</option>
 			<option value="name">작성자</option>
-		</select>
-		<input type="text" name="searchWord" placeholder="검색어를 입력해주세요" />
-		<input type="button" value="검색" onclick="searchBoard()" />
+		</select> <input type="text" name="searchWord" placeholder="검색어를 입력해주세요" /> <input
+			type="button" value="검색" onclick="searchBoard()" />
 	</form>
 
 
 	<jsp:include page="/resources/jsp/suggestion.jsp"></jsp:include>
 
-<script>
-
-allBoardList();
-</script>
+	<script>
+		allBoardList();
+	</script>
 
 </body>
 </html>

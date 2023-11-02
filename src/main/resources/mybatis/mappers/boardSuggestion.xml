@@ -32,7 +32,7 @@
 		INSERT INTO
 		boards (user_id, title, date, contents, category, attachment)
 		VALUES
-		(1, #{title}, NOW(), #{contents}, #{category}, #{attachment})
+		(#{user_id}, #{title}, NOW(), #{contents}, #{category}, #{attachment})
 	</insert>
 
 	<select id="showDetailSuggestionBoard" resultMap="boardResult"
@@ -53,7 +53,7 @@
 	<insert id="insertComment" parameterType="commentVo">
 		INSERT INTO
 		comments(user_id, board_id, date, content, nickname)
-		VALUES (1,
+		VALUES (#{user_id},
 		#{board_id}, now(), #{content}, #{nickname})
 	</insert>
 

@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.org.makgol.boards.vo.BoardVo;
+import com.org.makgol.users.vo.UserVo;
 import com.org.makgol.users.vo.UsersRequestVo;
 
 import lombok.RequiredArgsConstructor;
@@ -108,7 +109,7 @@ public class UserDao {
 	public String selectUser(UsersRequestVo usersRequestVo) {
 		
 		 String sql = "SELECT password FROM users WHERE email = ?";
-		 String encriptPassword = "sss";
+		 String encriptPassword = "";
 	    try {
 	        // 사용자 정보를 데이터베이스에서 조회
 	        //RowMapper<UsersRequestVo> rowMapper = BeanPropertyRowMapper.newInstance(UsersRequestVo.class);
@@ -116,9 +117,20 @@ public class UserDao {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    System.out.println("비밀번호는?" + encriptPassword);
 	    // 로그인 실패 시 null 반환
 	    return encriptPassword;
+	}
+	
+	public UserVo getUser(UsersRequestVo usersRequestVo) {
+		String sql = "SELECT * FROM users WHERE email = ?";
+		List<UserVo> userInfo = null;
+		try {
+			RowMapper<UserVo> rowMapper = BeanPropertyRowMapper.newInstance(UserVo.class);
+			userInfo = jdbcTemplate.query(sql, rowMapper, usersRequestVo.getEmail());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return userInfo.size() > 0 ? userInfo.get(0) : null;
 	}
 	
 }

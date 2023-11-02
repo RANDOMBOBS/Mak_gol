@@ -1,3 +1,5 @@
+<%@page import="com.org.makgol.users.vo.UserVo"%>
+<%@page import="io.opentelemetry.exporter.logging.SystemOutLogExporter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -55,6 +57,11 @@ ul img {
 			<td>내용</td>
 			<td>${boardVo.contents}</td>
 		</tr>
+		<tr>
+			<td>유저아이디</td>
+			<td>${boardVo.user_id}</td>
+		</tr>
+
 
 		<c:if test="${not empty boardVo.attachment}">
 			<tr>
@@ -73,7 +80,6 @@ ul img {
 		<c:url value="/board/suggestion" var="suggestion_url" />
 		<a href="${suggestion_url}">목록</a>
 
-		<!-- 로그인한 아이디와 작성자가 같을때만 보이기 -->
 		<c:url value="/board/suggestion/modify" var="modify_url">
 			<c:param name="b_id" value="${boardVo.b_id}" />
 		</c:url>
@@ -81,8 +87,10 @@ ul img {
 		<c:url value="/board/suggestion/delete" var="delete_url">
 			<c:param name="b_id" value="${boardVo.b_id}" />
 		</c:url>
-
-		<c:if test="">
+		<%
+		UserVo loginedUsersRequestVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
+		%>
+		<c:if test="${boardVo.user_id == loginedUsersRequestVo.getId()}">
 			<a href="${modify_url}">수정</a>
 			<a href="${delete_url}">삭제</a>
 		</c:if>
@@ -91,23 +99,26 @@ ul img {
 	<form name="create_comment_form">
 		<p>댓글</p>
 		<c:choose>
-			<c:when test="로그인 정보가 없다면?!!!!">
-				<input type="hidden" name="board_id" value="${boardVo.b_id}" />
-				<input type="text" name="nickname" placeholder="로그인 후 댓글 작성이 가능합니다." disabled />
-				<br />
-				<input type="text" name="content" placeholder="로그인 후 댓글 작성이 가능합니다." disabled/>
-				<br />
-				<a href="/makgol/user/login">로그인하러가기</a>
-				<br />
-			</c:when>
-
-			<c:otherwise>
+			<c:when test="${loginedUsersRequestVo != null}">
 				<input type="hidden" name="board_id" value="${boardVo.b_id}" />
 				<input type="text" name="nickname" placeholder="닉네임" />
 				<br />
 				<input type="text" name="content" placeholder="댓글을 입력해주세요." />
 				<input type="button" value="등록" onclick="createCommentForm()" />
 				<br />
+			</c:when>
+
+			<c:otherwise>
+				<input type="hidden" name="board_id" value="${boardVo.b_id}" />
+				<input type="text" name="nickname" placeholder="로그인 후 댓글 작성이 가능합니다."
+					disabled />
+				<br />
+				<input type="text" name="content" placeholder="로그인 후 댓글 작성이 가능합니다."
+					disabled />
+				<br />
+				<a href="/makgol/user/login">로그인하러가기</a>
+				<br />
+
 			</c:otherwise>
 		</c:choose>
 	</form>

@@ -14,22 +14,25 @@
 <c:forEach var="item" items="${commentVos}">
 	<div class="one_comment">
 		<ul>
-			<li><img src="<c:url value="/boardUploadImg/${item.getPhoto()}"/>"></li>
+			<li><img
+				src="<c:url value="/boardUploadImg/${item.getPhoto()}"/>"></li>
 			<li>닉네임은 ${item.getNickname()}</li>
 			<li>내용은 ${item.getContent()}</li>
 			<li>작성일은 ${item.getDate()}</li>
-			<c:if test="로그인 아이디와 등록한 아이디가 같다면 보여주기!!!!!!!!!!!!!">
-			<li><input type="button" value="수정" onclick="modComment(this)"/></li>
-			<li><input type="button" value="삭제" onclick="delComment(${item.getId()})" /></li>
+			<li>유저아이디는 ${item.getUser_id()}</li>
+			<c:if test="${item.getUser_id() == loginedUsersRequestVo.getId()}">
+				<li><input type="button" value="수정" onclick="modComment(this)" /></li>
+				<li><input type="button" value="삭제"
+					onclick="delComment(${item.getId()})" /></li>
 			</c:if>
 		</ul>
-		<div style="display:none" class="modCancle">
+		<div style="display: none" class="modCancle">
 			<form name="modify_comment_form" method="POST">
 				<p>수정박스입니다.</p>
 				<input type="text" name="nickname" value='${item.getNickname()}' /><br />
 				<input type="text" name="content" value='${item.getContent()}' /><br />
-				<input type="hidden" name="id" value='${item.getId()}' /><br/>
-				<input type="button" value="수정할게용" onclick="modifyCommentForm(this)">
+				<input type="hidden" name="id" value='${item.getId()}' /><br /> <input
+					type="button" value="수정할게용" onclick="modifyCommentForm(this)">
 				<input type="button" value="취소" onclick="modifyCancle(this)">
 				<br>
 			</form>

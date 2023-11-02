@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.org.makgol.users.service.UserService;
 import com.org.makgol.users.vo.AuthNumberVo;
+import com.org.makgol.users.vo.UserVo;
 import com.org.makgol.users.vo.UsersRequestVo;
 
 import lombok.RequiredArgsConstructor;
@@ -100,13 +101,8 @@ public class userController {
 	public String loginConfirm(UsersRequestVo usersRequestVo, HttpSession session) {
 	    // 기본적으로 로그인 성공 시 'login_ok' 화면을 표시
 	    String nextPage = "home";
-	    
-	    
-	    System.out.println(usersRequestVo.getEmail());
-	    System.out.println(usersRequestVo.getPassword());
 	    // 사용자 로그인 정보를 서비스를 통해 확인
-	    UsersRequestVo loginedUsersRequestVo = userService.loginConfirm(usersRequestVo);
-	    
+	    UserVo loginedUsersRequestVo = userService.loginConfirm(usersRequestVo);
 	    if (loginedUsersRequestVo == null) {
 	        // 로그인 실패 시 'login_ng' 화면을 표시
 	        nextPage = "user/user_login_ng";

@@ -25,6 +25,7 @@ import com.org.makgol.boards.UploadFileService;
 import com.org.makgol.boards.service.BoardSuggestionService;
 import com.org.makgol.boards.vo.BoardVo;
 import com.org.makgol.comment.vo.CommentVo;
+import com.org.makgol.users.vo.UserVo;
 
 @Controller
 @RequestMapping("/board/suggestion")
@@ -69,8 +70,13 @@ public class BoardSuggestionController {
 	@GetMapping("/create")
 	public String create(@RequestParam("name") String name, Model model, HttpSession session) {
 		String nextPage = "board/suggestion/create_board_form";
-//		세션에 로그인 정보가 있을때만 실행 (없으면 로그인폼으로 가기)
-		model.addAttribute("name", name);
+		UserVo loginedUsersRequestVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
+		String userName = loginedUsersRequestVo.getName();
+		int userId = loginedUsersRequestVo.getId();
+		if(loginedUsersRequestVo != null){
+			model.addAttribute("name", userName);
+			model.addAttribute("user_id", userId);
+		}
 		return nextPage;
 	}
 
@@ -125,6 +131,7 @@ public class BoardSuggestionController {
 	@ResponseBody
 	@PostMapping("/commentCreate")
 	public int createComment(@RequestBody CommentVo commentVo) {
+		System.out.println("컨트롤러"+commentVo);
 		int result = boardService.addComment(commentVo);
 		return result;
 	}
@@ -180,7 +187,6 @@ public class BoardSuggestionController {
 	@GetMapping("/modify")
 	public String modify(@RequestParam("b_id") int b_id, Model model) {
 		String nextPage = "board/suggestion/modify_board_form";
-//		세션에 로그인 정보가 있을때만 실행 (없으면 로그인폼으로 가기)
 		BoardVo boardVo = boardService.modifyBoard(b_id);
 		boardVo.setB_id(b_id);
 		model.addAttribute("boardVo", boardVo);

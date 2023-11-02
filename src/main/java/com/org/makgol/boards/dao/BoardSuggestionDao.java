@@ -34,7 +34,6 @@ public class BoardSuggestionDao {
 	}
 
 	/** suggestion 글 쓰기 폼 제출 **/
-//	(유저아이디 바꾸기!)
 	public int insertSuggestionBoard(BoardVo boardVo) {
 		int result = -1;
 		result = sqlSession.insert("mapper.boardSuggestion.insertSuggestionBoard", boardVo);
