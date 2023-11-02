@@ -1,13 +1,17 @@
 package com.org.makgol.boards.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,81 +27,129 @@ public class BoardNoticeController {
 
 	@Autowired
 	BoardNoticeService boardService;
+
+	@GetMapping("/notice")
+	/***
+	 *  ê³µì§€ì‚¬í•­ ê²Œì‹œíŒ í˜ì´ì§€
+	 */
+	public String notice() {
+		return "board/notice/notice";
+	}
 	
-	@GetMapping("/Notice")
-	public String Notice(Model model) {
-		String nextPage = "board/notice/notice";
-		List<BoardVo> boardVo = boardService.Notice();
-		model.addAttribute("boardVo",boardVo);
+	@GetMapping("/noticeAllList")
+	/***
+	 *  ê³µì§€ì‚¬í•­ ê²Œì‹œíŒ ë©”ì¸ ë¦¬ìŠ¤íŠ¸ (ajax) 
+	 * @param model
+	 * @return
+	 */
+	public String noticeAllList(Model model) {
+		String nextPage = "board/notice/notice_all_list";
+		List<BoardVo> boardVo = boardService.notice();
+		model.addAttribute("boardVo", boardVo);
 		return nextPage;
 	}
 	
+	
+	@RequestMapping(value = "/searchNoticeList", method = { RequestMethod.GET, RequestMethod.POST })
+	/***
+	 * 
+	 * @param map
+	 * @param model
+	 * @return
+	 */
+	public String search(@RequestBody Map<String, String> map, Model model) {
+		String nextPage = "board/notice/notice_all_searchlist";
+		String searchWord = (String) map.get("searchWord");
+		List<BoardVo> boardVo = boardService.searchNotice(searchWord);
+		model.addAttribute("boardVo", boardVo);
+		return nextPage;
+	}
+	
+
 	@GetMapping("/noticeCreateForm")
-	public String noticeCreateForm() {
+	/***
+	 * ê¸€ì“°ê¸° ë²„íŠ¼ í´ë¦­ì‹œ ì´ë™
+	 * @param name 
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	public String noticeCreateForm(@RequestParam("name") String name, Model model, HttpSession session) {
 		String nextPage = "board/notice/notice_create_form";
+		model.addAttribute("name", name);
 		return nextPage;
 	}
-	
-	
+
 	@PostMapping("/noticeAddList")
-	public String noticeAddList(BoardVo boardVo ) {
+	/***
+	 * ê¸€ì“°ê¸° ë“±ë¡ ì„±ê³µì‹œ OK ì‹¤íŒ¨ì‹œ NG
+	 * @param boardVo
+	 * @return
+	 */
+	public String noticeAddList(BoardVo boardVo) {
 		String nextPage = "board/notice/notice_register_ok";
 		int result = boardService.noticeAddList(boardVo);
-		if (result <=0) {
+		if (result <= 0) {
 			nextPage = "board/notice/notice_register_ng";
 		}
 		return nextPage;
 	}
- 
-		@GetMapping("/detailNotice")
-		public String detailNotice(@RequestParam("b_id") int b_id, Model model) {
-			String nextPage = "board/notice/notice_detail";
-			BoardVo boardVo = boardService.detailNotice(b_id);
-			model.addAttribute("boardVo", boardVo);
-			return nextPage;
+
+	@GetMapping("/detailNotice")
+	/***
+	 * ê²Œì‹œê¸€ ë‚´ìš©
+	 * @param b_id
+	 * @param model
+	 * @return
+	 */
+	public String detailNotice(@RequestParam("b_id") int b_id, Model model) {
+		String nextPage = "board/notice/notice_detail";
+		BoardVo boardVo = boardService.detailNotice(b_id);
+		model.addAttribute("boardVo", boardVo);
+		return nextPage;
+	}
+
+	@GetMapping("/modifyNotice")
+	/***
+	 * ê²Œì‹œê¸€ ìˆ˜ì •
+	 * @param b_id
+	 * @param model
+	 * @return
+	 */
+	public String modifyNotice(@RequestParam("b_id") int b_id, Model model) {
+		String nextPage = "/board/notice/notice_modify_form";
+		BoardVo boardVo = boardService.modifyNotice(b_id);
+		model.addAttribute("boardVo", boardVo);
+		return nextPage;
+	}
+
+	@PostMapping("/modifyNoticeConfirm")
+	/***
+	 * ê²Œì‹œê¸€ ìˆ˜ì •ë²„íŠ¼
+	 * @param boardVo
+	 * @return
+	 */
+	public String modifyNoticeConfirm(BoardVo boardVo) {
+		String nextPage = "/board/notice/notice_modify_ok";
+		int result = boardService.modifyNoticeConfirm(boardVo);
+		if (result <= 0) {
+			nextPage = "/board/notice/notice_modify_ng";
 		}
-		
-		@GetMapping("/modifyNotice")
-		public String modifyNotice(@RequestParam("b_id") int b_id, Model model) {
-			String nextPage = "/board/notice/notice_modify_form";
-			BoardVo boardVo = boardService.modifyNotice(b_id);
-			model.addAttribute("boardVo",boardVo);
-			return nextPage;
+		return nextPage;
+	}
+
+	@GetMapping("/deleteNotice")
+	/***
+	 * ê²Œì‹œê¸€ ì‚­ì œ
+	 * @param b_id
+	 * @return
+	 */
+	public String deleteNotice(@RequestParam("b_id") int b_id) {
+		String nextPage = "board/notice/notice_delete_ok";
+		int result = boardService.deleteNotice(b_id);
+		if (result <= 0) {
+			nextPage = "board/notice/notice_delete_ng";
 		}
-		
-		@PostMapping	("/modifyNoticeConfirm")
-		public String modifyNoticeConfirm(BoardVo boardVo) {
-			String nextPage = "/board/notice/notice_modify_ok";
-			int result = boardService.modifyNoticeConfirm(boardVo);
-			if(result <= 0) {
-				nextPage = "/board/notice/notice_modify_ng";
-			}
-			return nextPage;
-		}
-		
-		@GetMapping("/deleteNotice")
-		/***
-		 * °Ô½Ã±Û »èÁ¦ ¹öÆ°
-		 * @param b_id 
-		 * @return = nextPage
-		 * µî·Ï¹öÆ° ´©¸¦ ½Ã nextPage --
-		 * ¼º°ø : "board/notice_delete_ok" ÀÌµ¿
-		 * ½ÇÆĞ : "board/notice_delete_ng" ÀÌµ¿
-		 */
-		public String deleteNotice(@RequestParam("b_id") int b_id ) {
-			String nextPage = "board/notice/notice_delete_ok";
-			int result = boardService.deleteNotice(b_id);
-			if (result <=0) {
-				nextPage = "board/notice/notice_delete_ng";
-			}
-			return nextPage;
-		}
-		// ÁÁ¾Æ¿ä ¾ÆÁ÷ ±¸Çö X 
-		
-		@GetMapping("/likeNotice")
-		public String likeNotice (@RequestParam("b_id") int b_id, Model model) {
-			BoardVo boardVo = boardService.likeNotice(b_id);
-			model.addAttribute("boardVo",boardVo);
-			return "forward:/board/detailNotice";
-		}
+		return nextPage;
+	}
 }

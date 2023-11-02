@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
+
+import com.org.makgol.boards.UploadFileService;
 import com.org.makgol.boards.service.BoardSuggestionService;
 import com.org.makgol.boards.vo.BoardVo;
 import com.org.makgol.comment.vo.CommentVo;
@@ -29,7 +32,16 @@ public class BoardSuggestionController {
 	
 	@Autowired
 	BoardSuggestionService boardService;
-	
+
+	@Autowired
+	UploadFileService uploadFileService;
+	/**
+	 * suggestion 게시판 게시글리스트
+	 * 
+	 * @param model 다음 화면으로 값(boardVos : category가 suggestion인 게시글 배열)을 전달
+	 * 
+	 * @return suggestion.jsp로 이동
+	 */
 	@GetMapping({ "/", "" })
 	public String showmain() {
 		String nextPage = "board/suggestion/suggestion";
@@ -49,14 +61,26 @@ public class BoardSuggestionController {
 	@GetMapping("/create")
 	public String create(@RequestParam("name") String name, Model model, HttpSession session) {
 		String nextPage = "board/suggestion/create_board_form";
-//		�꽭�뀡�뿉 濡쒓렇�씤 �젙蹂닿� �엳�쓣�븣留� �떎�뻾 (�뾾�쑝硫� 濡쒓렇�씤�뤌�쑝濡� 媛�湲�)
 		model.addAttribute("name", name);
 		return nextPage;
 	}
 
+	/**
+	 * suggestion 글 쓰기 폼 제출
+	 * 
+	 * @param boardVo -- 카테고리 : category 제목 : title 작성자 : user_id 내용 : contents
+	 * 
+	 * @return 글쓰기 성공 여부
+	 * 			성공 시 : board/create_board_ok.jsp
+	 * 			실패 시 : board/create_board_ng.jsp
+	 */
 	@PostMapping("/createConfirm")
-	public String createConfirm(BoardVo boardVo) {
+	public String createConfirm(BoardVo boardVo, @RequestParam("file") MultipartFile file) {
 		String nextPage = "board/suggestion/create_board_ok";
+		String fileName = uploadFileService.upload(file);
+		if(fileName != null) {
+			boardVo.setAttachment(fileName);
+		}
 		int result = boardService.createBoardConfirm(boardVo);
 		if (result < 1) {
 			nextPage = "board/suggestion/create_board_ng";
@@ -69,6 +93,7 @@ public class BoardSuggestionController {
 		String nextPage = "board/suggestion/suggestion_board_detail";
 		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
 		boardService.addHit(b_id);
+		
 		model.addAttribute("boardVo", boardVo);
 		return nextPage;
 	}
@@ -104,7 +129,6 @@ public class BoardSuggestionController {
 	@GetMapping("/modify")
 	public String modify(@RequestParam("b_id") int b_id, Model model) {
 		String nextPage = "board/suggestion/modify_board_form";
-//		�꽭�뀡�뿉 濡쒓렇�씤 �젙蹂닿� �엳�쓣�븣留� �떎�뻾 (�뾾�쑝硫� 濡쒓렇�씤�뤌�쑝濡� 媛�湲�)
 		BoardVo boardVo = boardService.modifyBoard(b_id);
 		boardVo.setB_id(b_id);
 		model.addAttribute("boardVo", boardVo);

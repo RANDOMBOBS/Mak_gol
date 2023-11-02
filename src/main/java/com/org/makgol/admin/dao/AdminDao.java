@@ -16,7 +16,6 @@ public class AdminDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	/** User?��?�뒪�듃 �쟾泥� SELECT **/
 	public List<UserVo> selectAllUserList() {
 		String sql = "SELECT * FROM users ORDER BY id ASC";
 		List<UserVo> userVos = new ArrayList<UserVo>();
@@ -29,7 +28,6 @@ public class AdminDao {
 		return userVos;
 	}
 	
-	/** user �벑湲� �닔�젙 UPDATE **/
 	public int UpdateGrade(UserVo userVo) {
 		String sql = "UPDATE users SET grade = ? where id = ?";
 		int result = -1;

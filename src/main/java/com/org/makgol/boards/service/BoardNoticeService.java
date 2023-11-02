@@ -13,7 +13,7 @@ public class BoardNoticeService {
 	@Autowired
 	BoardNoticeDao noticeDao;
 
-	public List<BoardVo> Notice() {
+	public List<BoardVo> notice() {
 		return noticeDao.selectNotice();
 	}
 
@@ -41,4 +41,7 @@ public class BoardNoticeService {
 		return noticeDao.updateLikeNotice(b_id);
 	}
 
+	public List<BoardVo> searchNotice(String searchWord) {
+		return noticeDao.selectSearchNotice(searchWord);
+	}
 }

@@ -16,6 +16,10 @@
 
 <link href="<c:url value='/resources/css/main.css' />" rel="stylesheet"
 	type="text/css" />
+<link href="<c:url value='/resources/css/todaymenu.css' />"
+	rel="stylesheet" type="text/css" />
+	<link href="<c:url value='/resources/css/topmenu.css' />"
+	rel="stylesheet" type="text/css" />
 
 <style>
 * {
@@ -88,7 +92,7 @@ h1 {
 
 	<div id="pratice">
 		<h2>이동용</h2>
-		<a href="<c:url value='/board/Notice'/>">공지사항</a> <a
+		<a href="<c:url value='/board/notice'/>">공지사항</a> <a
 			href="<c:url value='/board/suggestion'/>">건의사항</a> <a
 			href="<c:url value='#'/>">하소연게시판 아직 구현 X </a>
 	</div>
@@ -106,32 +110,47 @@ h1 {
 		</article>
 
 		<div id="article2">
-			 <div class="today_menu">
-        <div class="todaymenu_main_div">
-          <ul class="todaymenu_main_ul">
-            <li class="today">오늘의메뉴</li>
-            <li>한식</li>
-            <li>양식</li>
-            <li>중식</li>
-            <li>분식</li>
-            <li>일식</li>
-            <li>카페</li>
-          </ul>
-        </div>
-        <div class="todaymenu_list_div">
-          <ul class="todaymenu_list_ul">
-            <li>추천메뉴1</li>
-            <li>추천메뉴2</li>
-            <li>추천메뉴3</li>
-            <li>추천메뉴4</li>
-            <li>추천메뉴5</li>
-          </ul>
-        </div>
-      </div>
+			<div class="today_menu">
+				<div class="todaymenu_main_div">
+					<ul class="todaymenu_main_ul">
+						<li class="today">오늘의메뉴</li>
+						<li>한식</li>
+						<li>양식</li>
+						<li>중식</li>
+						<li>분식</li>
+						<li>일식</li>
+						<li>카페</li>
+					</ul>
+				</div>
+				<div class="todaymenu_list_div">
+					<ul class="todaymenu_list_ul">
+						<li>추천메뉴1</li>
+						<li>추천메뉴2</li>
+						<li>추천메뉴3</li>
+						<li>추천메뉴4</li>
+						<li>추천메뉴5</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 
-		<div id="top">
-			<h1>TOP 5</h1>
+		<div id="article3">
+			<div class="top_menu">
+				<div class="topmenu_main_div">
+					<ul class="topmenu_main_ul">
+						<li class="top">TOP 5</li>
+					</ul>
+				</div>
+				<div class="topmenu_list_div">
+					<ul class="topmenu_list_ul">
+						<li>TOP 1</li>
+						<li>TOP 2</li>
+						<li>TOP 3</li>
+						<li>TOP 4</li>
+						<li>TOP 5</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 
 		<div id="event">
@@ -140,7 +159,7 @@ h1 {
 
 		<div id="boards">
 			<div>
-				<a href="<c:url value='/board/Notice'/>">공지사항</a>
+				<a href="<c:url value='/board/notice'/>">공지사항</a>
 			</div>
 			<div>
 				<a href="<c:url value='/category/categoryMain'/>">카테고리 리스트 </a>

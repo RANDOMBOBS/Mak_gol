@@ -1,5 +1,6 @@
 package com.org.makgol.users.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -44,7 +45,7 @@ public class userController {
 	 }// ResponseEntity_END
 	
 	@PostMapping("/mailCheck")
-	 @ResponseBody
+	@ResponseBody
 	public ResponseEntity<?> mailCheck(@Valid @RequestBody AuthNumberVo authNumberVo) {
 		
 		
@@ -78,4 +79,28 @@ public class userController {
 		return nextPage;
 	} // userJoinPage_END
 	
+	
+	// ¼ºÈñ¾¾ ÄÚµå
+	@GetMapping("/login")
+	public String loginForm() {
+	    return "user/user_login";
+	}
+		
+		@PostMapping("/loginConfirm")	
+	public String loginConfirm(UsersRequestVo usersRequestVo, HttpSession session) {
+	    String nextPage = "home";
+	    
+	    
+	    System.out.println(usersRequestVo.getEmail());
+	    System.out.println(usersRequestVo.getPassword());
+	    UsersRequestVo loginedUsersRequestVo = userService.loginConfirm(usersRequestVo);
+	    
+	    if (loginedUsersRequestVo == null) {
+	        nextPage = "user/user_login_ng";
+	    } else {
+	        session.setAttribute("loginedUsersRequestVo", loginedUsersRequestVo);
+	    }
+	    
+	    return nextPage;
+	}
 }
