@@ -16,16 +16,12 @@ body{
 h1{
 	margin-top:300px
 }
-ul{
-   list-style:none;
-   }
-
 </style>
 <body>
 
-	<h1>성공</h1>
-
-	<a href="<c:url value='/board/notice' />">공지사항 리스트로 이동</a>
+	<h1>게시글이 등록 되었습니다.</h1>
+	<img id="image" src="<c:url value='/resources/image/ok.gif' />">
+	<a href="<c:url value='/board/notice' />"><br>공지사항 게시글 목록으로 이동</a>
 
 </body>
 </html>

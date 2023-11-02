@@ -37,10 +37,6 @@ public class BoardNoticeService {
 		return noticeDao.deleteNotice(b_id);
 	}
 
-	public BoardVo likeNotice(int b_id) {
-		return noticeDao.updateLikeNotice(b_id);
-	}
-
 	public List<BoardVo> searchNotice(String searchWord) {
 		return noticeDao.selectSearchNotice(searchWord);
 	}
