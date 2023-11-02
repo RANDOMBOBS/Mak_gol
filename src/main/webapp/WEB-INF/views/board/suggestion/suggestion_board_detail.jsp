@@ -114,9 +114,6 @@ ul img {
 				<input type="text" name="nickname" placeholder="로그인 후 댓글 작성이 가능합니다."
 					disabled />
 				<br />
-				<input type="text" name="content" placeholder="로그인 후 댓글 작성이 가능합니다."
-					disabled />
-				<br />
 				<a href="/makgol/user/login">로그인하러가기</a>
 				<br />
 

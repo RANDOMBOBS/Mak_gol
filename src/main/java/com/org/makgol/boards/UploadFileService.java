@@ -33,7 +33,6 @@ public class UploadFileService {
 			e.printStackTrace();
 
 		}
-		System.out.println("결과는?"+result);
 		if (result) {
 			return uniqueName + fileExtension;
 		} else {

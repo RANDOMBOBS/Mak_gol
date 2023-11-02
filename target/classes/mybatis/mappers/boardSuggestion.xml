@@ -75,19 +75,19 @@
 		WHERE id = #{id}
 	</delete>
 
-	<!--
-	
-		<select id="selectBoard" resultMap="boardResult" parameterType="int"> 
-			SELECT * FROM boards WHERE id = #{id}
-		</select>
-				
-		<select id="updateBoard" 
-			resultMap="boardResult" parameterType="boardVo"> UPDATE boards
-			SET title=#{title}, contents=#{contents}, attachment=#{attachment}
-			WHERE id=#{id}
-		</select>
+	<select id="selectBoard" resultMap="boardResult" parameterType="int"> 
+		SELECT * FROM boards WHERE id = #{b_id}
+	</select>
 		
-	-->
+	
+			
+			<!--	
+		<update id="updateBoard" parameterType="boardVo">
+			UPDATE boards SET title=#{title}, contents=#{contents}, attachment=#{attachment}
+			WHERE id=#{b_id}
+		</update>
+			-->
+
 
 	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM boards WHERE

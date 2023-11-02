@@ -83,18 +83,11 @@ public class BoardSuggestionDao {
 		return result;
 	}
 
-	/** suggestion 글 수정 **/
+	/** suggestion 글 수정버튼 **/
 //	실패
 	public BoardVo selectBoard(int b_id) {
-		String sql = "SELECT * FROM boards WHERE id = ?";
 		List<BoardVo> boardVo = null;
-
-		try {
-			RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
-			boardVo = jdbcTemplate.query(sql, rowMapper, b_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		boardVo = sqlSession.selectList("mapper.boardSuggestion.selectBoard", b_id);
 		return boardVo.size() > 0 ? boardVo.get(0) : null;
 	}
 

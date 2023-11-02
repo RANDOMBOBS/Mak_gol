@@ -240,10 +240,8 @@ public class BoardSuggestionController {
 		String searchWord = (String) map.get("searchWord");
 		List<BoardVo> boardVos = boardService.searchBoard(searchOption, searchWord);
 		if (boardVos != null) {
-		
 			model.addAttribute("boardVos", boardVos);
 		}
-
 		return nextPage;
 		
 	}

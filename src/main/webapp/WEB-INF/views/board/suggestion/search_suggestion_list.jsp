@@ -8,8 +8,10 @@
 	integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<h3>검색하신 글 목록입니다.</h3>
 
+<c:choose>
+<c:when test="${boardVos} != null">
+<h3>검색하신 글 목록입니다.</h3>
 <table>
 	<thead>
 		<tr>
@@ -39,11 +41,14 @@
 
 	</tbody>
 </table>
+</c:when>
 
-<c:url value='/board/suggestion/create' var='create_url'>
-	<c:param name='name' value='${boardVo.name}' />
-</c:url>
-<a href="${create_url}">글쓰기</a><br>
+<c:otherwise>
+<h3>검색된 정보가 없습니다.</h3>
+</c:otherwise>
+</c:choose>
 <a href="#javascript" onclick="allBoardList()">전체목록보기</a><br>
+
+
 
 	<jsp:include page="/resources/jsp/suggestion.jsp"></jsp:include>
