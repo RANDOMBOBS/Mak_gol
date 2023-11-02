@@ -183,13 +183,6 @@
 		</dependency>
 
 
-		<!-- MyBatis 11/1 효 추가-->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-	
 
 
 		<!-- Test -->

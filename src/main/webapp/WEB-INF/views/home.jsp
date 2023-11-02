@@ -88,9 +88,12 @@ h1 {
 
 	<div id="pratice">
 		<h2>이동용</h2>
-		<a href="<c:url value='/board/Notice'/>">공지사항</a> <a
-			href="<c:url value='/board/suggestion'/>">건의사항</a> <a
-			href="<c:url value='#'/>">하소연게시판 아직 구현 X </a>
+		<a href="<c:url value='/board/Notice'/>">공지사항</a>
+		<a href="<c:url value='/board/suggestion'/>">건의사항</a>
+		<a href="<c:url value='/board/vent'/>">하소연게시판</a>
+		<a href="<c:url value='/user/login'/>">로그인</a>
+		<a href="<c:url value='/user/join'/>">회원가입</a>
+		<a href="<c:url value='/admin/userManagement'/>">회원관리</a>
 	</div>
 
 	<section>

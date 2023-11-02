@@ -131,7 +131,6 @@ public class BoardSuggestionController {
 	@ResponseBody
 	@PostMapping("/commentCreate")
 	public int createComment(@RequestBody CommentVo commentVo) {
-		System.out.println("컨트롤러"+commentVo);
 		int result = boardService.addComment(commentVo);
 		return result;
 	}
@@ -204,6 +203,7 @@ public class BoardSuggestionController {
 	public String modifyConfirm(BoardVo boardVo, @RequestParam("attachment") MultipartFile file) {
 		String nextPage = "board/suggestion/modify_board_ok";
 		String fileName = uploadFileService.upload(file);
+		System.out.println("글 정보" + boardVo);
 		if(fileName != null) {
 			boardVo.setAttachment(fileName);
 		}

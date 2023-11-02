@@ -64,7 +64,7 @@ public class UserDao {
 		String email = usersRequestVo.getEmail();
 		String password = usersRequestVo.getPassword();
 		String phone = usersRequestVo.getPhone();
-		String photo = "C:\\images\\599e8a0b6a171389b7bc5383e9599175.jpg";
+		String photo = "8596299d10cb4be597330ff7d57b3822.jpeg";
 		
 		
 		try {

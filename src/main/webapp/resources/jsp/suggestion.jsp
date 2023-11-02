@@ -47,10 +47,12 @@
 			let nickname = jQ("input[name=nickname]").val();
 			let content = jQ("input[name=content]").val();
 			let board_id = jQ("input[name=board_id]").val();
+			let user_id = jQ("input[name=user_id]").val();
 			let data = {
 				nickname : nickname,
 				content : content,
 				board_id : board_id,
+				user_id : user_id,
 			};
 			jQ.ajax({
 				url : "/makgol/board/suggestion/commentCreate",
