@@ -26,28 +26,22 @@ public class BoardNoticeDao {
 	private SqlSession sqlSession;
 
 	// 게시글 전체 리스트
-	// Notice select ( All List )
+	// Notice select ( all list ) mybatis -> ( selectNotice )
 	public List<BoardVo> selectNotice() throws DataAccessException {
 		List<BoardVo> boards = null;
 		boards = sqlSession.selectList("mapper.boardNotice.selectNotice",boards);
 		return boards.size() > 0 ? boards : null;
 	} // end
 
+	// 게시글 검색 리스트
+	// Notice select( search list ) -> mybatis ( selectSearchNotice )
 	public List<BoardVo> selectSearchNotice(String searchWord) {
-	    String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo"
-	            + " FROM boards AS b JOIN users AS u ON b.user_id = u.id WHERE category = 'notice' AND title LIKE ?";
-	    List<BoardVo> boardVos = new ArrayList<BoardVo>();
-	    try {
-	        RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
-	        boardVos = jdbcTemplate.query(sql, rowMapper, "%" + searchWord + "%");
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    return boardVos.size() > 0 ? boardVos : null;
+	    return sqlSession.selectList("mapper.boardNotice.selectSearchNotice", searchWord);
 	} // end
+	
 
 	// 글쓰기버튼하여 게시글 추가
-	// Notice insert -> mybatis
+	// Notice insert -> mybatis ( insertNotice )
 	public int insertNotice(BoardVo boardVo) throws DataAccessException {
 		int result = -1;
 		result=sqlSession.insert("mapper.boardNotice.insertNotice",boardVo);
@@ -55,12 +49,12 @@ public class BoardNoticeDao {
 	} // end
 	
 	// 게시글 내용 수정 페이지
-	// Notice detail page
+	// Notice detail page -> mybatis ( selectModNotice )
 	public BoardVo selectModNotice(int b_id) {
 		List<BoardVo> boards = null;
 		boards = sqlSession.selectList("mapper.boardNotice.selectNotice",boards);
 		return boards.size() > 0 ? boards.get(0) : null;
-	}
+	} // end
 
 	// 게시글 조회수 증가 ( + 1 )
 	public BoardVo selectNotice(int b_id) {
@@ -80,7 +74,7 @@ public class BoardNoticeDao {
 	} // end
 
 	// 게시글 수정
-	// Notice update -> mybatis
+	// Notice update -> mybatis ( updateNotice )
 	public int updateNotice(BoardVo boardVo) throws DataAccessException {
 		int result=-1;
 		result=sqlSession.update("mapper.boardNotice.updateNotice",boardVo);
@@ -88,7 +82,7 @@ public class BoardNoticeDao {
 	}	// end
 
 	// 게시글 삭제
-	// Notice delete -> mybatis 
+	// Notice delete -> mybatis ( deleteNotice )
 	public int deleteNotice(int b_id) throws DataAccessException {
 		int result=-1;
 		result=sqlSession.delete("mapper.boardNotice.deleteNotice",b_id);
