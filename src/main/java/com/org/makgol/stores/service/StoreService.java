@@ -1,7 +1,5 @@
 package com.org.makgol.stores.service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,13 +13,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.org.makgol.stores.data.type.KakaoLocalResponseJSON;
 import com.org.makgol.stores.data.vo.KakaoLocalRequestVo;
-import com.org.makgol.stores.data.vo.StoreMenuInfo;
-import com.org.makgol.stores.data.vo.StoreRequestMenuVo;
 import com.org.makgol.stores.data.vo.StoreRequestVo;
-import com.org.makgol.util.Crawller;
 
 import lombok.AllArgsConstructor;
 

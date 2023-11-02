@@ -1,4 +1,4 @@
-package com.org.makgol.admin.Service;
+package com.org.makgol.admin.service;
 
 import java.util.List;
 

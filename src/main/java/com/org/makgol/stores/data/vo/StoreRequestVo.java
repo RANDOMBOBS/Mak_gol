@@ -36,11 +36,13 @@ public class StoreRequestVo {
     //식당사이트
     private String    site;
     //메뉴 업데이트 날짜
-    private LocalDate    menu_update;
+    private LocalDate menu_update;
     //식당 상세페이지
     private String    place_url ;
     //식당정보 업데이트 날짜
     private LocalDate update_date;
+    
+    private String 	  keyword;
     
     
 	@Builder

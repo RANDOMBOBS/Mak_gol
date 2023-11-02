@@ -42,4 +42,9 @@ public class UsersRequestVo {
 	// 프로필사진경로
 	MultipartFile photo;
 	
+	//경도
+    double longitude = 127.027589;
+    //위도
+    double latitude = 37.498102;
+	
 }
