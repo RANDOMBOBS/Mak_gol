@@ -37,7 +37,9 @@ public class BoardSuggestionDao {
 	public int insertSuggestionBoard(BoardVo boardVo) {
 		int result = -1;
 		result = sqlSession.insert("mapper.boardSuggestion.insertSuggestionBoard", boardVo);
+		System.out.println("결과는?" + result);
 		return result;
+
 	}
 
 	/** suggestion 글 상세보기 **/

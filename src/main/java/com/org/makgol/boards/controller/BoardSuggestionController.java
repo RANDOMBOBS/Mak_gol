@@ -35,6 +35,7 @@ public class BoardSuggestionController {
 
 	@Autowired
 	UploadFileService uploadFileService;
+
 	/**
 	 * suggestion 게시판 게시글리스트
 	 * 
@@ -57,7 +58,7 @@ public class BoardSuggestionController {
 		}
 		return "board/suggestion/all_suggestion_list";
 	}
-	
+
 	/**
 	 * suggestion 글 쓰기 버튼
 	 * 
@@ -73,7 +74,7 @@ public class BoardSuggestionController {
 		UserVo loginedUsersRequestVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
 		String userName = loginedUsersRequestVo.getName();
 		int userId = loginedUsersRequestVo.getId();
-		if(loginedUsersRequestVo != null){
+		if (loginedUsersRequestVo != null) {
 			model.addAttribute("name", userName);
 			model.addAttribute("user_id", userId);
 		}
@@ -85,23 +86,27 @@ public class BoardSuggestionController {
 	 * 
 	 * @param boardVo -- 카테고리 : category 제목 : title 작성자 : user_id 내용 : contents
 	 * 
-	 * @return 글쓰기 성공 여부
-	 * 			성공 시 : board/create_board_ok.jsp
-	 * 			실패 시 : board/create_board_ng.jsp
+	 * @return 글쓰기 성공 여부 성공 시 : board/create_board_ok.jsp 실패 시 :
+	 *         board/create_board_ng.jsp
 	 */
 	@PostMapping("/createConfirm")
 	public String createConfirm(BoardVo boardVo, @RequestParam("file") MultipartFile file) {
-		String nextPage = "board/suggestion/create_board_ok";
-		String fileName = uploadFileService.upload(file);
-		if(fileName != null) {
-			boardVo.setAttachment(fileName);
-		}
-		int result = boardService.createBoardConfirm(boardVo);
-		if (result < 1) {
-			nextPage = "board/suggestion/create_board_ng";
-		}
-		return nextPage;
+	    String nextPage = "board/suggestion/create_board_ok";
+	    
+	    if (!file.isEmpty()) { // 파일이 업로드되었는지 확인
+	        String fileName = uploadFileService.upload(file);
+	        boardVo.setAttachment(fileName);
+	    }
+	    
+	    int result = boardService.createBoardConfirm(boardVo);
+	    
+	    if (result < 1) {
+	        nextPage = "board/suggestion/create_board_ng";
+	    }
+	    
+	    return nextPage;
 	}
+
 
 	/**
 	 * suggestion 글 상세보기 버튼
@@ -116,7 +121,7 @@ public class BoardSuggestionController {
 		String nextPage = "board/suggestion/suggestion_board_detail";
 		BoardVo boardVo = boardService.readSuggestionBoard(b_id);
 		boardService.addHit(b_id);
-		
+
 		model.addAttribute("boardVo", boardVo);
 		return nextPage;
 	}
@@ -203,7 +208,7 @@ public class BoardSuggestionController {
 	public String modifyConfirm(BoardVo boardVo, @RequestParam("attachment") MultipartFile file) {
 		String nextPage = "board/suggestion/modify_board_ok";
 		String fileName = uploadFileService.upload(file);
-		if(fileName != null) {
+		if (fileName != null) {
 			boardVo.setAttachment(fileName);
 		}
 		int result = boardService.modifyBoardConfirm(boardVo);
@@ -231,7 +236,6 @@ public class BoardSuggestionController {
 		return nextPage;
 	}
 
-	
 	/** suggestion 글 검색 **/
 	@RequestMapping(value = "/search", method = { RequestMethod.GET, RequestMethod.POST })
 	public String search(@RequestBody Map<String, String> map, Model model) {
@@ -243,7 +247,7 @@ public class BoardSuggestionController {
 			model.addAttribute("boardVos", boardVos);
 		}
 		return nextPage;
-		
+
 	}
-	
+
 }
