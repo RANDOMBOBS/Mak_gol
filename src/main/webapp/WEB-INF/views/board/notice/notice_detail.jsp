@@ -5,6 +5,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <head>
+  
+  <style>
+  ul,li{
+  	list-style:none;
+  }
+  
+  </style>
     <meta charset="UTF-8" />
 
     <script type="text/javascript">

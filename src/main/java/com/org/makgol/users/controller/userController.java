@@ -64,7 +64,6 @@ public class userController {
 	public ResponseEntity<?>  authNumberCheck(@Valid @RequestBody AuthNumberVo authNumberVo) {
 		//int number = Integer.parseInt(auth_number);
 		boolean result = userService.checkNumber(authNumberVo.getAuth_number(), authNumberVo.getEmail());
-		System.out.println(result);
 		if(result) {
 			return new ResponseEntity<>("true", HttpStatus.OK);	
 		} else {
@@ -90,9 +89,6 @@ public class userController {
 	public String loginConfirm(UsersRequestVo usersRequestVo, HttpSession session) {
 	    String nextPage = "home";
 	    
-	    
-	    System.out.println(usersRequestVo.getEmail());
-	    System.out.println(usersRequestVo.getPassword());
 	    UsersRequestVo loginedUsersRequestVo = userService.loginConfirm(usersRequestVo);
 	    
 	    if (loginedUsersRequestVo == null) {

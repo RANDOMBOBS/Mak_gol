@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.org.makgol.boards.vo.BoardVo;
 
-//import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.dao.DataAccessException;
 
 @Component
@@ -22,8 +22,8 @@ public class BoardNoticeDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-//	@Autowired
-//	private SqlSession sqlSession;
+	@Autowired
+	private SqlSession sqlSession;
 
 	public List<BoardVo> selectNotice() {
 		String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo FROM boards b join users u on u.id = b.user_id "
@@ -53,13 +53,8 @@ public class BoardNoticeDao {
 
 
 	public int insertNotice(BoardVo boardVo) throws DataAccessException {
-		String sql = "insert into boards(category,title,user_id,date,contents) values (?,?,2,now(),?) ";
-		int result = 0;
-		try {
-			result = jdbcTemplate.update(sql, boardVo.getCategory(), boardVo.getTitle(),boardVo.getContents());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		int result = -1;
+		result=sqlSession.insert("mapper.boardNotice.insertNotice",boardVo);
 		return result;
 	}
 

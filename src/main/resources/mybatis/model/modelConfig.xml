@@ -5,7 +5,7 @@
 <configuration>
 <!-- 마이바티스 데이터를 받는 Vo를 지목해줌 -->
 	<typeAliases>
-		<typeAlias type="com.org.makgol.users.vo"  alias="userVo" />
-		<typeAlias type="com.org.makgol.boards.vo"  alias="boardVo" />
+		<typeAlias type="com.org.makgol.users.vo.UserVo"  alias="userVo" />
+		<typeAlias type="com.org.makgol.boards.vo.BoardVo"  alias="boardVo" />
 	</typeAliases>
 </configuration>

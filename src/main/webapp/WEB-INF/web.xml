@@ -12,6 +12,7 @@
 		/WEB-INF/spring/jdbc-context.xml
 		/WEB-INF/spring/file-context.xml
 		/WEB-INF/spring/emailAuthentication-context.xml
+		/WEB-INF/spring/action-mybatis.xml
 		</param-value>
 		
 

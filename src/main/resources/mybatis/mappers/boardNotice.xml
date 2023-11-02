@@ -5,9 +5,10 @@
 
 
 	<insert id="insertNotice" parameterType="boardVo">
-		INSERT INTO boards (category, title, user_id, date, contents)
+		INSERT INTO boards 
+		(category, title, user_id, date, contents)
 		VALUES
-		(#{category},#{title},#{1},now(),#{contents})
+		(#{category},#{title},1,now(),#{contents})
 	</insert>
 
 
