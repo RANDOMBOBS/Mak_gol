@@ -103,7 +103,6 @@ public class userController {
 	    String nextPage = "home";
 	    // 사용자 로그인 정보를 서비스를 통해 확인
 	    UserVo loginedUsersRequestVo = userService.loginConfirm(usersRequestVo);
-	    System.out.println("로그인 유저 정보"+ loginedUsersRequestVo);
 	    if (loginedUsersRequestVo == null) {
 	        // 로그인 실패 시 'login_ng' 화면을 표시
 	        nextPage = "user/user_login_ng";

@@ -93,7 +93,6 @@ h1 {
 		<a href="<c:url value='/board/vent'/>">하소연게시판</a>
 		<a href="<c:url value='/user/login'/>">로그인</a>
 		<a href="<c:url value='/user/join'/>">회원가입</a>
-		<a href="<c:url value='/admin/userManagement'/>">회원관리</a>
 	</div>
 
 	<section>

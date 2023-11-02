@@ -203,7 +203,6 @@ public class BoardSuggestionController {
 	public String modifyConfirm(BoardVo boardVo, @RequestParam("attachment") MultipartFile file) {
 		String nextPage = "board/suggestion/modify_board_ok";
 		String fileName = uploadFileService.upload(file);
-		System.out.println("글 정보" + boardVo);
 		if(fileName != null) {
 			boardVo.setAttachment(fileName);
 		}
