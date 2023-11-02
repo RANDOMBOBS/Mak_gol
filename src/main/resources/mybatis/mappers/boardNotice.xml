@@ -4,12 +4,46 @@
 <mapper namespace="mapper.boardNotice">
 
 
+	<!-- 별명 및 칼럼명 다를때 표시 -->
+	<resultMap id="boardResult" type="boardVo">
+		<result property="b_id" column="id" />
+		<result property="user_id" column="user_id" />
+		<result property="hit" column="hit" />
+		<result property="title" column="title" />
+		<result property="date" column="date" />
+		<result property="contents" column="contents" />
+		<result property="category" column="category" />
+		<result property="sympathy" column="sympathy" />
+		<result property="name" column="name" />
+		<result property="attachment" column="attachment" />
+	</resultMap>
+
+	<!-- Notice insert -->
 	<insert id="insertNotice" parameterType="boardVo">
-		INSERT INTO boards 
+		INSERT INTO
+		boards
 		(category, title, user_id, date, contents)
 		VALUES
 		(#{category},#{title},1,now(),#{contents})
 	</insert>
+
+	<!-- Notice update -->
+	<update id="updateNotice" parameterType="boardVo">
+		UPDATE boards
+		SET
+		title = #{title},
+		contents=#{contents}
+		WHERE
+		id = #{b_id}
+	</update>
+
+	<!-- Notice delete -->
+	<delete id="deleteNotice" parameterType="boardVo">
+		DELETE FROM boards
+		WHERE
+		id = #{b_id}
+	</delete>
+
 
 
 </mapper>

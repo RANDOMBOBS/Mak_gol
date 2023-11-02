@@ -89,25 +89,17 @@ public class BoardNoticeDao {
 		return null;
 	}
 
+	// Notice update -> mybatis
 	public int updateNotice(BoardVo boardVo) {
-		String sql = "update boards set title=?, contents=?  where id = ?";
-		int result = 0;
-		try {
-			result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getB_id());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		int result=-1;
+		result=sqlSession.update("mapper.boardNotice.updateNotice",boardVo);
 		return result;
 	}
 
-	public int deleteNotice(int b_id) {
-		String sql = "delete from boards where id = ?";
-		int result = 0;
-		try {
-			result = jdbcTemplate.update(sql, b_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	// Notice delete -> mybatis 
+	public int deleteNotice(int b_id) throws DataAccessException {
+		int result=-1;
+		result=sqlSession.delete("mapper.boardNotice.deleteNotice",b_id);
 		return result;
 	}
 

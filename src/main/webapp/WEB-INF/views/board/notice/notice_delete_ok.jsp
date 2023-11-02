@@ -11,6 +11,6 @@
  성공
  
  
- <a href="<c:url value='/board/Notice' />">게시글로 이동</a>
+ <a href="<c:url value='/board/notice' />">게시글로 이동</a>
 </body>
 </html>

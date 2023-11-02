@@ -11,7 +11,7 @@
 
 			<h1> 게시글이 수정 되었습니다. </h1>
 			
-			<a href="<c:url value='/board/Notice' />">게시글로 이동</a>
+			<a href="<c:url value='/board/notice' />">게시글로 이동</a>
 			
 </body>
 </html>
