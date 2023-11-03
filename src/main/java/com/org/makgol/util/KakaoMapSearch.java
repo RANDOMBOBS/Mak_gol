@@ -10,6 +10,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -56,10 +57,8 @@ public class KakaoMapSearch {
 		restApiCrawller(storeRequestVoList);
 	}
 
-	public void searchMenu(String[] categories, KakaoLocalRequestVo kakaoLocalRequestVo) {
-
-		List<StoreRequestVo> storeRequestVoList = new ArrayList<StoreRequestVo>();
-
+	public List<StoreRequestVo> searchMenu(String[] categories, KakaoLocalRequestVo kakaoLocalRequestVo, List<StoreRequestVo> storeRequestVoList) {
+		
 		// 음식 카테고리 매핑
 		for (int i = 1; i < categories.length; i++) {
 
@@ -71,23 +70,28 @@ public class KakaoMapSearch {
 			//HttpTransactionLogger httpTransactionLogger = new HttpTransactionLogger();
 			//httpTransactionLogger.logResponseJson(kakaoResponseJSON);
 
+			
 			// ShopInfo를 StoreRequestVo로 매핑
 			List<StoreRequestVo> storeRequestVoListAdd = shopInfoList.stream().map(ShopInfo::mapToStoreRequestVo)
 					.collect(Collectors.toList());
-
+			
+			
+			int beforeAddSize = storeRequestVoList.size();
 			storeRequestVoList.addAll(storeRequestVoListAdd);
-
-			for (StoreRequestVo storeRequestVo : storeRequestVoList) {
-				storeRequestVo.setKeyword(categories[0]);
-			} 
+			int afterAddSize = storeRequestVoList.size();
+			
+			
+			for(int j=beforeAddSize; j < afterAddSize; j++) {
+				storeRequestVoList.get(j).setKeyword(categories[0]);
+				storeRequestVoList.get(j).setMenuName(categories[i]);
+			}
 		}
-		System.out.println(storeRequestVoList.size());
-		restApiCrawller(storeRequestVoList);
+		return storeRequestVoList;
 	}
 	
 	public void restApiCrawller(List<StoreRequestVo> storeRequestVoList) {
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://localhost:8090/api/v1/crawl/kakaoStoreCrwall";
+		String url = "http://localhost:8090/user/join";
 		
 		// HTTP 요청 헤더 설정
 		HttpHeaders headers = new HttpHeaders();
@@ -97,7 +101,7 @@ public class KakaoMapSearch {
 		HttpEntity<List<StoreRequestVo>> request = new HttpEntity<>(storeRequestVoList, headers);
 
 		// 서버로 HTTP GET 요청 보내기
-		restTemplate.exchange(
+		ResponseEntity<HashMap<String, Object>> responseEntity = restTemplate.exchange(
 			    url,
 			    HttpMethod.POST,
 			    request,

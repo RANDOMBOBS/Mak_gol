@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.org.makgol.stores.data.vo.Category;
 import com.org.makgol.stores.data.vo.KakaoLocalRequestVo;
+import com.org.makgol.stores.data.vo.StoreRequestVo;
 import com.org.makgol.users.dao.UserDao;
 import com.org.makgol.users.vo.UsersRequestVo;
 import com.org.makgol.util.KakaoMapSearch;
@@ -85,28 +86,40 @@ public class UserService {
 			kakaoLocalRequestVo.setX(String.valueOf(usersRequestVo.getLongitude()));
 			 
 			 
-			String[] foodCategories = Arrays.stream(Category.CategoryFood.values())
-	                .map(Enum::name)
-	                .toArray(String[]::new);
+			//String[] foodCategories = Arrays.stream(Category.CategoryFood.values())
+	          //      .map(Enum::name)
+	            //    .toArray(String[]::new);
 
 	        // CategoryMenukorea의 값을 String 배열로 변환
-			String[] menuKoreaGgigaeCategories = Arrays.stream(Category.CategoryKoreaGgigaeMenu.values())
+			String[] CategoryKoreaGgigaeMenu = Arrays.stream(Category.CategoryKoreaGgigaeMenu.values())
 	                .map(Enum::name)
 	                .toArray(String[]::new);
 			
-			String[] menuKoreaGooEeCategories = Arrays.stream(Category.CategoryKoreaGgigaeMenu.values())
+			String[] CategoryKoreaGooEeMenu = Arrays.stream(Category.CategoryKoreaGooEeMenu.values())
 	                .map(Enum::name)
 	                .toArray(String[]::new);
 			
-			String[] CategoryKoreaRiceMenu = Arrays.stream(Category.CategoryKoreaGgigaeMenu.values())
+			String[] CategoryKoreaRiceMenu = Arrays.stream(Category.CategoryKoreaRiceMenu.values())
 	                .map(Enum::name)
 	                .toArray(String[]::new);
+			
 			 
-	        kakaoMapSearch.search(foodCategories, kakaoLocalRequestVo);
-	        kakaoMapSearch.searchMenu(menuKoreaGgigaeCategories, kakaoLocalRequestVo);
-	        kakaoMapSearch.searchMenu(menuKoreaGooEeCategories, kakaoLocalRequestVo);
-	        kakaoMapSearch.searchMenu(CategoryKoreaRiceMenu, kakaoLocalRequestVo);
-			 
+	        //kakaoMapSearch.search(foodCategories, kakaoLocalRequestVo);
+			List<StoreRequestVo> storeRequestVoList = new ArrayList<StoreRequestVo>();
+			storeRequestVoList = kakaoMapSearch.searchMenu(CategoryKoreaGgigaeMenu, kakaoLocalRequestVo, storeRequestVoList);
+			storeRequestVoList = kakaoMapSearch.searchMenu(CategoryKoreaGooEeMenu, kakaoLocalRequestVo, storeRequestVoList);
+			storeRequestVoList = kakaoMapSearch.searchMenu(CategoryKoreaRiceMenu, kakaoLocalRequestVo, storeRequestVoList);
+			
+			System.out.println(storeRequestVoList.size());
+			
+			int i=0;
+			for(StoreRequestVo storeRequestVo: storeRequestVoList) {
+				i++;
+				System.out.println("index"+ i +" --> : " +storeRequestVo.getPlace_url());
+				System.out.println("index"+ i +" --> : " +storeRequestVo.getMenuName());
+			}
+			try { kakaoMapSearch.restApiCrawller(storeRequestVoList); } catch(Exception e) {}
+			
 		}
 		return null;
 		 

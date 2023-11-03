@@ -8,10 +8,7 @@ public class KakaoLocalRequestVo {
 	public String y;
 	public String keyword="";
 	public int radius = 10000;
-	public int size = 15;
+	public int size = 5;
 	public int page = 1;
-
-	
-
 	
 }
