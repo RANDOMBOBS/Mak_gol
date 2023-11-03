@@ -13,22 +13,24 @@ import com.org.makgol.category.vo.CategoryListVo;
 
 @Component
 
-public class MainDao {
-
+public class TodayMenuDao {
+	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	public List<CategoryListVo> selectAllCategory() {
-		String sql = "SELECT DISTINCT category FROM stores";
-		List <CategoryListVo> categorys = new ArrayList<CategoryListVo>();
+	public List<CategoryListVo> selectTodayMenu(String where) {
+		String sql = "SELECT menu_name FROM category_menu " + where;
+		List<CategoryListVo> categorys = new ArrayList<CategoryListVo>();
 		try {
-		RowMapper<CategoryListVo> rowMapper = BeanPropertyRowMapper.newInstance(CategoryListVo.class);
-		categorys = jdbcTemplate.query(sql, rowMapper);
+			RowMapper<CategoryListVo> rowMapper = BeanPropertyRowMapper.newInstance(CategoryListVo.class);
+			categorys = jdbcTemplate.query(sql, rowMapper);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return categorys;
+		return categorys.size() > 0 ? categorys : null;
 	}
 	
-	
+	public List<CategoryListVo> selectTodayMenu() {
+		return selectTodayMenu("");
+	}
 }

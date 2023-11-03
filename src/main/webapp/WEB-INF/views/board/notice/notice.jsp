@@ -44,7 +44,6 @@
 				}
 			});
 		}
-
 		noticeAllList(); // 최초 리스트 호출
 	</script>
 </body>

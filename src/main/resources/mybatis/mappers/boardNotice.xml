@@ -4,7 +4,6 @@
 
 <mapper namespace="mapper.boardNotice">
 
-
 	<!-- 별명 및 칼럼명 다를때 표시 -->
 	<resultMap id="boardResult" type="boardVo">
 		<result property="b_id" column="id" />
@@ -19,6 +18,7 @@
 		<result property="attachment" column="attachment" />
 	</resultMap>
 
+	<!-- 게시글 전체 리스트 -->
 	<!-- Notice select (All List) -->
 	<select id="selectNotice" resultType="boardVo" parameterType="boardVo">
 		SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date,
@@ -30,6 +30,7 @@
 		category = 'notice' order by date DESC
 	</select>
 
+	<!-- 게시글 정보 -->
 	<!-- Notice select (Notice detail) -->
 	<select id="selectModNotice" resultType="boardVo" parameterType="boardVo">
 		SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date,
@@ -40,14 +41,26 @@
 		WHERE b.id = #{b_id}
 	</select>
 
+	<!-- 게시글 특정단어 검색 -->
  	<!-- Notice select (Notice search) -->
-	<select id="selectSearchNotice" resultType="boardVo" parameterType="java.lang.String">
+	<select id="selectSearchNotice" resultType="boardVo" parameterType="boardVo">
     	SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo
    		FROM boards AS b
     	JOIN users AS u ON b.user_id = u.id
     	WHERE category = 'notice' AND title LIKE CONCAT('%', #{searchWord}, '%')
 	</select>
+	
+	<!-- 게시글 조회수 +1 증가 -->
+	<!-- Notice select (Notcie hit) -->
+	<update id="updateNoticeHit" parameterType="boardVo">
+			UPDATE boards AS b 
+			JOIN users AS u
+			ON b.user_id = u.id
+			SET b.hit = b.hit + 1
+			WHERE b.id = #{b.id}
+	</update>
 
+	<!-- 게시글 추가 -->
 	<!-- Notice insert -->
 	<insert id="insertNotice" parameterType="boardVo">
 		INSERT INTO
@@ -57,6 +70,7 @@
 		(#{category},#{title},1,now(),#{contents})
 	</insert>
 
+	<!-- 게시글 수정 -->
 	<!-- Notice update -->
 	<update id="updateNotice" parameterType="boardVo">
 		UPDATE boards
@@ -68,6 +82,7 @@
 		id = #{b_id}
 	</update>
 
+	<!-- 게시글 삭제 -->
 	<!-- Notice delete -->
 	<delete id="deleteNotice" parameterType="boardVo">
 		DELETE FROM boards

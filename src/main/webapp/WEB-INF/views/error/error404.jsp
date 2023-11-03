@@ -35,9 +35,6 @@ pageEncoding="UTF-8" isErrorPage="true"%>
       <span>404 에러 페이지</span>
     </div>
     
-    
-    
-    
     <script>
         // JavaScript를 사용하여 이미지를 무한 반복으로 변경
         let image = document.getElementById("image");
@@ -47,7 +44,7 @@ pageEncoding="UTF-8" isErrorPage="true"%>
             if (loopCount < 10) { // 루프를 원하는 횟수로 설정
                 image.src = "<c:url value='/resources/image/error.gif' />"; // 이미지를 다시 로드
                 loopCount++;
-                setTimeout(loopImage, 4000); // 1초마다 반복
+                setTimeout(loopImage, 4000); // 4초마다 반복
             }
         }
         loopImage(); // 루프 시작

@@ -1,28 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-    <section>
-     <div id="todaymenu_main_div">
-        <ul class="todaymenu_main_ul">
-          <li>오늘의메뉴</li>
-          <li>한식</li>
-          <li>양식</li>
-          <li>중식</li>
-          <li>분식</li>
-          <li>일식</li>
-          <li>카페/디저트</li>
-        </ul>
-      </div>
-      <div class="todaymenu_list_div">
-        
-      </div>
-    </section>
-</body>
-</html>
+<ul class="todaymenu_list_ul">
+	<c:forEach var="item" items="${categoryVo}" begin="0" end="4">
+		<li class="todaymenu_list">
+		<img class="today_img" src="<c:url value='/resources/image/김치찌개.jpg' />"> 
+		<span class="today_menu_name">${item.menu_name}</span> 
+		<span class="today_menu_gogo">근처식당 찾아보기 >></span>
+		</li>
+	</c:forEach>
+</ul>

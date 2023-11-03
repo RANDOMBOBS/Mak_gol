@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 
 
 <ul class="category_list_ul">
-  <c:forEach var="item" items="${categoryVo }">
+  <c:forEach var="item" items="${categoryVo}">
     <li class="menu_list">
       <img src="<c:url value='/resources/image/김치찌개.jpg' />">
       <span class="menu_name">${item.menu}</span>

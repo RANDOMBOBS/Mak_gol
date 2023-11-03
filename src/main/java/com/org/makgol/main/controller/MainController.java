@@ -17,6 +17,7 @@ import com.org.makgol.main.service.MainService;
 @Controller
 @RequestMapping("/main")
 public class MainController {
+	
 	@Autowired
 	MainService mainService;
 
@@ -26,11 +27,6 @@ public class MainController {
 		return "main/main";
 	}
 	
-	/**
-	 * 음식점의 모든 카테고리 가져오기
-	 * @param model : 돌림판 페이지로 카테고리 목록을 넘김
-	 * @return random_wheel.jsp
-	 */
 	@RequestMapping(value = "/allCategory", method = { RequestMethod.GET, RequestMethod.POST })
 	public String allCategory(Model model) {
 		List<CategoryListVo> categorys = mainService.getAllCategory();
@@ -38,13 +34,6 @@ public class MainController {
 		return "main/random_wheel";
 	}
 	
-	
-	/**
-	 * 메뉴추천 결과
-	 * @param menu
-	 * @param model
-	 * @return
-	 */
 	@RequestMapping(value = "/resultMenu/{menu}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String resultMenu(@PathVariable("menu") String menu, Model model) {
 		model.addAttribute("menu", menu);

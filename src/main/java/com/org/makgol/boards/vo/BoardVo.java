@@ -18,5 +18,4 @@ public class BoardVo {
 	String attachment;
 	
 	
-	
 }

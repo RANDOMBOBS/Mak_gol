@@ -74,6 +74,19 @@ h1 {
 	border: 1px solid #000;
 }
 
+.todaymenu_list_ul img {
+	width: 100%;
+	height: 260px;
+	object-fit: cover;
+	border-radius: 7px;
+	filter: brightness(60%);
+}
+
+.todaymenu_list:hover .today_img {
+	transition: all 0.6s;
+	transform: scale(1.2);
+}
+
 #pratice {
 	display: flex;
 	justify-content: space-around;
@@ -90,20 +103,29 @@ h1 {
 <body background="/resources/image/chick.jpg">
 	<h1 id="header">Header</h1>
 
+	
 	<div id="pratice">
-		<h2>이동용</h2>
+		<h2>게스트용</h2>
 		<a href="<c:url value='/board/notice'/>">공지사항</a> 
 		<a href="<c:url value='/board/suggestion'/>">건의사항</a> 
 		<a href="<c:url value='/board/vent'/>">하소연게시판 </a>
 		<a href="<c:url value='/user/login'/>">로그인</a>
 		<a href="<c:url value='/user/join'/>">회원가입</a>
 	</div>
+	
+	
+	<div id="pratice">
+		<h2>로그인용</h2>
+		<a href="<c:url value='/board/notice'/>">공지사항</a> 
+		<a href="<c:url value='/board/suggestion'/>">건의사항</a> 
+		<a href="<c:url value='/board/vent'/>">하소연게시판 </a>
+		<a href="<c:url value='/'/>">로그아웃</a>
+		<a href="<c:url value='/'/>">정보수정</a>
+	</div>
 
 	<section>
 		<article id="article1">
 			<p class="selectedCategory">오늘의 점심 메뉴는 ?</p>
-
-
 			<p class="roulette_pin"></p>
 			<button id="spin">시작!</button>
 			<div class="roullette_position">
@@ -125,13 +147,8 @@ h1 {
 					</ul>
 				</div>
 				<div class="todaymenu_list_div">
-					<ul class="todaymenu_list_ul">
-						<li>추천메뉴1</li>
-						<li>추천메뉴2</li>
-						<li>추천메뉴3</li>
-						<li>추천메뉴4</li>
-						<li>추천메뉴5</li>
-					</ul>
+					
+					
 				</div>
 			</div>
 		</div>
@@ -170,7 +187,7 @@ h1 {
 				<a href="<c:url value='/board/suggestion'/>">건의사항</a>
 			</div>
 			<div>
-				<a href="<c:url value='#'/>">하소연게시판 아직 구현 X </a>
+				<a href="<c:url value='/board/vent'/>">하소연게시판</a>
 			</div>
 		</div>
 	</section>
@@ -179,11 +196,13 @@ h1 {
 	</footer>
 
 	<jsp:include page="/resources/jsp/main.jsp"></jsp:include>
+	<jsp:include page="/resources/jsp/todayMenu.jsp"></jsp:include>
 
 
 	<script>
 		$.noConflict();
 		var jQ = jQuery;
+		
 		function getAllcategory() {
 			jQ.ajax({
 				url : "/makgol/main/allCategory",
@@ -197,8 +216,10 @@ h1 {
 				},
 			});
 		}
-
 		getAllcategory();
+		
+		todayMenuList();
+		
 	</script>
 </body>
 </html>

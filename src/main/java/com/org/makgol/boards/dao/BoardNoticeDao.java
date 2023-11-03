@@ -1,15 +1,15 @@
 package com.org.makgol.boards.dao;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.List;
+//import java.sql.Timestamp;
+//import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+//import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+//import org.springframework.jdbc.core.RowMapper;
 
 import com.org.makgol.boards.vo.BoardVo;
 
@@ -55,22 +55,14 @@ public class BoardNoticeDao {
 		boards = sqlSession.selectList("mapper.boardNotice.selectNotice",boards);
 		return boards.size() > 0 ? boards.get(0) : null;
 	} // end
-
+	
 	// 게시글 조회수 증가 ( + 1 )
-	public BoardVo selectNotice(int b_id) {
-		String updatesql = "UPDATE boards AS b JOIN users AS u ON b.user_id = u.id SET b.hit = b.hit + 1 WHERE b.id = ?";
-		String selectsql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
-				+ "FROM boards AS b " + "JOIN users AS u ON b.user_id = u.id " + "WHERE b.id = ?";
+	// Notice updateHit -> mybatis (updateNoticeHit)
+	public BoardVo selectNotice(int b_id) throws DataAccessException {
 		List<BoardVo> boards = null;
-		try {
-			jdbcTemplate.update(updatesql, b_id);
-			RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
-			boards = jdbcTemplate.query(selectsql, rowMapper, b_id);
-			return boards.size() > 0 ? boards.get(0) : null;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+		sqlSession.update("mapper.boardNotice.updateNoticeHit",b_id);
+		boards = sqlSession.selectList("mapper.boardNotice.selectNotice",b_id);
+		return boards.size() > 0 ? boards.get(0) : null;
 	} // end
 
 	// 게시글 수정
