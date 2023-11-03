@@ -1,4 +1,3 @@
-<%@page import="com.org.makgol.users.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -17,23 +16,6 @@
 <body>
 	<h3>건의게시판</h3>
 	<div class="board_list"></div>
-
-
-
-
-	<c:url value='/board/suggestion/create' var='create_url'>
-		<c:param name='name' value='${boardVo.name}' />
-	</c:url>
-	<%
-	UserVo loginedUserVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
-	if (loginedUserVo != null) {
-	%>
-
-	<a href="${create_url}">글쓰기</a>
-	<br>
-	<%
-	}
-	%>
 
 	<form name="search_board_form">
 		<select name="search">

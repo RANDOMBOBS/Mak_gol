@@ -57,10 +57,6 @@ ul img {
 			<td>내용</td>
 			<td>${boardVo.contents}</td>
 		</tr>
-		<tr>
-			<td>유저아이디</td>
-			<td>${boardVo.user_id}</td>
-		</tr>
 
 
 		<c:if test="${not empty boardVo.attachment}">
@@ -82,10 +78,13 @@ ul img {
 
 		<c:url value="/board/suggestion/modify" var="modify_url">
 			<c:param name="b_id" value="${boardVo.b_id}" />
+			<c:param name="name" value="${boardVo.name}" />
+			<c:param name="attachment" value="${boardVo.attachment}" />
 		</c:url>
 
 		<c:url value="/board/suggestion/delete" var="delete_url">
 			<c:param name="b_id" value="${boardVo.b_id}" />
+			<c:param name="attachment" value="${boardVo.attachment}" />
 		</c:url>
 		<%
 		UserVo loginedUsersRequestVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
@@ -101,7 +100,8 @@ ul img {
 		<c:choose>
 			<c:when test="${loginedUsersRequestVo != null}">
 				<input type="hidden" name="board_id" value="${boardVo.b_id}" />
-				<input type="hidden" name="user_id" value="${loginedUsersRequestVo.getId()}" />
+				<input type="hidden" name="user_id"
+					value="${loginedUsersRequestVo.getId()}" />
 				<input type="text" name="nickname" placeholder="닉네임" />
 				<br />
 				<input type="text" name="content" placeholder="댓글을 입력해주세요." />

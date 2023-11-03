@@ -81,12 +81,12 @@
 		
 	
 			
-			<!--	
-		<update id="updateBoard" parameterType="boardVo">
-			UPDATE boards SET title=#{title}, contents=#{contents}, attachment=#{attachment}
-			WHERE id=#{b_id}
-		</update>
-			-->
+		
+	<update id="updateBoard" parameterType="boardVo">
+		UPDATE boards SET title=#{title}, contents=#{contents}, attachment=#{attachment}
+		WHERE id=#{b_id}
+	</update>
+	
 
 
 	<delete id="deleteBoard" parameterType="int">

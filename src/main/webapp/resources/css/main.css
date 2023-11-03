@@ -17,11 +17,6 @@
 body::-webkit-scrollbar{
 	display:none;
 }
-#header {
-  height: 100px;
-  line-height: 100px;
-  border: 1px solid #000;
-}
 
 .roulette_pin {
   position: absolute;
@@ -63,7 +58,7 @@ body::-webkit-scrollbar{
   transform: translate(-50%, -50%);
 }
 
-.roulette {
+.roullette_position .roulette {
   display: flex;
   justify-content: center;
   width: 500px;
@@ -74,9 +69,11 @@ body::-webkit-scrollbar{
   position: relative;
   overflow: hidden;
   transition: 4s;
+  box-shadow : 5px 5px 10px rgba(0, 0, 0, 0.7);
+  
 }
 
-.roulette div {
+.roulette .onePiece {
   padding-top: 15%;
   clip-path: polygon(50% 100%, 0 0, 100% 0);
   height: 50%;
@@ -89,32 +86,38 @@ body::-webkit-scrollbar{
   transform-origin: bottom center;
 }
 
-.roulette div:nth-child(odd) {
+.roulette .onePiece:nth-child(odd) {
   background-color: #ffeeaa;
 }
 
-.roulette div:nth-child(even) {
+.roulette .onePiece:nth-child(even) {
   background-color: #ffd400;
 }
 
-.roulette div:nth-child(2) {
+.roulette .onePiece:nth-child(2) {
   transform: rotate(60deg);
 }
 
-.roulette div:nth-child(3) {
+.roulette .onePiece:nth-child(3) {
   transform: rotate(120deg);
 }
 
-.roulette div:nth-child(4) {
+.roulette .onePiece:nth-child(4) {
   transform: rotate(180deg);
 }
 
-.roulette div:nth-child(5) {
+.roulette .onePiece:nth-child(5) {
   transform: rotate(240deg);
 }
 
-.roulette div:nth-child(6) {
+.roulette .onePiece:nth-child(6) {
   transform: rotate(300deg);
+}
+
+.resultMenu {
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
 }
 
 .selectedCategory {
@@ -127,11 +130,7 @@ body::-webkit-scrollbar{
   font-size: 30px;
 }
 
-.resultMenu {
-  width: 150px;
-  height: 50px;
-  line-height: 50px;
-}
+
 .letsMenu {
   margin: 0 20px;
   background-color: transparent;

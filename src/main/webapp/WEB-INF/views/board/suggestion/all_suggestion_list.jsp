@@ -1,3 +1,4 @@
+<%@page import="com.org.makgol.users.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -36,3 +37,14 @@
 		</c:forEach>
 	</tbody>
 </table>
+
+
+	<%
+	UserVo loginedUserVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
+	if (loginedUserVo != null) {
+	%>
+	<a href="<c:url value='/board/suggestion/create'/>">글쓰기</a>
+	<br>
+	<%
+	}
+	%>

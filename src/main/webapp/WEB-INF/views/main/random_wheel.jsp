@@ -6,7 +6,7 @@
 
 
 	<c:forEach var="item" items="${categorys}">
-		<div>
+		<div class="onePiece">
 			<span class="category">${item.category}</span>
 		</div>
 	</c:forEach>

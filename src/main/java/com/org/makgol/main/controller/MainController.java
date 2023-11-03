@@ -48,7 +48,7 @@ public class MainController {
 	@RequestMapping(value = "/resultMenu/{menu}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String resultMenu(@PathVariable("menu") String menu, Model model) {
 		model.addAttribute("menu", menu);
-		return "main/todaysMenu";		
+		return "main/roulette_result";		
 		
 	}
 }

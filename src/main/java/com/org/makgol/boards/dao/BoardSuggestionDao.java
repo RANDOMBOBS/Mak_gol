@@ -37,7 +37,6 @@ public class BoardSuggestionDao {
 	public int insertSuggestionBoard(BoardVo boardVo) {
 		int result = -1;
 		result = sqlSession.insert("mapper.boardSuggestion.insertSuggestionBoard", boardVo);
-		System.out.println("결과는?" + result);
 		return result;
 
 	}
@@ -57,7 +56,6 @@ public class BoardSuggestionDao {
 	}
 
 	/** suggestion 댓글 INSERT **/
-//	(유저아이디 바꾸기!)
 	public int insertComment(CommentVo commentVo) {
 		int result = -1;
 		result = sqlSession.insert("mapper.boardSuggestion.insertComment", commentVo);
@@ -86,7 +84,6 @@ public class BoardSuggestionDao {
 	}
 
 	/** suggestion 글 수정버튼 **/
-//	실패
 	public BoardVo selectBoard(int b_id) {
 		List<BoardVo> boardVo = null;
 		boardVo = sqlSession.selectList("mapper.boardSuggestion.selectBoard", b_id);

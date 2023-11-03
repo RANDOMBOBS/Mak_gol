@@ -1,5 +1,6 @@
 package com.org.makgol.boards.controller;
 
+import java.io.File;
 import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -69,7 +70,7 @@ public class BoardSuggestionController {
 	 * @return create_board_form.jsp로 이동
 	 */
 	@GetMapping("/create")
-	public String create(@RequestParam("name") String name, Model model, HttpSession session) {
+	public String create(Model model, HttpSession session) {
 		String nextPage = "board/suggestion/create_board_form";
 		UserVo loginedUsersRequestVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
 		String userName = loginedUsersRequestVo.getName();
@@ -94,7 +95,7 @@ public class BoardSuggestionController {
 	    String nextPage = "board/suggestion/create_board_ok";
 	    
 	    if (!file.isEmpty()) { // 파일이 업로드되었는지 확인
-	        String fileName = uploadFileService.upload(file);
+	        String fileName = uploadFileService.boardUpload(file);
 	        boardVo.setAttachment(fileName);
 	    }
 	    
@@ -189,10 +190,10 @@ public class BoardSuggestionController {
 	 * @return modify_board_form.jsp로 이동
 	 */
 	@GetMapping("/modify")
-	public String modify(@RequestParam("b_id") int b_id, Model model) {
+	public String modify(@RequestParam("b_id") int b_id, @RequestParam("name") String name, Model model, @RequestParam("attachment") String attachment) {
 		String nextPage = "board/suggestion/modify_board_form";
 		BoardVo boardVo = boardService.modifyBoard(b_id);
-		boardVo.setB_id(b_id);
+		boardVo.setName(name);
 		model.addAttribute("boardVo", boardVo);
 		return nextPage;
 	}
@@ -205,15 +206,22 @@ public class BoardSuggestionController {
 	 * @return 수정 성공 여부 성공 시 : modify_board_ok.jsp 실패 시 : modify_board_ng.jsp
 	 */
 	@PostMapping("/modifyConfirm")
-	public String modifyConfirm(BoardVo boardVo, @RequestParam("attachment") MultipartFile file) {
+	public String modifyConfirm(BoardVo boardVo, @RequestParam("file") MultipartFile file, @RequestParam("trash") String trash) {
 		String nextPage = "board/suggestion/modify_board_ok";
-		String fileName = uploadFileService.upload(file);
-		if (fileName != null) {
-			boardVo.setAttachment(fileName);
-		}
+
+		
+		if (!file.isEmpty()) { 
+	        String fileName = uploadFileService.boardUpload(file);
+	        boardVo.setAttachment(fileName);
+	    }
+		
 		int result = boardService.modifyBoardConfirm(boardVo);
 		if (result < 1) {
 			nextPage = "board/suggestion/modify_board_ng";
+		}else {
+			String deleteFile = "C:\\makgol\\board\\upload\\"+trash;
+			File oldfile= new File(deleteFile);
+			oldfile.delete();
 		}
 		return nextPage;
 	}
@@ -225,13 +233,15 @@ public class BoardSuggestionController {
 	 * @return 삭제 성공 여부 성공 시 : delete_board_ok.jsp 실패 시 : delete_board_ng.jsp
 	 */
 	@GetMapping("/delete")
-	public String delete(@RequestParam("b_id") int b_id) {
+	public String delete(@RequestParam("b_id") int b_id, @RequestParam("attachment") String attachment) {
 		String nextPage = "board/suggestion/delete_board_ok";
-
-		//
 		int result = boardService.deleteBoard(b_id);
+		String deleteFile = "C:\\makgol\\board\\upload\\"+attachment;
 		if (result < 1) {
 			nextPage = "board/suggestion/delete_board_ng";
+		} else {
+			File file = new File(deleteFile);
+			file.delete();
 		}
 		return nextPage;
 	}

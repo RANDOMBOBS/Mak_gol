@@ -34,7 +34,7 @@
 		<form
 			action="<c:url value='/board/suggestion/modifyConfirm' ><c:param name='b_id' value='${boardVo.b_id}' />
 		</c:url>"
-			method="post" name="modify_board_form">
+			method="post" name="modify_board_form" enctype="multipart/form-data">
 			<span>카테고리 선택</span>
 			<select name="category" readonly disabled>
 				<option value="">카테고리 선택</option>
@@ -46,7 +46,8 @@
 			<span>제목</span> <input type="text" name="title" 	value="${boardVo.title}" placeholder="글제목"><br>
 			<span>작성자</span> <input type="text" name="name" value="${boardVo.name}" readonly disabled><br>
 			<span>내용</span><input type="text" name="contents" value="${boardVo.contents}" placeholder="글내용을 입력해주세요"><br>
-			<span>내용</span><input type="file" name="attachment" ><br>
+			<span>내용</span><input type="hidden" name="trash" value="${boardVo.attachment}"><br>
+			<span>내용</span><input type="file" name="file" ><br>
 			<input type="button" value="수정" onclick="ModifyBoardForm();">
 			<input type="button" value="취소" onclick="history.go(-1)"/>
 		</form>
