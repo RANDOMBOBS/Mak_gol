@@ -123,4 +123,31 @@ public class BoardSuggestionDao {
 		boardVos = sqlSession.selectList("mapper.boardSuggestion.selectSearchBoard", map);
 		return boardVos.size() > 0 ? boardVos : null;
 	}
+	
+	public int selectuserLikeStatus(BoardVo boardVo) {
+		int status = sqlSession.selectOne("mapper.boardSuggestion.selectuserLikeStatus", boardVo);
+		return status;
+	}
+	
+	public int insertBoardLike(BoardVo boardVo) {
+		int result = -1;
+		result = sqlSession.insert("mapper.boardSuggestion.insertBoardLike", boardVo);
+		return result;
+	}
+	
+	public int deleteBoardLike(BoardVo boardVo) {
+		int result = -1;
+		result = sqlSession.delete("mapper.boardSuggestion.deleteBoardLike", boardVo);
+		return result;
+	}
+	
+	public int selectCountLike(int b_id) {
+		int totalLike = sqlSession.selectOne("mapper.boardSuggestion.selectLikeCount", b_id);
+		return totalLike;
+	}
+	
+	public void updateBoardSympathy(Map<String, Integer> map) {
+		sqlSession.update("mapper.boardSuggestion.updateBoardSympathy", map);
+	}
 }
+

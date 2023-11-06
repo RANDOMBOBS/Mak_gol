@@ -6,19 +6,20 @@
 	$.noConflict();
 	var jQ = jQuery;
 
-	function allBoardList(){
+	function allBoardList() {
 		jQuery.ajax({
 			url : "/makgol/board/suggestion/showAllList",
 			type : "GET",
-		 	dataType : "html",
+			dataType : "html",
 			success : function(rdata) {
 				jQuery(".board_list").html(rdata);
 			},
 			error : function(error) {
 				alert("allBoardList 오류");
 			}
-		});}
-	
+		});
+	}
+
 	function comList() {
 		let board_id = parseInt(jQ("input[name=board_id]").val());
 		jQ.ajax({
@@ -175,7 +176,63 @@
 			});
 		}
 	}
+
+	jQ('input[type=checkbox]').on('click',function() {
+		if (!user_id) {
+			alert("로그인을 하세요.")
+			return false;
+		}
+		if (jQ(this).prop('checked')) {
+			jQ(this).next('i').addClass('fa-solid').removeClass('fa-regular')
+			jQ.ajax({
+			type :"POST",
+			url : "${pageContext.request.contextPath}/board/suggestion/likeBoard",
+			data : JSON.stringify(likeData),
+			contentType : "application/json; charset=UTF-8",
+			success : function(rdata){
+				jQ('.fa-thumbs-up').text(rdata.totalLike)
+			},
+			error : function(error){
+				console.log(error)
+			}
+		})
+		
+		} else {
+			jQ(this).next('i').addClass('fa-regular').removeClass('fa-solid')
+
+			jQ.ajax({
+			type :"POST",
+			url : "${pageContext.request.contextPath}/board/suggestion/unlikeBoard",
+			data : JSON.stringify(likeData),
+			contentType : "application/json; charset=UTF-8",
+			success : function(rdata){
+				jQ('.fa-thumbs-up').text(rdata.totalLike)
+			},
+			error : function(error){
+				console.log(error)
+			}
+		})
+		}
+	})
 	
 	
-	
+	function userLikeStatus(b_id, user_id){
+		jQ.ajax({
+			type :"POST",
+			url : "${pageContext.request.contextPath}/board/suggestion/userLikeStatus",
+			data : JSON.stringify(likeData),
+			contentType : "application/json; charset=UTF-8",
+			success : function(rdata){
+			if(rdata.status){
+				jQ("#like").next('i').addClass('fa-solid').removeClass('fa-regular')
+				jQ("#like").prop("checked", true)
+			}else{
+				jQ("#like").next('i').addClass('fa-regular').removeClass('fa-solid')
+			}
+			},
+			error : function(error){
+				console.log(error)
+			}
+		})
+	}
 </script>

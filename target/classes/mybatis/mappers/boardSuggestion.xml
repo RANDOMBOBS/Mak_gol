@@ -18,8 +18,7 @@
 	</resultMap>
 
 
-	<select id="selectAllSuggestionBoard" resultMap="boardResult"
-		parameterType="boardVo">
+	<select id="selectAllSuggestionBoard" resultMap="boardResult" parameterType="boardVo">
 		SELECT b.id, b.user_id, b.hit, b.title, b.date,
 		b.contents, b.category, b.sympathy, u.name, u.photo
 		FROM boards AS b
@@ -113,5 +112,26 @@
 				AND b.contents LIKE CONCAT('%', #{searchWord}, '%')
 			</when>
 		</choose>
+	</select>
+	
+	<insert id="insertBoardLike" parameterType="boardVo">
+	INSERT INTO board_like(b_id, user_id) VALUES (#{b_id}, #{user_id})
+	</insert>
+	
+	<delete id="deleteBoardLike" parameterType="boardVo">
+	DELETE FROM board_like WHERE b_id = #{b_id} AND user_id = #{user_id}
+	</delete>
+	
+	
+	<select id="selectLikeCount" resultType="int" parameterType="int">
+	SELECT count(*) FROM board_like WHERE b_id = #{b_id};
+	</select>
+	
+	<update id ="updateBoardSympathy" parameterType="map">
+	UPDATE boards SET sympathy=#{totalLike} WHERE id = #{b_id}
+	</update>
+	
+	<select id="selectuserLikeStatus" resultType="int" parameterType="boardVo">
+	SELECT count(*) FROM board_like WHERE b_id = #{b_id} AND user_id = #{user_id}
 	</select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.org.makgol.boards.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,12 +31,12 @@ public class BoardSuggestionService {
 	public BoardVo readSuggestionBoard(int b_id) {
 		return boardDao.showDetailSuggestionBoard(b_id);
 	}
-	
+
 	/** suggestion 조회수 **/
 	public int addHit(int b_id) {
 		return boardDao.updateHit(b_id);
 	}
-	
+
 	/** suggestion 댓글 INSERT **/
 	public int addComment(CommentVo commentVo) {
 
@@ -76,4 +77,26 @@ public class BoardSuggestionService {
 	public List<BoardVo> searchBoard(String searchOption, String searchWord) {
 		return boardDao.selectSearchBoard(searchOption, searchWord);
 	}
- }
+
+	public int userLikeStatus(BoardVo boardVo) {
+		return boardDao.selectuserLikeStatus(boardVo);
+	}
+
+	public int addLikeBoard(BoardVo boardVo) {
+		return boardDao.insertBoardLike(boardVo);
+	}
+
+	public int removeLikeBoard(BoardVo boardVo) {
+		return boardDao.deleteBoardLike(boardVo);
+
+	}
+
+	public int countLike(int b_id) {
+		return boardDao.selectCountLike(b_id);
+	}
+
+	public void addBoardSympathy(Map<String, Integer> map) {
+	boardDao.updateBoardSympathy(map);
+	}
+
+}

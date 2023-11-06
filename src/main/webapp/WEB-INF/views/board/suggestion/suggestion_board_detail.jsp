@@ -34,9 +34,17 @@ ul img {
 	width: 20px;
 	height: 20px;
 }
+
+label {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
+	<%
+	UserVo loginedUsersRequestVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
+	%>
+
 	<table>
 		<tr>
 			<td>${boardVo.category}</td>
@@ -66,13 +74,15 @@ ul img {
 		</c:if>
 	</table>
 
+
 	<div>
 		<p>
-			<label for="like" onclick="boardlike()"> <input
-				type="checkbox" style="display: none" /> <i
-				class="fa-regular fa-thumbs-up"> ${boardVo.sympathy}</i>
+			<label for="like">
+			<input type="checkbox" id="like" style="display: none" data-b_id="${boardVo.b_id}" data-user_id="${loginedUsersRequestVo.id}" />
+			<i class="fa-regular fa-thumbs-up">${boardVo.sympathy}</i>
 			</label>
 		</p>
+
 		<c:url value="/board/suggestion" var="suggestion_url" />
 		<a href="${suggestion_url}">목록</a>
 
@@ -86,9 +96,7 @@ ul img {
 			<c:param name="b_id" value="${boardVo.b_id}" />
 			<c:param name="attachment" value="${boardVo.attachment}" />
 		</c:url>
-		<%
-		UserVo loginedUsersRequestVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
-		%>
+
 		<c:if test="${boardVo.user_id == loginedUsersRequestVo.getId()}">
 			<a href="${modify_url}">수정</a>
 			<a href="${delete_url}">삭제</a>
@@ -127,6 +135,13 @@ ul img {
 
 
 	<script>
+		let b_id = jQ('input[type=checkbox]').attr("data-b_id")
+		let user_id = jQ('input[type=checkbox]').attr("data-user_id")
+		console.log("게시글번호"+b_id+"유저"+user_id)
+		let likeData = { b_id : b_id, user_id : user_id }
+		if (user_id) {
+			userLikeStatus(b_id, user_id);
+		}
 		comList();
 	</script>
 </body>

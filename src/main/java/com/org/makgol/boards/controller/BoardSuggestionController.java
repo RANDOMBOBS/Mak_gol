@@ -257,7 +257,52 @@ public class BoardSuggestionController {
 			model.addAttribute("boardVos", boardVos);
 		}
 		return nextPage;
-
 	}
+
+	
+	@ResponseBody
+	@RequestMapping(value="/userLikeStatus", method = { RequestMethod.GET, RequestMethod.POST })
+	public Map<String, Integer> userLikeStatus(@RequestBody BoardVo boardVo) {
+		Map<String, Integer> map = new HashMap<>();
+		int status = boardService.userLikeStatus(boardVo);
+		map.put("status", status);
+		return map;	}
+	
+	
+	
+	/** suggestion 글 좋아요 **/
+	@ResponseBody
+	@RequestMapping(value = "/likeBoard", method = { RequestMethod.GET, RequestMethod.POST })
+	public Map<String, Integer> likeBoard(@RequestBody BoardVo boardVo) {
+		Map<String, Integer> map = new HashMap<>();
+		int b_id = boardVo.getB_id();
+		int result = boardService.addLikeBoard(boardVo);
+		int totalLike = 0;
+		if(result > 0) {
+			totalLike = boardService.countLike(b_id);
+			map.put("totalLike", totalLike);
+			map.put("b_id", b_id);
+			boardService.addBoardSympathy(map);
+		}
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/unlikeBoard", method = { RequestMethod.GET, RequestMethod.POST })
+	public Map<String, Integer> unlikeBoard(@RequestBody BoardVo boardVo) {
+		Map<String, Integer> map = new HashMap<>();
+		int b_id = boardVo.getB_id();
+		int result = boardService.removeLikeBoard(boardVo);
+		int totalLike = 0;
+		if(result > 0) {
+			totalLike = boardService.countLike(b_id);
+			map.put("totalLike", totalLike);
+			map.put("b_id", b_id);
+			boardService.addBoardSympathy(map);
+		}
+		return map;
+	}
+	
+	
 
 }
