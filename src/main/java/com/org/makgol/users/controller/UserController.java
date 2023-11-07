@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
-public class userController {
+public class UserController {
 	
 	private final UserService userService;
 	
@@ -96,17 +96,17 @@ public class userController {
 	    return "user/user_login";
 	}
 		
-		@PostMapping("/loginConfirm")	
+	@PostMapping("/loginConfirm")
 	public String loginConfirm(UsersRequestVo usersRequestVo, HttpSession session) {
 	    // 기본적으로 로그인 성공 시 'login_ok' 화면을 표시
 	    String nextPage = "home";
-	    
-	    
+
 	    System.out.println(usersRequestVo.getEmail());
 	    System.out.println(usersRequestVo.getPassword());
+
 	    // 사용자 로그인 정보를 서비스를 통해 확인
 	    UsersRequestVo loginedUsersRequestVo = userService.loginConfirm(usersRequestVo);
-	    
+
 	    if (loginedUsersRequestVo == null) {
 	        // 로그인 실패 시 'login_ng' 화면을 표시
 	        nextPage = "user/user_login_ng";
@@ -114,9 +114,19 @@ public class userController {
 	        // 로그인 성공 시 사용자 정보를 세션에 저장하고 세션
 	        session.setAttribute("loginedUsersRequestVo", loginedUsersRequestVo);
 
-	        // session.setMaxInactiveInterval(60 * 30); // 세션 유지 시간을 30분으로 설정
+	        // 세션에 저장된 "loginedUsersRequestVo" 객체를 확인
+	        UsersRequestVo retrievedUser = (UsersRequestVo) session.getAttribute("loginedUsersRequestVo");
+	        if (retrievedUser != null) {
+	            System.out.println("로그인 성공한 사용자 정보: " + retrievedUser.toString());
+	        } else {
+	            System.out.println("로그인된 사용자 정보가 세션에 저장되어 있지 않습니다.");
+	        }
 	    }
-	    
+
+	    System.out.println(session);
 	    return nextPage;
 	}
+	
+		
+		
 }

@@ -112,10 +112,10 @@ public class UserDao {
 	    try {
 	    	
 	        // 사용자 정보를 데이터베이스에서 조회
-	        //RowMapper<UsersRequestVo> rowMapper = BeanPropertyRowMapper.newInstance(UsersRequestVo.class);
+	        RowMapper<UsersRequestVo> rowMapper = BeanPropertyRowMapper.newInstance(UsersRequestVo.class);
 	    	encriptPassword = jdbcTemplate.queryForObject(sql, String.class, usersRequestVo.getEmail());
 	        
-	    	
+	    
 	       
 	        
 	    } catch (Exception e) {

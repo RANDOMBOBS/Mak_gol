@@ -42,4 +42,12 @@ public class UsersRequestVo {
 	// 프로필사진경로
 	MultipartFile photo;
 	
+	// ID
+	int id;
+	
+	@NotBlank(message = "회원등급(필수)")
+	@NotEmpty
+	String grade;
+	
+	
 }

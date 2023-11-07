@@ -192,13 +192,69 @@ $(document).ready(function() {
 });//$(document).ready(function()_END
 </script>
 
+<style>
+    /* Style the form container */
+    .email-form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .email-form label {
+        font-size: 24px; /* Adjust the font size as needed */
+        display: block;
+        text-align: center;
+    }
+
+    /* Style form elements */
+    .input-group {
+        margin-top: 20px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .mail-check-box input,
+    .mail-check-box button {
+        margin-top: 10px;
+    }
+
+    /* Style the file input and additional spacing for buttons */
+    #photo {
+        margin-top: 10px;
+    }
+
+    .mail-check-box button,
+    #passwordCheckBtn,
+    #joinButton {
+        margin-top: 15px;
+    }
+</style>
 
 
 </head>
 
 <body>
 <div class="form-group email-form">
-    <label>회원가입!</label>
+    <label>JOIN</label>
    <form action = "makgol/user/join" method="post" enctype="multipart/form-data">
     <div class="input-group">
         <input type="text" class="form-control" name="userEmail1" id="userEmail1" placeholder="이메일">

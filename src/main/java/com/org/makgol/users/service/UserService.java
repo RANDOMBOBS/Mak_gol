@@ -75,23 +75,26 @@ public class UserService {
 	}// joinUser_END
 
 	 // 로그인 확인
-	 public UsersRequestVo loginConfirm(UsersRequestVo usersRequestVo) {
-	    // 로그인 정보 확인
-		 
-		 
-	    String encriptPassword = userDao.selectUser(usersRequestVo);
-	    
-	    if (encriptPassword != null) {
-	    	
-	        if (BCrypt.checkpw(usersRequestVo.getPassword(), encriptPassword)) {
-	        	
-	        	System.out.println("성공");
-	        	
-	        	UsersRequestVo loginedUsersRequestVo = new UsersRequestVo();
-	        	
-	            return loginedUsersRequestVo;
+	public UsersRequestVo loginConfirm(UsersRequestVo usersRequestVo) {
+	    String encryptedPassword = userDao.selectUser(usersRequestVo);
+
+	    if (encryptedPassword != null) {
+	        if (BCrypt.checkpw(usersRequestVo.getPassword(), encryptedPassword)) {
+	            System.out.println("로그인 성공");
+
+	            // 로그인 성공 시 UsersRequestVo에 id 값을 설정
+	            UsersRequestVo loggedInUsersRequestVo = new UsersRequestVo();
+	            loggedInUsersRequestVo.setId(usersRequestVo.getId()); // id 설정
+	            // 다른 필요한 정보도 설정할 수 있습니다.
+	            
+	            if (usersRequestVo.getGrade() != null && usersRequestVo.getGrade().equalsIgnoreCase("블랙리스트")) {
+	                System.out.println("블랙리스트 회원입니다. 로그인 실패.");
+	            } else {
+	                return loggedInUsersRequestVo;
+	            }
 	        }
 	    }
+
 	    // 로그인 실패
 	    return null;
 	}
