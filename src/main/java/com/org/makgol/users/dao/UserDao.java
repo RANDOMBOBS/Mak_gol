@@ -105,25 +105,17 @@ public class UserDao {
 	} // updatePassword_END
 	
 	// 사용자 정보 조회 (로그인)
-	public String selectUser(UsersRequestVo usersRequestVo) {
-		
-		 String sql = "SELECT password FROM users WHERE email = ?";
-		 String encriptPassword = "";
+	public UsersRequestVo selectUser(UsersRequestVo usersRequestVo) {
+		 String sql = "SELECT * FROM users WHERE email = ?";
+		 List<UsersRequestVo> list = new ArrayList<>();
 	    try {
-	    	
-	        // 사용자 정보를 데이터베이스에서 조회
 	        RowMapper<UsersRequestVo> rowMapper = BeanPropertyRowMapper.newInstance(UsersRequestVo.class);
-	    	encriptPassword = jdbcTemplate.queryForObject(sql, String.class, usersRequestVo.getEmail());
-	        
-	    
-	       
-	        
+	        list = jdbcTemplate.query(sql, rowMapper, usersRequestVo.getEmail());
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    
-	    // 로그인 실패 시 null 반환
-	    return encriptPassword;
+	    System.out.println(list.get(0));
+	    return list.size()>0 ? list.get(0) : null;
 	}
 	
 }
