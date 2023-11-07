@@ -79,10 +79,16 @@ public class UserService {
 		UsersRequestVo searchMem = userDao.selectUser(usersRequestVo);
 		System.out.println(searchMem.getId());
 		UsersRequestVo loginedInUsersRequestVo = searchMem;
+		if (searchMem.getGrade() != null && "블랙리스트".equals(searchMem.getGrade())) {
+	        // 블랙리스트 회원이라면 로그인 실패
+	        return null;
+	    }
+
 	    if (!BCrypt.checkpw(usersRequestVo.getPassword(), searchMem.getPassword())) {
-	        	loginedInUsersRequestVo = null;
-	   }
-	   return loginedInUsersRequestVo;
+	        loginedInUsersRequestVo = null;
+	    }
+
+	    return loginedInUsersRequestVo;
 	}
 	
 	
