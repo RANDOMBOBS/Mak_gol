@@ -83,14 +83,15 @@ public class UserService {
 	            System.out.println("로그인 성공");
 
 	            // 로그인 성공 시 UsersRequestVo에 id 값을 설정
-	            UsersRequestVo loggedInUsersRequestVo = new UsersRequestVo();
-	            loggedInUsersRequestVo.setId(usersRequestVo.getId()); // id 설정
+	            UsersRequestVo loginedInUsersRequestVo = new UsersRequestVo();
+	            loginedInUsersRequestVo.setId(usersRequestVo.getId()); // id 설정
 	            // 다른 필요한 정보도 설정할 수 있습니다.
 	            
 	            if (usersRequestVo.getGrade() != null && usersRequestVo.getGrade().equalsIgnoreCase("블랙리스트")) {
 	                System.out.println("블랙리스트 회원입니다. 로그인 실패.");
 	            } else {
-	                return loggedInUsersRequestVo;
+	            	System.out.println("로그인성공이라고?");
+					return loginedInUsersRequestVo;
 	            }
 	        }
 	    }
