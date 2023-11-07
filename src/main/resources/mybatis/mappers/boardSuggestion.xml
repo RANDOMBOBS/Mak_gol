@@ -71,7 +71,7 @@
 
 	<delete id="deleteComment" parameterType="int">
 		DELETE FROM comments
-		WHERE id = #{id}
+		WHERE id = #{b_id}
 	</delete>
 
 	<select id="selectBoard" resultMap="boardResult" parameterType="int"> 

@@ -5,7 +5,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
-import org.springframework.web.multipart.MultipartFile;
+//import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,6 +40,19 @@ public class UsersRequestVo {
 	String phone;
 	
 	// 프로필사진경로
-	MultipartFile photo;
+	String photo;
+	
+	// ID
+	int id;
+	
+	@NotBlank(message = "회원등급(필수)")
+	@NotEmpty
+	String grade;
+	
+    String date;
+    String address;
+    String longitude;
+    String latitude;
+	
 	
 }

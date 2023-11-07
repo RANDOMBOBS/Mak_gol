@@ -1,4 +1,4 @@
-<%@page import="com.org.makgol.users.vo.UserVo"%>
+<%@page import="com.org.makgol.users.vo.UsersRequestVo"%>
 <%@page import="io.opentelemetry.exporter.logging.SystemOutLogExporter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -42,7 +42,7 @@ label {
 </head>
 <body>
 	<%
-	UserVo loginedUsersRequestVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
+	UsersRequestVo loginedUsersRequestVo = (UsersRequestVo) session.getAttribute("loginedUsersRequestVo");
 	%>
 
 	<table>

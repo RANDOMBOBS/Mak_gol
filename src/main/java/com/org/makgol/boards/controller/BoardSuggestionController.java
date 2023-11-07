@@ -26,7 +26,8 @@ import com.org.makgol.boards.UploadFileService;
 import com.org.makgol.boards.service.BoardSuggestionService;
 import com.org.makgol.boards.vo.BoardVo;
 import com.org.makgol.comment.vo.CommentVo;
-import com.org.makgol.users.vo.UserVo;
+import com.org.makgol.users.vo.UsersRequestVo;
+
 
 @Controller
 @RequestMapping("/board/suggestion")
@@ -53,10 +54,10 @@ public class BoardSuggestionController {
 	@GetMapping("/showAllList")
 	public String showAllList(Model model) {
 		List<BoardVo> boardVos = boardService.getSuggestionBoard();
-
 		if (boardVos != null) {
 			model.addAttribute("boardVos", boardVos);
 		}
+		System.out.println(boardVos);
 		return "board/suggestion/all_suggestion_list";
 	}
 
@@ -72,7 +73,7 @@ public class BoardSuggestionController {
 	@GetMapping("/create")
 	public String create(Model model, HttpSession session) {
 		String nextPage = "board/suggestion/create_board_form";
-		UserVo loginedUsersRequestVo = (UserVo) session.getAttribute("loginedUsersRequestVo");
+		UsersRequestVo loginedUsersRequestVo = (UsersRequestVo) session.getAttribute("loginedUsersRequestVo");
 		String userName = loginedUsersRequestVo.getName();
 		int userId = loginedUsersRequestVo.getId();
 		if (loginedUsersRequestVo != null) {

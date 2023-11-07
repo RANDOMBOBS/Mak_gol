@@ -6,7 +6,6 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import com.org.makgol.users.dao.UserDao;
-import com.org.makgol.users.vo.UserVo;
 import com.org.makgol.users.vo.UsersRequestVo;
 import com.org.makgol.util.MailSendUtil;
 import com.org.makgol.util.RedisUtil;
@@ -76,19 +75,21 @@ public class UserService {
 	}// joinUser_END
 
 	 // 로그인 확인
-	 public UserVo loginConfirm(UsersRequestVo usersRequestVo) {
-	    // 로그인 정보 확인
-	    String encriptPassword = userDao.selectUser(usersRequestVo);
-	    if (encriptPassword != null) {
-	       
-	    	if (BCrypt.checkpw(usersRequestVo.getPassword(), encriptPassword)) {
-	        	UserVo loginedUsersRequestVo = userDao.getUser(usersRequestVo);
-	        	
-	            return loginedUsersRequestVo;
-	        }
+	public UsersRequestVo loginConfirm(UsersRequestVo usersRequestVo) {
+		UsersRequestVo searchMem = userDao.selectUser(usersRequestVo);
+		System.out.println(searchMem.getId());
+		UsersRequestVo loginedInUsersRequestVo = searchMem;
+		if (searchMem.getGrade() != null && "블랙리스트".equals(searchMem.getGrade())) {
+	        // 블랙리스트 회원이라면 로그인 실패
+	        return null;
 	    }
-	    // 로그인 실패
-	    return null;
+
+	    if (!BCrypt.checkpw(usersRequestVo.getPassword(), searchMem.getPassword())) {
+	        loginedInUsersRequestVo = null;
+	    }
+
+	    return loginedInUsersRequestVo;
 	}
+	
 	
 }
