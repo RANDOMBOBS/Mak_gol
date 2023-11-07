@@ -9,7 +9,12 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"
 	integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script
+      type="text/javascript"
+      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
 
 
 <title>막내야 골라봐 | 메인 (MAIN)</title>
@@ -20,6 +25,8 @@
 	rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/topmenu.css' />"
 	rel="stylesheet" type="text/css" />
+	
+	
 
 <style>
 * {
@@ -74,18 +81,6 @@ h1 {
 	border: 1px solid #000;
 }
 
-.todaymenu_list_ul img {
-	width: 100%;
-	height: 260px;
-	object-fit: cover;
-	border-radius: 7px;
-	filter: brightness(60%);
-}
-
-.todaymenu_list:hover .today_img {
-	transition: all 0.6s;
-	transform: scale(1.2);
-}
 
 #pratice {
 	display: flex;
@@ -138,17 +133,19 @@ h1 {
 				<div class="todaymenu_main_div">
 					<ul class="todaymenu_main_ul">
 						<li class="today">오늘의메뉴</li>
-						<li>한식</li>
-						<li>양식</li>
-						<li>중식</li>
-						<li>분식</li>
-						<li>일식</li>
-						<li>카페</li>
+						<li><button class="todayBtn" type="button" onclick="korToday()">한식</button></li>
+						<li><button class="todayBtn" type="button" onclick="westToday()">양식</button></li>
+						<li><button class="todayBtn" type="button" onclick="chiToday()">중식</button></li>
+						<li><button class="todayBtn" type="button" onclick="snackToday()">분식</button></li>
+						<li><button class="todayBtn" type="button" onclick="jpnToday()">일식</button></li>
+						<li><button class="todayBtn" type="button" onclick="cafeToday()">카페</button></li>
 					</ul>
 				</div>
+				<div class="todaymenu_list">	
+					<i class="fa-solid fa-circle-arrow-right"></i>
+					<i class="fa-solid fa-circle-arrow-left"></i>
 				<div class="todaymenu_list_div">
-					
-					
+				</div>
 				</div>
 			</div>
 		</div>
@@ -219,6 +216,30 @@ h1 {
 		getAllcategory();
 		
 		todayMenuList();
+	
+		var count = 0;
+		var maxList = 5;
+
+		jQ(".fa-circle-arrow-right").click(function(){
+		    var total = jQ(".todaymenu_list_ul li").length;
+
+		    // 현재 표시 중인 요소에 "on" 클래스를 삭제
+		    jQ(".todaymenu_list_ul li.on").removeClass("on");
+
+		    // 다음 5개의 요소에 "on" 클래스를 추가
+		    for (let i = count; i < count + maxList; i++) {
+		        jQ(".todaymenu_list_ul li").eq(i).addClass("on");
+		    }
+
+		    // count를 업데이트
+		    count += maxList;
+
+		    // count가 요소의 총 수를 초과하지 않도록 확인
+		    if (count >= total) {
+		        count = 0;
+		    }
+		});
+		
 		
 	</script>
 </body>
