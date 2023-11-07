@@ -57,7 +57,6 @@ public class BoardSuggestionController {
 		if (boardVos != null) {
 			model.addAttribute("boardVos", boardVos);
 		}
-		System.out.println(boardVos);
 		return "board/suggestion/all_suggestion_list";
 	}
 

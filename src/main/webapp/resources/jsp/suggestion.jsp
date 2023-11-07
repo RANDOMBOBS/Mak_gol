@@ -15,7 +15,6 @@
 				jQuery(".board_list").html(rdata);
 			},
 			error : function(error) {
-				console.log(error)
 				alert("allBoardList 오류");
 			}
 		});

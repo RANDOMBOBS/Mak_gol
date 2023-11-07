@@ -91,26 +91,17 @@ public class BoardSuggestionDao {
 	}
 
 	/** suggestion 글 수정 폼 제출 **/
-//	실패
 	public int updateBoard(BoardVo boardVo) {
-		String sql = "UPDATE boards SET title=?, contents=?, attachment=? WHERE id=? ";
 		int result = -1;
-
-		try {
-			result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getAttachment(),
-					boardVo.getB_id());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
+			result = sqlSession.update("mapper.boardSuggestion.updateBoard", boardVo);
+			return result;
 	}
 
 	/** suggestion 글 DELETE **/
 	public int deleteBoard(int b_id) {
 		int result = -1;
+		System.out.println(b_id);
 		result = sqlSession.delete("mapper.boardSuggestion.deleteBoard", b_id);
-//		글 삭제할때 폴더에 있는 사진도 지워지게 하기!(폴더 경로 잡히면 진행하기)
 		return result;
 	}
 
@@ -123,6 +114,7 @@ public class BoardSuggestionDao {
 		boardVos = sqlSession.selectList("mapper.boardSuggestion.selectSearchBoard", map);
 		return boardVos.size() > 0 ? boardVos : null;
 	}
+	
 	
 	public int selectuserLikeStatus(BoardVo boardVo) {
 		int status = sqlSession.selectOne("mapper.boardSuggestion.selectuserLikeStatus", boardVo);

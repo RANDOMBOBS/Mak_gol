@@ -70,7 +70,6 @@ public class UserController {
 		//int number = Integer.parseInt(auth_number);
 		boolean result = userService.checkNumber(authNumberVo.getAuth_number(), authNumberVo.getEmail());
 		
-		System.out.println(result);
 		//인증 성공
 		if(result) {
 			return new ResponseEntity<>("true", HttpStatus.OK);	
@@ -101,9 +100,6 @@ public class UserController {
 	    // 기본적으로 로그인 성공 시 'login_ok' 화면을 표시
 	    String nextPage = "home";
 
-	    System.out.println(usersRequestVo.getEmail());
-	    System.out.println(usersRequestVo.getPassword());
-
 	    // 사용자 로그인 정보를 서비스를 통해 확인
 	    UsersRequestVo loginedUsersRequestVo = userService.loginConfirm(usersRequestVo);
 
@@ -117,13 +113,11 @@ public class UserController {
 	        // 세션에 저장된 "loginedUsersRequestVo" 객체를 확인
 	        UsersRequestVo retrievedUser = (UsersRequestVo) session.getAttribute("loginedUsersRequestVo");
 	        if (retrievedUser != null) {
-	            System.out.println("로그인 성공한 사용자 정보: " + retrievedUser.toString());
 	        } else {
 	            System.out.println("로그인된 사용자 정보가 세션에 저장되어 있지 않습니다.");
 	        }
 	    }
 
-	    System.out.println(session);
 	    return nextPage;
 	}
 	
