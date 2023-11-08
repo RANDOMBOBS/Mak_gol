@@ -5,28 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8" />
+
+<link href="<c:url value='/resources/css/main.css' />" rel="stylesheet"
+	type="text/css" />
+<link href="<c:url value='/resources/css/todaymenu.css' />" rel="stylesheet" type="text/css" />
+<link href="<c:url value='/resources/css/topmenu.css' />" rel="stylesheet" type="text/css" />
+<link href="<c:url value='/resources/css/slick.css' />" rel="stylesheet" type="text/css" />
+
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"
 	integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script
-      type="text/javascript"
-      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-    ></script>
-
 
 <title>막내야 골라봐 | 메인 (MAIN)</title>
-
-<link href="<c:url value='/resources/css/main.css' />" rel="stylesheet"
-	type="text/css" />
-<link href="<c:url value='/resources/css/todaymenu.css' />"
-	rel="stylesheet" type="text/css" />
-	<link href="<c:url value='/resources/css/topmenu.css' />"
-	rel="stylesheet" type="text/css" />
-	
-	
 
 <style>
 * {
@@ -81,7 +77,6 @@ h1 {
 	border: 1px solid #000;
 }
 
-
 #pratice {
 	display: flex;
 	justify-content: space-around;
@@ -95,27 +90,25 @@ h1 {
 }
 </style>
 </head>
-<body background="/resources/image/chick.jpg">
+<body>
 	<h1 id="header">Header</h1>
 
-	
 	<div id="pratice">
 		<h2>게스트용</h2>
-		<a href="<c:url value='/board/notice'/>">공지사항</a> 
-		<a href="<c:url value='/board/suggestion'/>">건의사항</a> 
-		<a href="<c:url value='/board/vent'/>">하소연게시판 </a>
-		<a href="<c:url value='/user/login'/>">로그인</a>
-		<a href="<c:url value='/user/join'/>">회원가입</a>
+		<a href="<c:url value='/board/notice'/>">공지사항</a> <a
+			href="<c:url value='/board/suggestion'/>">건의사항</a> <a
+			href="<c:url value='/board/vent'/>">하소연게시판 </a> <a
+			href="<c:url value='/user/login'/>">로그인</a> <a
+			href="<c:url value='/user/join'/>">회원가입</a>
 	</div>
-	
-	
+
+
 	<div id="pratice">
 		<h2>로그인용</h2>
-		<a href="<c:url value='/board/notice'/>">공지사항</a> 
-		<a href="<c:url value='/board/suggestion'/>">건의사항</a> 
-		<a href="<c:url value='/board/vent'/>">하소연게시판 </a>
-		<a href="<c:url value='/'/>">로그아웃</a>
-		<a href="<c:url value='/'/>">정보수정</a>
+		<a href="<c:url value='/board/notice'/>">공지사항</a> <a
+			href="<c:url value='/board/suggestion'/>">건의사항</a> <a
+			href="<c:url value='/board/vent'/>">하소연게시판 </a> <a
+			href="<c:url value='/'/>">로그아웃</a> <a href="<c:url value='/'/>">정보수정</a>
 	</div>
 
 	<section>
@@ -133,19 +126,22 @@ h1 {
 				<div class="todaymenu_main_div">
 					<ul class="todaymenu_main_ul">
 						<li class="today">오늘의메뉴</li>
-						<li><button class="todayBtn" type="button" onclick="korToday()">한식</button></li>
-						<li><button class="todayBtn" type="button" onclick="westToday()">양식</button></li>
-						<li><button class="todayBtn" type="button" onclick="chiToday()">중식</button></li>
-						<li><button class="todayBtn" type="button" onclick="snackToday()">분식</button></li>
-						<li><button class="todayBtn" type="button" onclick="jpnToday()">일식</button></li>
-						<li><button class="todayBtn" type="button" onclick="cafeToday()">카페</button></li>
+						<li><button class="todayBtn" type="button"
+								onclick="korToday()">한식</button></li>
+						<li><button class="todayBtn" type="button"
+								onclick="westToday()">양식</button></li>
+						<li><button class="todayBtn" type="button"
+								onclick="chiToday()">중식</button></li>
+						<li><button class="todayBtn" type="button"
+								onclick="snackToday()">분식</button></li>
+						<li><button class="todayBtn" type="button"
+								onclick="jpnToday()">일식</button></li>
+						<li><button class="todayBtn" type="button"
+								onclick="cafeToday()">카페</button></li>
 					</ul>
 				</div>
-				<div class="todaymenu_list">	
-					<i class="fa-solid fa-circle-arrow-right"></i>
-					<i class="fa-solid fa-circle-arrow-left"></i>
-				<div class="todaymenu_list_div">
-				</div>
+				<div class="todaymenu_list">
+					<div class="todaymenu_list_div"></div>
 				</div>
 			</div>
 		</div>
@@ -196,10 +192,13 @@ h1 {
 	<jsp:include page="/resources/jsp/todayMenu.jsp"></jsp:include>
 
 
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+
 	<script>
 		$.noConflict();
 		var jQ = jQuery;
-		
+
 		function getAllcategory() {
 			jQ.ajax({
 				url : "/makgol/main/allCategory",
@@ -216,31 +215,45 @@ h1 {
 		getAllcategory();
 		
 		todayMenuList();
-	
+		
+		function slickSlider(){
+		jQ(document).ready(function(){
+            jQ('.todaymenu_list_ul').slick({
+            	slidesToShow: 5,
+            	slidesToScroll: 5,
+            	draggable: false,
+            	dotsClass: 'custom-dots',
+            	dots:true,
+            	autoplay:true,
+            	speed: 2000,
+            	prevArrow: "<class='slick-next'><i class='fa-solid fa-circle-arrow-left'></i>",
+            	nextArrow: "<class='slick-prev'><i class='fa-solid fa-circle-arrow-right'></i>",
+            });
+        });
+		}
+		/*
 		var count = 0;
 		var maxList = 5;
 
-		jQ(".fa-circle-arrow-right").click(function(){
-		    var total = jQ(".todaymenu_list_ul li").length;
+		 jQ(".fa-circle-arrow-right").click(function() {
+			var total = jQ(".todaymenu_list_ul li").length;
 
-		    // 현재 표시 중인 요소에 "on" 클래스를 삭제
-		    jQ(".todaymenu_list_ul li.on").removeClass("on");
+			// 현재 표시 중인 요소에 "on" 클래스를 삭제
+			jQ(".todaymenu_list_ul li.on").removeClass("on");
 
-		    // 다음 5개의 요소에 "on" 클래스를 추가
-		    for (let i = count; i < count + maxList; i++) {
-		        jQ(".todaymenu_list_ul li").eq(i).addClass("on");
-		    }
+			// 다음 5개의 요소에 "on" 클래스를 추가
+			for (let i = count; i < count + maxList; i++) {
+				jQ(".todaymenu_list_ul li").eq(i).addClass("on");
+			}
 
-		    // count를 업데이트
-		    count += maxList;
+			// count를 업데이트
+			count += maxList;
 
-		    // count가 요소의 총 수를 초과하지 않도록 확인
-		    if (count >= total) {
-		        count = 0;
-		    }
-		});
-		
-		
+			// count가 요소의 총 수를 초과하지 않도록 확인
+			if (count >= total) {
+				count = 0;
+			}
+		}); */
 	</script>
 </body>
 </html>

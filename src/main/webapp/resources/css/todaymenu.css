@@ -4,15 +4,13 @@ ul, li {
 	list-style: none;
 }
 
-
-
 .todayBtn {
-	width:70px;
-	border:1px solid #ddd;
-	border-radius:20px;
+	width: 70px;
+	border: 1px solid #ddd;
+	border-radius: 20px;
 	background-color: transparent;
-	padding:5px;
-	margin:3px;
+	padding: 5px;
+	margin: 3px;
 }
 
 .today_menu {
@@ -32,27 +30,68 @@ ul, li {
 	padding-right: 20px;
 }
 
-.todaymenu_list{
-	display:flex;
-	position:relative;
-	
-	}
-	
-.fa-circle-arrow-right{
-	position: absolute;
-    top: 45%;
-    right: 1.7%;
-    font-size: 40px;
-    color: #ffa500;
-}	
+.todaymenu_list {
+	display: flex;
+	position: relative;
+}
 
-.fa-circle-arrow-left{
+.slick-initialized .slick-slide{
+	display:flax;
+	justify-content:center;
+}
+
+
+.fa-circle-arrow-right {
 	position: absolute;
-    top: 45%;
-    left: 1.7%;
-    font-size: 40px;
-    color: #ffa500;
-}	
+	top: 45%;
+	right: 0.5%;
+	font-size: 40px;
+	color: #ffa500;
+}
+
+
+.fa-circle-arrow-left {
+	position: absolute;
+	top: 45%;
+	left: 0.8%;
+	font-size: 40px;
+	color: #ffa500;
+}
+
+.slick-slider{
+	text-align:center;
+}
+
+.custom-dots {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 10px 0;
+	padding: 0;
+}
+
+.custom-dots li {
+	list-style: none;
+	cursor: pointer;
+	display: inline-block;
+	margin: 0 6px;
+	padding: 0;
+}
+
+.custom-dots li button {
+	border: none;
+	background: #d1d1d1;
+	color: transparent;
+	cursor: pointer;
+	display: block;
+	height: 10px;
+	width: 10px;
+	border-radius: 100%;
+	padding: 0;
+}
+
+.custom-dots li.slick-active button {
+  background-color: #ffe286;
+}
 
 .todaymenu_list_div {
 	width: 1200px;
@@ -64,30 +103,21 @@ ul, li {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	padding: 30px 50px;
-	overflow:hidden;
+	padding: 30px 50px 0px 50px;
+	overflow: hidden;
+	position: relative;
 }
 
-.todaymenu_list_ul li {
+.todaymenu_list_ul .todaymenu_list {
 	font-family: "Noto Sans KR", sans-serif;
-	width: 19%;
 	height: 260px;
 	line-height: 260px;
 	border-radius: 10px;
 	position: relative;
 	overflow: hidden;
-	display: flex;
 	justify-content: center;
-	border : 2px solid #ffe286;
-}
-
-
-.todaymenu_list_ul li {
-		display:none;
-}
-
-.todaymenu_list_ul li.on {
-		display:flex;
+	border: 2px solid #ffe286;
+	margin:0px 5px;
 }
 
 .todaymenu_list_ul li img {
@@ -107,7 +137,7 @@ ul, li {
 .today {
 	width: 400px;
 	text-align: center;
-	font-size:20px;
+	font-size: 20px;
 }
 
 .todaymenu_list_ul li:hover .today_menu_gogo {
@@ -120,6 +150,7 @@ ul, li {
 	color: #fff;
 	z-index: 9999;
 	font-size: 25px;
+	position:absolute;
 }
 
 .today_menu_gogo {

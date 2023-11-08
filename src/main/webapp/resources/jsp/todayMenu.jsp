@@ -18,6 +18,7 @@
 			dataType : "html",
 			success : function(rdata) {   //category_list 데이터 값을 가져와 성공하면
 				jQ(".todaymenu_list_div").html(rdata); 
+				slickSlider();
 			},
 			error : function(error) { // 실패하면 오류 
 				alert('오류');			

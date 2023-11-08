@@ -3,6 +3,7 @@
 ul, li {
 	list-style: none;
 }
+
 button {
 	border: 0;
 	background-color: transparent;
@@ -18,7 +19,7 @@ button.active {
 }
 
 #category_main_div {
-	margin : 30px  0;
+	margin: 30px 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -29,7 +30,7 @@ button.active {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	width:600px;
+	width: 600px;
 }
 
 .category_main_ul li {
