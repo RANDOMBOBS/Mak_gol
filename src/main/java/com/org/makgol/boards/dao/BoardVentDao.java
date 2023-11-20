@@ -1,121 +1,156 @@
 package com.org.makgol.boards.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSession;
 import com.org.makgol.boards.vo.BoardVo;
+import com.org.makgol.comment.vo.CommentRequestVo;
+import com.org.makgol.comment.vo.CommentResponseVo;
 import com.org.makgol.comment.vo.CommentVo;
 
 @Component
 public class BoardVentDao {
 
-    @Autowired
+	@Autowired
 	JdbcTemplate jdbcTemplate;
-    // vent °Ô½ÃÆÇ °¡Á®¿À±â
-    public List<BoardVo> selectAllVentBoard() {
-        String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo FROM boards AS b JOIN users AS u ON b.user_id = u.id Where category='vent' ORDER BY date DESC";
-		List<BoardVo> boardVon = new ArrayList<BoardVo>();
 
-		try {
-			RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
-			boardVon = jdbcTemplate.query(sql, rowMapper);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return boardVon.size() > 0 ? boardVon : null;
+	@Autowired
+	private SqlSession sqlSession;
+
+	/** Vent ê²Œì‹œíŒ ê°€ì ¸ì˜¤ê¸° **/
+	public List<BoardVo> selectAllVentBoard() throws DataAccessException {
+		List<BoardVo> boardVos = new ArrayList<BoardVo>();
+		boardVos = sqlSession.selectList("mapper.boardVent.selectAllVentBoard");
+		return boardVos.size() > 0 ? boardVos : null;
 	}
-    
-    // vent °Ô½ÃÆÇ »ó¼¼º¸±â
-    public BoardVo showDetailVentBoard(int b_id) {
-    	System.out.println(2);
-       String sql = "SELECT b.id AS b_id, b.user_id, b.hit, b.title, b.date, b.contents, b.category, b.sympathy, u.name, u.photo "
-				+ "FROM boards AS b "
-				+ "JOIN users AS u ON b.user_id = u.id "
-				+ "WHERE b.id = ?";
-		
-		List<BoardVo> boardVo = null;
 
-		try {
-			RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
-			boardVo = jdbcTemplate.query(sql, rowMapper, b_id);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+	/** Vent ê¸€ ì“°ê¸° í¼ ì œì¶œ **/
+	public int insertVentBoard(BoardVo boardVo) {
+		int result = -1;
+		result = sqlSession.insert("mapper.boardVent.insertVentBoard", boardVo);
+		return result;
+
+	}
+
+	/** Vent ê¸€ ìƒì„¸ë³´ê¸° **/
+	public BoardVo showDetailVentBoard(int b_id) {
+		List<BoardVo> boardVo = null;
+		boardVo = sqlSession.selectList("mapper.boardVent.showDetailVentBoard", b_id);
 		return boardVo.size() > 0 ? boardVo.get(0) : null;
 	}
 
-    // vent °Ô½Ã±Û¾²±â ¿Ï·á
-    public int insertVentBoard(BoardVo boardVo) {
-        String sql = "INSERT INTO boards (user_id, title, date, contents, category) values (?, ?, NOW(), ?, ?)";
+	/** Vent ì¡°íšŒìˆ˜ **/
+	public int updateHit(int b_id) {
 		int result = -1;
-
-		try {
-	        result = jdbcTemplate.update(sql, boardVo.getUser_id(), boardVo.getTitle(), boardVo.getContents(), boardVo.getCategory());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		result = sqlSession.update("mapper.boardVent.updateHit", b_id);
 		return result;
 	}
 
-    // °Ô½Ã±Û ¼öÁ¤À» À§ÇÑ Ã£±â 1´Ü°è
-    public BoardVo findBoard(int b_id) {
-        String sql = "SELECT * FROM boards WHERE id = ?";
-        List<BoardVo> boardVo = null;
-            
-        try{
-            RowMapper<BoardVo> rowMapper = BeanPropertyRowMapper.newInstance(BoardVo.class);
-            boardVo = jdbcTemplate.query(sql, rowMapper, b_id);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return boardVo.size() > 0 ? boardVo.get(0) : null;
-    }
-    
-    // °Ô½Ã±Û ¼öÁ¤ Æû Á¦Ãâ 2´Ü°è
-    public int updateVentBoard(BoardVo boardVo) {
-		String sql = "UPDATE boards SET title=?, contents=? WHERE id=? ";
+	/** Vent ëŒ“ê¸€ INSERT **/
+	public int insertComment(CommentRequestVo commentRequestVo) {
 		int result = -1;
-
-		try {
-			result = jdbcTemplate.update(sql, boardVo.getTitle(), boardVo.getContents(), boardVo.getB_id());
-			
-		} catch(Exception e) {
-		 e.printStackTrace();
-		}
+		result = sqlSession.insert("mapper.boardVent.insertComment", commentRequestVo);
 		return result;
 	}
 
-    // °Ô½Ã±Û »èÁ¦
-    public int deleteVentBoard(int b_id) {
-		String sql = "delete from boards where id = ?";
-		int result=0;
-		try {
-			result = jdbcTemplate.update(sql,b_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	/** Vent ëŒ“ê¸€ SELECT **/
+	public List<CommentResponseVo> selectCommentList(int board_id) {
+		List<CommentResponseVo> CommentVos = null;
+		CommentVos = sqlSession.selectList("mapper.boardVent.selectCommentList", board_id);
+		return CommentVos.size() > 0 ? CommentVos : null;
+	}
+
+	/** Vent ëŒ“ê¸€ ìˆ˜ì • í¼ ì œì¶œ **/
+	public int updateComment(CommentResponseVo commentResponseVo) {
+		int result = -1;
+		result = sqlSession.update("mapper.boardVent.updateComment", commentResponseVo);
 		return result;
 	}
 
-    
-    public void insertComment(CommentVo commentVo) {
-        // ´ñ±ÛÀ» µ¥ÀÌÅÍº£ÀÌ½º¿¡ »ğÀÔÇÏ´Â Äõ¸®¸¦ ÀÛ¼º ¹× ½ÇÇà
-        // jdbcTemplate.update(...);
-    }
+	/** Vent ëŒ“ê¸€ DELETE **/
+	public int deleteComment(int id) {
+		int result = -1;
+		result = sqlSession.delete("mapper.boardVent.deleteComment", id);
+		return result;
+	}
 
-    public List<CommentVo> selectCommentList(int board_id) {
-        // Æ¯Á¤ °Ô½Ã¹°¿¡ ´ëÇÑ ´ñ±Û ¸ñ·ÏÀ» µ¥ÀÌÅÍº£ÀÌ½º¿¡¼­ Á¶È¸ÇÏ´Â Äõ¸®¸¦ ÀÛ¼º ¹× ½ÇÇà
-        // ¹İÈ¯µÈ °á°ú¸¦ CommentVo °´Ã¼ ¸®½ºÆ®·Î ¸ÅÇÎ
-        // jdbcTemplate.query(...);
+	/** Vent ê¸€ ìˆ˜ì •ë²„íŠ¼ **/
+	public BoardVo selectBoard(int b_id) {
+		List<BoardVo> boardVo = null;
+		boardVo = sqlSession.selectList("mapper.boardVent.selectBoard", b_id);
+		return boardVo.size() > 0 ? boardVo.get(0) : null;
+	}
 
-        return null; // ½ÇÁ¦ ÄÚµå¿¡¼­´Â µ¥ÀÌÅÍº£ÀÌ½º Á¶È¸ °á°ú¸¦ ¹İÈ¯
-    }
+	/** Vent ê¸€ ìˆ˜ì • í¼ ì œì¶œ **/
+	public int updateBoard(BoardVo boardVo) {
+		int result = -1;
+			result = sqlSession.update("mapper.boardVent.updateBoard", boardVo);
+			return result;
+	}
+
+	/** Vent ê¸€ DELETE **/
+	public int deleteBoard(int b_id) {
+		int result = -1;
+		System.out.println(b_id);
+		result = sqlSession.delete("mapper.boardVent.deleteBoard", b_id);
+		return result;
+	}
+
+	/** Vent ê¸€ ê²€ìƒ‰ **/
+	public List<BoardVo> selectSearchBoard(String searchOption, String searchWord) {
+		List<BoardVo> boardVos = new ArrayList<BoardVo>();
+		Map<String, String> map = new HashMap<>();
+		map.put("searchOption", searchOption);
+		map.put("searchWord", searchWord);
+		boardVos = sqlSession.selectList("mapper.boardVent.selectSearchBoard", map);
+		return boardVos.size() > 0 ? boardVos : null;
+	}
+	
+	
+	public int selectuserLikeStatus(BoardVo boardVo) {
+		int status = sqlSession.selectOne("mapper.boardVent.selectuserLikeStatus", boardVo);
+		return status;
+	}
+	
+	public int insertBoardLike(BoardVo boardVo) {
+		int result = -1;
+		result = sqlSession.insert("mapper.boardVent.insertBoardLike", boardVo);
+		return result;
+	}
+	
+	public int deleteBoardLike(BoardVo boardVo) {
+		int result = -1;
+		result = sqlSession.delete("mapper.boardVent.deleteBoardLike", boardVo);
+		return result;
+	}
+	
+	public int selectCountLike(int b_id) {
+		int totalLike = sqlSession.selectOne("mapper.boardVent.selectLikeCount", b_id);
+		return totalLike;
+	}
+	
+	public void updateBoardSympathy(Map<String, Integer> map) {
+		sqlSession.update("mapper.boardVent.updateBoardSympathy", map);
+	}
+
+	/** pagingê´€ë ¨ **/
+	public List<BoardVo> pagingList(Map<String, Integer> pagingParams) {
+	return sqlSession.selectList( "mapper.boardVent.paging", pagingParams);
+	}
+
+	public int boardCount() {
+		return sqlSession.selectOne( "mapper.boardVent.paging");
+	}
 }

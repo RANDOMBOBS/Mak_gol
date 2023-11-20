@@ -4,20 +4,15 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 @Data
-public class BoardVo {
-
-
+public class BoardLikeVo {
+    int id;
     int b_id;
+    int my_id;
     int user_id;
     int hit;
     String title;
-    String date;
-    String contents;
     String category;
     int sympathy;
-    String name;
-    String attachment;
-    MultipartFile file;
-
+    String date;
 
 }

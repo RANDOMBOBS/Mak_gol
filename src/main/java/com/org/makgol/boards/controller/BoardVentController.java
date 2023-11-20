@@ -1,154 +1,305 @@
 package com.org.makgol.boards.controller;
 
+import java.io.File;
 import java.net.http.HttpResponse;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 import com.org.makgol.boards.service.BoardVentService;
 import com.org.makgol.boards.vo.BoardVo;
-import com.org.makgol.comment.vo.CommentVo;
+import com.org.makgol.boards.vo.PageDTO;
+import com.org.makgol.comment.vo.CommentRequestVo;
+import com.org.makgol.comment.vo.CommentResponseVo;
+import com.org.makgol.users.vo.UsersRequestVo;
+import com.org.makgol.boards.UploadFileService;
 
 @Controller
 @RequestMapping("/board/vent")
 public class BoardVentController {
-    @Autowired
-    BoardVentService ventService;
+	@Autowired
+	BoardVentService BoardVentService;
+	
 
-    @GetMapping({ "/", "" })
+
+
+
 	/**
-	 * vent °Ô½ÃÆÇ °Ô½Ã±Û¸®½ºÆ®
-	 * @param model ´ÙÀ½ È­¸éÀ¸·Î °ª(boardVos : category°¡ ventÀÎ °Ô½Ã±Û ¹è¿­)À» Àü´Ş
-	 * @return vent.jsp·Î ÀÌµ¿
+	 * vent ê²Œì‹œíŒ ê²Œì‹œê¸€ë¦¬ìŠ¤íŠ¸ 
+	 * @param model ë‹¤ìŒ í™”ë©´ìœ¼ë¡œ ê°’(boardVos : categoryê°€ ventì¸ ê²Œì‹œê¸€ ë°°ì—´)ì„
+	 * @return vent.jspë¡œ ì´ë™
 	 */
-	public String showList(Model model) {
-		String nextPage = "board/vent/vent_board_form";
-		List<BoardVo> boardVo = ventService.getVentBoard();
+	public String showVentPage(Model model,
+                               @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+        if (page <= 0) {
+            page = 1;
+        }
+        System.out.println("page = " + page);
+        // í•´ë‹¹ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì¤„ ê¸€ ëª©ë¡
+        List<BoardVo> pagingList = BoardVentService.pagingList(page);
+        System.out.println("pagingList = " + pagingList);
+        PageDTO pageDTO = BoardVentService.pagingParam(page);
 
-		if (boardVo != null) {
-			model.addAttribute("boardVo", boardVo);
+        model.addAttribute("boardList", pagingList);
+        model.addAttribute("paging", pageDTO);
+
+        return "vent"; // vent.jspë¡œ ì—°ê²°
+    }
+	
+
+
+	@GetMapping("/showAllList")
+	public String showAllList(Model model) {
+		List<BoardVo> boardVos = BoardVentService.getVentBoard();
+		if (boardVos != null) {
+			model.addAttribute("boardVos", boardVos);
 		}
-		return nextPage;
+		return "board/vent/all_vent_list";
 	}
 
-    @RequestMapping(value="detail", method = {RequestMethod.GET, RequestMethod.POST})
+
 	/**
-	 * suggestion ±Û »ó¼¼º¸±â ¹öÆ°
-	 * @param b_id : °Ô½Ã±Û ¹øÈ£
-	 * @param model : ´ÙÀ½ È­¸éÀ¸·Î °ª(boardVo: ¼±ÅÃÇÑ b_id°¡ Æ÷ÇÔµÈ ·¹ÄÚµå °ª)À» Àü´Ş
-	 * @return suggestion_board_detail.jsp·Î ÀÌµ¿
+	 * vent ê¸€ ì“°ê¸° ë²„íŠ¼
+	 * @param name    : ë¡œê·¸ì¸ í•œ íšŒì›ëª…
+	 * @param model   : ë‹¤ìŒ í™”ë©´ìœ¼ë¡œ name ê°’ì„ ì „ë‹¬
+	 * @param session :
+	 * @return create_vent_board_form.jspë¡œ ì´ë™
 	 */
-    public String detail(@RequestParam("b_id") int b_id, Model model) {
-		String nextPage = "board/vent/vent_board_detail_form";
-		BoardVo boardVo = ventService.readVentBoard(b_id);
-		List<CommentVo> commentVos = ventService.getCommentList(b_id);
-		model.addAttribute("boardVo", boardVo);
-		model.addAttribute("commentVos", commentVos);
-		return nextPage;
-	}
-
-
-
 	@GetMapping("/create")
-	/** ±Û¾²±â À§ÇØ Á¶È¸ÇÏ´Â °úÁ¤
-	 * vent ±Û ¾²±â ¹öÆ° 
-	 * @param name : ·Î±×ÀÎ ÇÑ È¸¿ø¸í
-	 * @param model : ´ÙÀ½ È­¸éÀ¸·Î name °ªÀ» Àü´Ş
-	 * @param session : 
-	 * @return create_board_form.jsp·Î ÀÌµ¿
-	 */
-	public String create() {
-		String nextPage = "board/vent/vent_board_create_form";
-//		¼¼¼Ç¿¡ ·Î±×ÀÎ Á¤º¸°¡ ÀÖÀ»¶§¸¸ ½ÇÇà (¾øÀ¸¸é ·Î±×ÀÎÆûÀ¸·Î °¡±â)
+	public String create(Model model, HttpSession session) {
+		String nextPage = "board/vent/create_vent_board_form";
+		UsersRequestVo loginedUsersRequestVo = (UsersRequestVo) session.getAttribute("loginedUsersRequestVo");
+		String userName = loginedUsersRequestVo.getName();
+		int userId = loginedUsersRequestVo.getId();
+		if (loginedUsersRequestVo != null) {
+			model.addAttribute("name", userName);
+			model.addAttribute("user_id", userId);
+		}
 		return nextPage;
 	}
 
-	
+	/**
+	* vent ê¸€ ì“°ê¸° í¼ ì œì¶œ
+	* @param boardVo -- ì¹´í…Œê³ ë¦¬ : category ì œëª© : title ì‘ì„±ì : user_id ë‚´ìš© : contents
+	* @return ê¸€ì“°ê¸° ì„±ê³µ ì—¬ë¶€ ì„±ê³µ ì‹œ : board/create_vent_board_ok.jsp ì‹¤íŒ¨ ì‹œ :
+	*         board/create_vent_board_ng.jsp
+	 */
 	@PostMapping("/createConfirm")
-	/** ±Û¾²±â ÆûÀ» Á¦ÃâÇÏ´Â °úÁ¤
-	 * vent ±Û ¾²±â Æû Á¦Ãâ
-	 * @param boardVo --
-	 * 		  Ä«Å×°í¸® : category
-	 * 		  Á¦¸ñ : title
-	 * 		  ÀÛ¼ºÀÚ : user_id
-	 * 		  ³»¿ë : contents
-	 * @return ±Û¾²±â ¼º°ø ¿©ºÎ
-	 * 		   ¼º°ø ½Ã : board/vent/vent_board_create_ok.jsp
-	 * 		   ½ÇÆĞ ½Ã : board/vent/vent_board_create_ng.jsp
-	 */
-	public String createConfirm(BoardVo boardVo) {
-		String nextPage = "board/vent/vent_board_create_ok";
-		int result = ventService.createBoardConfirm(boardVo);
-		if (result < 1) {
-			nextPage = "board/vent/vent_board_create_ng";
-		}
-		return nextPage;
+	public String createConfirm(@ModelAttribute BoardVo boardVo) {
+	    String nextPage = "jsp/board/suggestion/create_board_ok";
+	    int result = BoardVentService.createBoardConfirm(boardVo);
+	    if (result < 1) {
+	        nextPage = "jsp/board/suggestion/create_board_ng";
+	    }
+	    return nextPage;
 	}
+	
 
-	@GetMapping("/modify")
+
 	/**
-	 * vent ±Û ¼öÁ¤ ¹öÆ°
-	 * @param b_id : °Ô½Ã±Û ¹øÈ£
-	 * @param model : ´ÙÀ½ È­¸éÀ¸·Î °ª(boardVo : ¼öÁ¤Æû¿¡ ÀÔ·ÂÇÑ °ª)À» Àü´ŞÇØÁÖ´Â °´Ã¼
-	 * @return modify_board_form.jsp·Î ÀÌµ¿
+	 * vent ê¸€ ìƒì„¸ë³´ê¸° ë²„íŠ¼
+	 * 
+	 * @param b_id  : ê²Œì‹œê¸€ ë²ˆí˜¸
+	 * @param model : ë‹¤ìŒ í™”ë©´ìœ¼ë¡œ ê°’(boardVo: ì„ íƒí•œ b_idê°€ í¬í•¨ëœ ë ˆì½”ë“œ ê°’)ì„ ì „ë‹¬
+	 * 
+	 * @return vent_board_detail.jspë¡œ ì´ë™
 	 */
-	public String modify(@RequestParam("b_id") int b_id, Model model) {
-		String nextPage = "board/vent/vent_board_modify_form";
-//		¼¼¼Ç¿¡ ·Î±×ÀÎ Á¤º¸°¡ ÀÖÀ»¶§¸¸ ½ÇÇà (¾øÀ¸¸é ·Î±×ÀÎÆûÀ¸·Î °¡±â)
-		BoardVo boardVo = ventService.modifyBoard(b_id);
-		boardVo.setB_id(b_id);
+	@RequestMapping(value = "/detail", method = { RequestMethod.GET, RequestMethod.POST })
+	public String detail(@RequestParam("b_id") int b_id, 
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            Model model, HttpSession httpSession) {
+		String nextPage = "board/vent/vent_board_detail";
+		BoardVo boardVo = BoardVentService.readVentBoard(b_id);
+		BoardVentService.addHit(b_id);
+
 		model.addAttribute("boardVo", boardVo);
+		model.addAttribute("page", page);
 		return nextPage;
 	}
 	
-	@PostMapping("/modifyVentConfirm")
+
+
+
+
+
+
 	/**
-	 * vent ±Û ¼öÁ¤ Æû Á¦Ãâ 
-	 * @param boardVo --
-	 * 		  Ä«Å×°í¸® : category
-	 * 		  Á¦¸ñ : title
-	 * 		  ÀÛ¼ºÀÚ : user_id
-	 * 		  ³»¿ë : contents
-	 * 
-	 * @return ¼öÁ¤ ¼º°ø ¿©ºÎ
-	 * 		   ¼º°ø ½Ã : vent/vent_modify_board_ok.jsp
-	 * 		   ½ÇÆĞ ½Ã : vent/vent_modify_board_ng.jsp 
+	 * vent ëŒ“ê¸€ INSERT
+	 * @param commentVo : ëŒ“ê¸€ í¼ì—ì„œ ê°€ì ¸ì˜¨ ì •ë³´(board_id, nickname, content)
+	 * @return resultê°’(INSERT ì¿¼ë¦¬ë¬¸ ì„±ê³µì—¬ë¶€)ë¥¼ ê°€ì§€ê³  vent_board_detail.jspë¡œ ë™
 	 */
-	public String modifyConfirm(BoardVo boardVo) {
-		String nextPage = "board/vent/vent_board_modify_ok";
-		int result = ventService.modifyBoardConfirm(boardVo);
+	@ResponseBody
+	@PostMapping("/commentCreate")
+	public int createComment(@RequestBody CommentRequestVo commentRequestVo) {
+		int result = BoardVentService.addComment(commentRequestVo);
+		return result;
+	}
+	/**
+	 * vent ëŒ“ê¸€ SELECT
+	 * @param board_id : ê²Œì‹œíŒ ë²ˆí˜¸
+* @param model : ë‹¤ìŒ í™”ë©´ìœ¼ë¡œ ê°’(commentVo: ì„ íƒí•œ b_idì— ì íŒ ëŒ“ê¸€ ëª©ë¡ ë°ì´í„° ì „ë‹¬
+	 * @return vent_comment_list.jspë¡œ ì´ë™
+	 */
+	@RequestMapping(value = "/commentList/{board_id}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String commentList(@PathVariable("board_id") int board_id, Model model) {
+		List<CommentResponseVo> commentVos = BoardVentService.getCommentList(board_id);
+		model.addAttribute("commentVos", commentVos);
+		return "board/vent/vent_comment_list";
+	}
+	/**
+	 * vent ëŒ“ê¸€ ìˆ˜ì • í¼ ì œì¶œ
+	 * @param commentVo : ìˆ˜ì •í¼ì—ì„œ ê°€ì ¸ì˜¨ ë°ì´í„°(nickname, contents, id)
+	 * @return resultê°’(UPDATE ì¿¼ë¦¬ë¬¸ ì„±ê³µì—¬ë¶€)ë¥¼ ê°€ì§€ê³  vent_comment_list.jspë¡œ ì´ë™
+	*/
+	 @ResponseBody
+	@RequestMapping(value = "/commentModifyConfirm", method = { RequestMethod.GET, RequestMethod.POST })
+	public int commentModifyConfirm(@RequestBody CommentResponseVo commentResponseVo) {
+		int result = BoardVentService.modifyCommentConfirm(commentResponseVo);
+		return result;
+	}
+	/**
+	 * vent ëŒ“ê¸€ DELETE
+	 * @param id : ëŒ“ê¸€ ë²ˆí˜¸
+	 * @return resultê°’(DELETE ì¿¼ë¦¬ë¬¸ ì„±ê³µì—¬ë¶€)ë¥¼ ê°€ì§€ê³  vent_comment_list.jspë¡œ ì´ë™
+	*/
+	 @ResponseBody
+	@RequestMapping(value = "/commentDelete/{id}", method = { RequestMethod.GET, RequestMethod.POST })
+	public int deleteComment (@PathVariable("id") int id) {
+		int result = BoardVentService.delComment(id);
+		return result;
+	}
+	 
+	/**
+	 * vent ê¸€ ìˆ˜ì • ë²„íŠ¼
+	 * @param b_id  : ê²Œì‹œê¸€ ë²ˆí˜¸
+	 * @param model : ë‹¤ìŒ í™”ë©´ìœ¼ë¡œ ê°’(boardVo : ìˆ˜ì •í¼ì— ì…ë ¥í•œ ê°’)ì„ ì „ë‹¬í•´ì£¼ëŠ” ê°ì²´
+	 * @return modify_vent_board_form.jspë¡œ ì´ë™
+	 */
+	 public String modify(@RequestParam("b_id") int b_id, @RequestParam("name") String name, Model model, @RequestParam("attachment") String attachment) {
+			String nextPage = "jsp/board/vent/modify_vent_board_form";
+			BoardVo boardVo = BoardVentService.modifyBoard(b_id);
+			boardVo.setName(name);
+			model.addAttribute("boardVo", boardVo);
+			return nextPage;
+		}
+
+		/**
+		 * vent ê¸€ ìˆ˜ì • í¼ ì œì¶œ
+		 * 
+		 *
+		 * @return ìˆ˜ì • ì„±ê³µ ì—¬ë¶€ ì„±ê³µ ì‹œ : modify_board_ok.jsp ì‹¤íŒ¨ ì‹œ : modify_board_ng.jsp
+		 */
+		@PostMapping("/modifyConfirm")
+		public String modifyConfirm (@ModelAttribute BoardVo boardVo, @RequestParam("oldFile") String oldFile) {
+			String nextPage = "jsp/board/vent/modify_vent_board_ok";
+
+			int result = BoardVentService.modifyBoardConfirm(boardVo, oldFile);
+			if (result < 1) {
+				nextPage = "jsp/board/vent/modify_vent_board_ng";
+			}
+			return nextPage;
+		}
+
+
+
+
+
+
+
+
+	/**
+	 * vent ê¸€ DELETE
+	 * @param b_id : ê²Œì‹œê¸€ ë²ˆí˜¸
+	 * @return ì‚­ì œ ì„±ê³µ ì—¬ë¶€ ì„±ê³µ ì‹œ : delete_vent_board_ok.jsp ì‹¤íŒ¨ ì‹œ : delete_vent_board_ng.jsp
+	 */
+	@GetMapping("/delete")
+	public String delete(@RequestParam("b_id") int b_id, @RequestParam("attachment") String attachment) {
+		String nextPage = "board/vent/delete_vent_board_ok";
+		int result = BoardVentService.deleteBoard(b_id, nextPage);
+		String deleteFile = "C:\\makgol\\board\\upload\\"+attachment;
 		if (result < 1) {
-			nextPage = "board/vent/vent_board_modify_ng";
+			nextPage = "board/vent/delete_vent_board_ng";
+		} else {
+			File file = new File(deleteFile);
+			file.delete();
 		}
 		return nextPage;
 	}
 
-	@GetMapping("/delete")
-	/**
-	 * suggestion ±Û »èÁ¦¹öÆ°
-	 * @param b_id : °Ô½Ã±Û ¹øÈ£
-	 * @return »èÁ¦ ¼º°ø ¿©ºÎ
-	 * 		   ¼º°ø ½Ã : delete_board_ok.jsp
-	 * 		   ½ÇÆĞ ½Ã : delete_board_ng.jsp 
-	 */
-	public String delete(@RequestParam("b_id") int b_id) {
-		String nextPage = "board/vent/vent_board_delete_ok";
-		
-		//
-		int result = ventService.deleteVent(b_id);
-		if(result < 1) {
-			nextPage = "board/vent/vent_board_delete_ng";
+	/** vent ê¸€ ê²€ìƒ‰ **/
+	@RequestMapping(value = "/search", method = { RequestMethod.GET, RequestMethod.POST })
+public String search (@RequestBody Map<String, String> map, Model model) {
+	String nextPage = "board/vent/search_vent_list";
+	String searchOption = (String) map.get("searchOption");
+	String searchWord = (String) map.get("searchWord");
+	List<BoardVo> boardVos = BoardVentService.searchBoard(searchOption, searchWord);
+		if (boardVos != null) {
+			model.addAttribute("boardVos", boardVos);
 		}
 		return nextPage;
 	}
+@ResponseBody
+@RequestMapping(value="/userLikeStatus", method = { RequestMethod.GET, RequestMethod.POST })
+	public Map<String, Integer> userLikeStatus (@RequestBody BoardVo boardVo) {
+		Map<String, Integer> map = new HashMap<>();
+		int status = BoardVentService.userLikeStatus(boardVo);
+		map.put("status", status);
+		return map;	}
+	
+	
+
+
+	
+	/** vent ê¸€ ì¢‹ì•„ìš” **/
+	@ResponseBody
+	@RequestMapping(value = "/likeBoard", method = { RequestMethod.GET, RequestMethod.POST })
+	public Map<String, Integer> likeBoard(@RequestBody BoardVo boardVo) {
+		Map<String, Integer> map = new HashMap<>();
+		int b_id = boardVo.getB_id();
+		int result = BoardVentService.addLikeBoard(boardVo);
+		int totalLike = 0;
+		if(result > 0) {
+			totalLike = BoardVentService.countLike(b_id);
+			map.put("totalLike", totalLike);
+			map.put("b_id", b_id);
+			BoardVentService.addBoardSympathy(map);
+		}
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/unlikeBoard", method = { RequestMethod.GET, RequestMethod.POST })
+	public Map<String, Integer> unlikeBoard(@RequestBody BoardVo boardVo) {
+		Map<String, Integer> map = new HashMap<>();
+		int b_id = boardVo.getB_id();
+		int result = BoardVentService.removeLikeBoard(boardVo);
+		int totalLike = 0;
+		if(result > 0) {
+			totalLike = BoardVentService.countLike(b_id);
+			map.put("totalLike", totalLike);
+			map.put("b_id", b_id);
+			BoardVentService.addBoardSympathy(map);
+		}
+		return map;
+	}
+
+
 }
+
+	
